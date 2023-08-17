@@ -1,0 +1,503 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --textcolor1: #000000;
+    --color: white;
+    --color2: #36ec63;
+    --textcolor2: #8a8a8a;
+    --bg: #e2e2e3;
+    --menubg: #ffffffaf;
+    --songbg: #ffffffaf;
+    --playerctrl: #ffffffaf;
+    --border: rgb(230, 230, 230);
+    --playborder: rgba(255,255,255,0.1)
+}
+
+body.dark {
+    --textcolor1: #ffffff;
+    --color: black;
+    --menubg: #111727af;
+    --songbg: #0b1320af;
+    --playerctrl: #111727af;
+    --border: rgba(255, 255, 255, 0.1);
+    --bg: #121213;
+}
+
+body {
+    position: relative;
+    background: var(--bg);
+    height: 100vh;
+    display: grid;
+    place-items: center;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    /* Width of the scrollbar track */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--textcolor1);
+    /* Color of the thumb */
+    border-radius: 3px;
+    /* Rounded corners on the thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #555;
+    /* Color of the thumb on hover */
+}
+
+::-webkit-scrollbar-track {
+    background-color: transparent;
+    /* Color of the track */
+}
+
+::-webkit-scrollbar-corner {
+    background-color: transparent;
+    /* Color of the corner (where horizontal and vertical scrollbars meet) */
+}
+
+.bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.container {
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    width: 90%;
+    height: 98%;
+    border: 2px solid var(--border);
+}
+
+section {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    height: 85%;
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid var(--border);
+}
+
+section .menu {
+    overflow: auto;
+    padding: 10px 20px;
+    border-right: 2px solid var(--border);
+    border-top-left-radius: 10px;
+    background: var(--menubg);
+    height: 100%;
+    width: 25%;
+}
+
+section .songs {
+    border-top-right-radius: 10px;
+    background: var(--songbg);
+    height: 100%;
+    width: 75%;
+}
+
+footer {
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    background: var(--playerctrl);
+    height: 15%;
+}
+
+.menu h1 {
+    color: var(--textcolor1);
+    font-weight: 500;
+}
+
+.menu .playlists {
+    margin-top: 20px;
+}
+
+.menu .playlists h4 {
+    color: var(--textcolor2);
+    cursor: pointer;
+    padding-bottom: 10px;
+    text-transform: capitalize;
+    font-weight: 300;
+    transition: 0.3s linear;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.menu .playlists h4:hover {
+    color: var(--textcolor1);
+}
+
+.menu .playlists h4 span {
+    position: relative;
+    margin-right: 30px;
+}
+
+.menu .playlists h4 span::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    transition: 0.3s linear;
+    transform: translateY(-50%);
+    left: 0;
+    height: 5px;
+    width: 5px;
+    border: 2px solid var(--border);
+    border-radius: 50%;
+
+}
+
+.menu .playlists h4:hover span::before {
+    border-color: var(--textcolor1);
+}
+
+.menu .playlists h4.active {
+    color: #36e2ec;
+}
+
+.menu .playlists h4.active span {
+    display: none;
+}
+
+.menu .playlists h4 .bi {
+    display: none;
+}
+
+.menu .playlists h4.active .bi {
+    display: inline-block;
+    margin-left: -5px;
+    margin-right: 20px;
+}
+
+.menu-songs {
+    margin-top: 20px;
+    max-height: 270px;
+    overflow: auto;
+    color: var(--textcolor1);
+    border-radius: 15px;
+}
+
+.menu-songs::-webkit-scrollbar {
+    display: none;
+}
+
+.menu-songs ul .songs-list {
+    user-select: none;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 15px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    color: var(--color);
+    background-color: var(--color2);
+    transition: background-color 0.3s linear, color 0.3s linear;
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+
+.menu-songs ul .songs-list:hover {
+    color: var(--textcolor1);
+    background-color: var(--color);
+
+}
+
+.menu-songs ul .songs-list .bi {
+    font-size: 2em;
+}
+
+.menu-songs ul .songs-list div:first-child {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.title{
+    display: inline-block;
+    width: 60%;
+    line-height: 16px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.subtitle{
+    font-size: 0.8em;
+    font-weight: 500;
+    color: var(--textcolor2);
+}
+.menu-songs ul .songs-list div:first-child img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.spining {
+    animation: spin 4s linear infinite;
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    color: var(--textcolor1);
+}
+
+footer .wave {
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    height: 30px;
+    background: transparent;
+    margin-right: 20px;
+}
+footer .wave .wave1{
+    width: 3px;
+    height: 10px;
+    margin-left: 5px;
+    background-color: #36ec63;
+    animation: unset;
+}
+footer .wave .wave1:nth-child(2){
+    height: 13px;
+    animation-delay: 0.4s;
+}
+footer .wave .wave1:nth-child(3){
+    animation-delay: 0.16s;
+    height: 8px;
+}
+
+footer .active1 .wave1{
+    animation: wave 0.5s linear alternate infinite;
+}
+footer .active1 .wave1:nth-child(2){
+    animation-delay: 0.4s;
+}
+footer .active1 .wave1:nth-child(3){
+    animation-delay: 0.16s;
+}
+
+@keyframes wave {
+    0%{
+        height: 10px;
+    }
+    50%{
+        height: 20px;
+    }
+    100%{
+        height: 10px;
+    }
+}
+footer img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+}
+footer .title{
+    width: 150px;
+    letter-spacing: 1px;
+}
+footer .icons{
+    font-size: 1.5em;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+footer .icons .bi:nth-child(1){
+    margin-right: 20px;
+}
+footer .icons .bi:nth-child(3){
+    font-size: 1.8em;
+}
+footer .icons .bi:hover{
+    cursor: pointer;
+}
+#currentStart,#currentEnd{
+    margin-left: 20px;
+    font-weight: 200;
+    font-size: 0.8em;
+}
+.bar{
+    position: relative;
+    margin-left: 20px;
+    width: 40%;
+    height: 3px;
+    background-color: var(--playborder);
+}
+.bar1{
+    transition: 1s linear;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    background-color: #36e2ec;
+}
+.bar input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    opacity: 0;
+    cursor: pointer;
+}
+.bar1::after,.bar1::before,
+.bar2::after,.bar2::before{
+    content: '';
+    position: absolute;
+    height: 10px;
+    width: 10px;
+    background: #36e2ec;
+    top: 50%;
+    left: 0%;
+    transform: translate(-50%,-50%);
+    border-radius: 50%;
+}
+.bar1::before,
+.bar2::before{
+    height: 15px;
+    width: 15px;
+    background: transparent;
+    border: 1px solid #36e2ec;
+}
+footer .vol{
+    position: relative;
+    height: 3px;
+    width: 10%;
+    background: var(--playborder);
+    margin-left: 60px;
+}
+footer .vol .bar2{
+    transition: 1s linear;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 50%;
+    background-color: #36e2ec;
+}
+footer .vol .bi{
+    position: absolute;
+    top: 50%;
+    left: -10%;
+    transform: translate(-100%,-50%);
+    font-size: 1.8em;
+    cursor: pointer;
+}
+footer .vol input{
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    left: 0;
+    transform: translate(0,-50%);
+    font-size: 1.8em;
+    z-index: 1;
+    opacity: 0;
+    cursor: pointer;
+}
+.songs{
+    position: relative;
+    z-index: 2;
+}
+.songs::before{
+    position: absolute;
+    content: '';
+    background: url(../bg2.png);
+    background-size: contain;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 300px;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+.songs nav{
+    height: 15%;
+    width: 90%;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.songs nav ul {
+    display: flex;
+    align-items: center;
+}
+.songs nav ul li{
+    position: relative;
+    font-size: 0.9em;
+    list-style: none;
+    color: var(--textcolor1);
+    text-transform: uppercase;
+    cursor: pointer;
+    color: var(--textcolor2);
+    margin-right: 20px;
+    transition: 0.3s ease;
+}
+.songs nav ul li:hover,
+.songs nav ul li.active2{
+    color: var(--textcolor1);
+}
+.songs nav ul li:hover::after,
+.songs nav ul li.active2::after{
+    position: absolute;
+    width: 100%;
+    bottom: -5px;
+    left: 0;
+    content: '';
+    height: 2px;
+    background: #36e2ec;
+}
+.search{
+    position: relative;
+    width: 60%;
+    height: 40px;
+}
+.search input{
+    position: absolute;
+    top: 0;
+    left: 0;
+    border: none;
+    outline: none;
+    padding: 0 10px;
+    padding-left: 40px;
+    color: var(--textcolor1);
+    background: transparent;
+    backdrop-filter: blur(3px);
+    height: 100%;
+    width: 80%;
+    border: 2px solid var(--border);
+    border-radius: 40px;
+}
+.search .bi{
+    position: absolute;
+    top: 50%;
+    left: 3%;
+    color: var(--textcolor1);
+    z-index: 1;
+    transform: translateY(-50%);
+}
