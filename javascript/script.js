@@ -116,7 +116,7 @@ Array.from(document.getElementsByClassName("bi-play-circle-fill")).forEach((e, i
         if (music.paused) {
             document.querySelector("footer img").classList.add("spining");
             document.querySelector("footer .wave").classList.add("active1");
-            music.src = "../audio/" + e.getAttribute("id") + ".mp3";
+            music.src = "./audio/" + e.getAttribute("id") + ".mp3";
             music.play();
             e.classList.remove("bi-play-circle-fill");
             e.classList.add("bi-pause-circle-fill");
@@ -158,7 +158,7 @@ changeMasterPlay(0);
 function playmasterplay(e){
     if (music.paused) {
         
-        music.src = "../audio/" + e.getAttribute("id").split('0')[1] + ".mp3";
+        music.src = "./audio/" + e.getAttribute("id").split('0')[1] + ".mp3";
         music.play();
         document.querySelector("footer img").classList.add("spining");
         document.querySelector("footer .wave").classList.add("active1");
