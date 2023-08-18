@@ -18,12 +18,14 @@
     --songbg: #ffffffaf;
     --playerctrl: #ffffffaf;
     --border: rgb(230, 230, 230);
-    --playborder: rgba(255,255,255,0.1);
+    --playborder: rgba(255, 255, 255, 0.1);
     --darkbtnbg: rgba(1, 1, 1, 0.2);
 }
-ul li{
+
+ul li {
     list-style: none;
 }
+
 body.dark {
     --darkbtnbg: rgba(250, 250, 250, 0.2);
     --imgbg: #070d16;
@@ -35,14 +37,16 @@ body.dark {
     --border: rgba(255, 255, 255, 0.1);
     --bg: #121213;
 }
-.dark-mode{
+
+.dark-mode {
     z-index: 10;
     position: fixed;
     top: 15px;
     right: 15px;
     color: var(--textcolor1);
 }
-.dark-btn{
+
+.dark-btn {
     cursor: pointer;
     position: relative;
     height: 30px;
@@ -50,7 +54,8 @@ body.dark {
     background-color: var(--darkbtnbg);
     border-radius: 30px;
 }
-.dark-btn .btn{
+
+.dark-btn .btn {
     color: var(--color);
     display: flex;
     justify-content: center;
@@ -65,19 +70,24 @@ body.dark {
     border-radius: 50%;
     transition: left 0.7s ease;
 }
-body.dark .dark-btn .btn{
+
+body.dark .dark-btn .btn {
     left: 65%;
 }
-body.dark .bi-moon-stars{
+
+body.dark .bi-moon-stars {
     display: inline-block;
 }
-body.dark .bi-sun-fill{
+
+body.dark .bi-sun-fill {
     display: none;
 }
-body .bi-sun-fill{
+
+body .bi-sun-fill {
     display: inline-block;
 }
-body .bi-moon-stars{
+
+body .bi-moon-stars {
     display: none;
 }
 
@@ -89,9 +99,11 @@ body {
     display: grid;
     place-items: center;
 }
-::placeholder{
+
+::placeholder {
     color: var(--textcolor1);
 }
+
 ::-webkit-scrollbar {
     width: 6px;
     /* Width of the scrollbar track */
@@ -156,9 +168,11 @@ section .menu {
     height: 100%;
     width: 25%;
 }
-section .songs::-webkit-scrollbar{
+
+section .songs::-webkit-scrollbar {
     display: none;
 }
+
 section .songs {
     border-top-right-radius: 10px;
     background: var(--songbg);
@@ -176,18 +190,21 @@ footer {
 .menu h1 {
     font-weight: 500;
 }
-.menu .header{
+
+.menu .header {
     height: 10%;
     display: flex;
     color: var(--textcolor1);
     align-items: center;
     justify-content: space-between;
 }
-.menu .header .bi{
+
+.menu .header .bi {
     display: none;
     font-size: 1.5em;
     cursor: pointer;
 }
+
 .menu .playlists {
     margin-top: 10px;
     height: 25%;
@@ -279,8 +296,8 @@ footer {
 }
 
 .hover {
-    color: var(--textcolor1)!important;
-    background-color: var(--color)!important;
+    color: var(--textcolor1) !important;
+    background-color: var(--color) !important;
 
 }
 
@@ -295,7 +312,7 @@ footer {
     gap: 5px;
 }
 
-.title{
+.title {
     display: inline-block;
     width: 60%;
     line-height: 16px;
@@ -303,11 +320,13 @@ footer {
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.subtitle{
+
+.subtitle {
     font-size: 0.8em;
     font-weight: 500;
     color: var(--textcolor2);
 }
+
 .menu-songs ul .list div:first-child img {
     width: 50px;
     height: 50px;
@@ -329,20 +348,27 @@ footer {
     user-select: none;
     display: flex;
     align-items: center;
-    padding:20px;
+    padding: 20px;
     color: var(--textcolor1);
 }
-footer .controles{
-    width: 35%;
+
+footer .controles {
+    width: 40%;
     display: flex;
     align-items: center;
 }
-footer .tracker{
-    width: 50%;
+
+footer .tracker {
+    pointer-events: none;
+    margin-left: 20px;
+    display: flex;
+    align-content: center;
+    justify-content: space-around;
+    width: 60%;
     display: flex;
     align-items: center;
 }
- 
+
 footer .wave {
     display: flex;
     align-items: flex-end;
@@ -351,120 +377,146 @@ footer .wave {
     margin-right: 20px;
     height: 20px;
 }
-footer .wave .wave1{
+
+footer .wave .wave1 {
     width: 3px;
     height: 10px;
     margin-left: 5px;
     background-color: #36ec63;
     animation: unset;
 }
-footer .wave .wave1:nth-child(2){
+
+footer .wave .wave1:nth-child(2) {
     height: 13px;
     animation-delay: 0.4s;
 }
-footer .wave .wave1:nth-child(3){
+
+footer .wave .wave1:nth-child(3) {
     animation-delay: 0.16s;
     height: 8px;
 }
 
-footer .active1 .wave1{
+footer .active1 .wave1 {
     animation: wave 0.5s linear alternate infinite;
 }
-footer .active1 .wave1:nth-child(2){
+
+footer .active1 .wave1:nth-child(2) {
     animation-delay: 0.4s;
 }
-footer .active1 .wave1:nth-child(3){
+
+footer .active1 .wave1:nth-child(3) {
     animation-delay: 0.16s;
 }
 
 @keyframes wave {
-    0%{
+    0% {
         height: 10px;
     }
-    50%{
+
+    50% {
         height: 20px;
     }
-    100%{
+
+    100% {
         height: 10px;
     }
 }
-footer img{
+
+footer img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
     margin-right: 10px;
 }
-footer .title{
+
+footer .title {
     width: 150px;
     letter-spacing: 1px;
 }
-footer .icons{
+
+footer .icons {
+
     font-size: 1.5em;
     display: flex;
     gap: 10px;
     align-items: center;
 }
-footer .icons .bi:nth-child(1){
-    margin-right: 20px;
+
+footer .icons .bi:nth-child(1) {
+    margin-right: 0px;
 }
-footer .icons .bi:nth-child(3){
+
+footer .icons .bi:nth-child(3) {
     font-size: 1.8em;
 }
-footer .icons .bi:hover{
+
+footer .icons .bi:hover {
     cursor: pointer;
 }
-#currentStart,#currentEnd{
-    margin-left: 20px;
+
+#currentStart,
+#currentEnd {
+    display: inline-block;
     font-weight: 200;
+    width: 100px;
+    text-align: center;
     font-size: 0.8em;
 }
-.bar{
+
+.bar {
+    border-radius: 3px;
     position: relative;
-    margin-left: 20px;
-    width: 100%;
+    width: 70%;
     height: 3px;
     background-color: var(--playborder);
 }
-.bar1{
-    transition: 1s linear;
-    position: absolute;
+
+.bar1 {
+    border-radius: 3px;
+    position: relative;
     top: 0;
     left: 0;
     height: 100%;
-    width: 100%;
+    width: 0%;
     background-color: #36e2ec;
 }
-.bar input{
+
+.bar input {
     position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    left: -1px;
     width: 100%;
     z-index: 1;
     opacity: 0;
     cursor: pointer;
 }
-.bar1::after,.bar1::before,
-.bar2::after,.bar2::before{
+
+.bar1::after,
+.bar1::before,
+.bar2::after,
+.bar2::before {
     content: '';
     position: absolute;
     height: 10px;
     width: 10px;
     background: #36e2ec;
     top: 50%;
-    left: 0%;
-    transform: translate(-50%,-50%);
+    right: 0%;
+    transform: translate(50%, -50%);
     border-radius: 50%;
 }
+
 .bar1::before,
-.bar2::before{
+.bar2::before {
     height: 15px;
     width: 15px;
     background: transparent;
     border: 1px solid #36e2ec;
 }
-footer .vol{
+
+footer .vol {
     display: none;
     position: relative;
     height: 3px;
@@ -472,7 +524,8 @@ footer .vol{
     background: var(--playborder);
     margin-left: 60px;
 }
-footer .vol .bar2{
+
+footer .vol .bar2 {
     transition: 1s linear;
     position: absolute;
     top: 0;
@@ -481,35 +534,39 @@ footer .vol .bar2{
     width: 50%;
     background-color: #36e2ec;
 }
-footer .vol .bi{
+
+footer .vol .bi {
     position: absolute;
     top: 50%;
     left: -10%;
-    transform: translate(-100%,-50%);
+    transform: translate(-100%, -50%);
     font-size: 1.8em;
     cursor: pointer;
 }
-footer .vol input{
+
+footer .vol input {
     position: absolute;
     width: 100%;
     top: 50%;
     left: 0;
-    transform: translate(0,-50%);
+    transform: translate(0, -50%);
     font-size: 1.8em;
     z-index: 1;
     opacity: 0;
     cursor: pointer;
 }
-.songs{
+
+.songs {
     user-select: none;
     position: relative;
     z-index: 2;
     overflow: auto;
 }
-.songs::before{
+
+.songs::before {
     position: absolute;
     content: '';
-    background: url(../bg3.png);
+    background: url(../otherImages/bg3.png);
     background-size: cover;
     top: 0;
     left: 50%;
@@ -519,7 +576,8 @@ footer .vol input{
     background-repeat: no-repeat;
     z-index: -1;
 }
-.songs::after{
+
+.songs::after {
     position: absolute;
     content: '';
     top: 0;
@@ -527,9 +585,10 @@ footer .vol input{
     height: 300px;
     z-index: -1;
     width: 100%;
-    background: linear-gradient(to top, var(--imgbg) 5%,rgba(0,0,0,0) 100%);
+    background: linear-gradient(to top, var(--imgbg) 5%, rgba(0, 0, 0, 0) 100%);
 }
-.mobile-hamb{
+
+.mobile-hamb {
     display: none;
     height: 25px;
     width: 30px;
@@ -540,15 +599,17 @@ footer .vol input{
     align-items: center;
     justify-content: space-between;
 }
+
 .mobile-hamb .one,
 .mobile-hamb .two,
-.mobile-hamb .three{
+.mobile-hamb .three {
     border-radius: 2px;
     height: 3px;
     width: 100%;
     background: var(--textcolor1);
 }
-.songs nav{
+
+.songs nav {
     position: relative;
     height: 20%;
     overflow: hidden;
@@ -558,11 +619,13 @@ footer .vol input{
     align-items: center;
     justify-content: space-between;
 }
+
 .songs nav ul {
     display: flex;
     align-items: center;
 }
-.songs nav ul li{
+
+.songs nav ul li {
     user-select: none;
     text-align: center;
     position: relative;
@@ -575,12 +638,14 @@ footer .vol input{
     margin-right: 20px;
     transition: 0.3s ease;
 }
+
 .songs nav ul li:hover,
-.songs nav ul li.active2{
+.songs nav ul li.active2 {
     color: var(--textcolor1);
 }
+
 .songs nav ul li:hover::after,
-.songs nav ul li.active2::after{
+.songs nav ul li.active2::after {
     position: absolute;
     width: 100%;
     bottom: -5px;
@@ -589,12 +654,14 @@ footer .vol input{
     height: 2px;
     background: #36e2ec;
 }
-.search{
+
+.search {
     position: relative;
     width: 50%;
     height: 40px;
 }
-.search input{
+
+.search input {
     position: absolute;
     top: 0;
     left: 0;
@@ -610,7 +677,8 @@ footer .vol input{
     border: 2px solid var(--border);
     border-radius: 40px;
 }
-.search .bi{
+
+.search .bi {
     position: absolute;
     top: 50%;
     left: 15px;
@@ -618,31 +686,37 @@ footer .vol input{
     z-index: 1;
     transform: translateY(-50%);
 }
-.songs nav img{
+
+.songs nav img {
     width: 40px;
     height: 40px;
     object-fit: contain;
 }
-.content{
+
+.content {
     width: 90%;
     height: auto;
     color: var(--textcolor1);
     margin: auto;
 }
-.content h1{
+
+.content h1 {
     text-transform: capitalize;
     font-weight: 600;
     font-size: 2em;
 }
-.content p{
+
+.content p {
     color: var(--textcolor2);
     font-size: .7em;
     text-align: justify;
 }
-.buttons{
+
+.buttons {
     margin-top: 10px;
 }
-.buttons button{
+
+.buttons button {
     margin-bottom: 5px;
     outline: none;
     width: 140px;
@@ -654,100 +728,120 @@ footer .vol input{
     cursor: pointer;
     transition: 0.5s ease;
 }
-.buttons button:hover{
+
+.buttons button:hover {
     background: transparent;
 }
-.buttons button:nth-child(2){
+
+.buttons button:nth-child(2) {
     background: transparent;
 }
-.buttons button:nth-child(2):hover{
+
+.buttons button:nth-child(2):hover {
     background: #5adae0;
 }
-.popular-container{
+
+.popular-container {
     width: 90%;
     color: var(--textcolor1);
     margin: 10px auto;
 }
-.popular-container .upper{
+
+.popular-container .upper {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.popular-container .upper h4{
+
+.popular-container .upper h4 {
     font-weight: 400;
     text-transform: uppercase;
 }
-.popular-container .upper .left-right-btn .bi{
+
+.popular-container .upper .left-right-btn .bi {
     cursor: pointer;
     color: var(--textcolor2);
     transition: color 0.5 ease;
 }
-.popular-container .upper .left-right-btn .bi:hover{
+
+.popular-container .upper .left-right-btn .bi:hover {
     color: var(--textcolor1);
 }
 
-.popular-container .items{
+.popular-container .items {
     padding: 5px 5px 5px 0;
     height: auto;
     overflow: auto;
     scroll-behavior: smooth;
 }
-.popular-container .items ul{
+
+.popular-container .items ul {
     display: flex;
     width: 100%;
     height: 100%;
     align-items: center;
 }
-.popular-container .items::-webkit-scrollbar{
+
+.popular-container .items::-webkit-scrollbar {
     display: none;
 }
+
 .items .list:not(:nth-child(1)),
-.items .artist-list:not(:nth-child(1)){
+.items .artist-list:not(:nth-child(1)) {
     margin-left: 10px;
 }
-.items .list .song{
+
+.items .list .song {
     height: 85%;
     width: 100px;
     position: relative;
 }
-.items .list .bi{
+
+.items .list .bi {
     color: white;
     position: absolute;
     cursor: pointer;
     top: 50%;
     left: 50%;
     font-size: 2em;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     opacity: 0;
     transition: opacity 0.5s ease;
 }
-.items .artist-list{
+
+.items .artist-list {
     width: 100px;
 }
-.items .artist-list .title{
+
+.items .artist-list .title {
     width: 100%;
     text-align: center;
 }
-.items .artist-list img{
+
+.items .artist-list img {
     width: 100px;
     height: 100px;
     object-fit: cover;
     border-radius: 50%;
 }
-.items .list img{
+
+.items .list img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     border-radius: 5px;
     transition: filter 0.5s ease;
 }
-.items .list:hover .bi{
+
+.items .list:hover .bi {
     opacity: 1;
 }
-.items .list:hover img{
+
+.items .list:hover img {
     filter: blur(2px);
 }
-.items .list .title{
+
+.items .list .title {
     height: 15%;
     font-size: 0.6em;
     text-align: center;
@@ -758,12 +852,16 @@ footer .vol input{
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-body.dark .logo{
+
+body.dark .logo {
     filter: invert(0%);
 }
-body .logo{
+
+body .logo {
     filter: invert(100%);
 }
-#loader{
+
+#loader {
+    margin-left: 20px;
     display: none;
 }

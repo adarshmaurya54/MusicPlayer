@@ -1,3 +1,6 @@
+
+const currentStart = document.getElementById("currentStart");
+const currentEnd = document.getElementById("currentEnd");
 const music = new Audio();
 
 const songs = [
@@ -100,21 +103,44 @@ songs.forEach((element, i) => {
 });
 
 // we pause all the buttons when another music is played
-function pauseAllBtns(){
+function pauseAllBtns() {
     Array.from(document.getElementsByClassName("bi-pause-circle-fill")).forEach(e => {
         e.classList.remove("bi-pause-circle-fill");
         e.classList.add("bi-play-circle-fill");
     })
 }
+// this function used to show buffering of the music
+function buffering() {
+    music.addEventListener("loadedmetadata", function () {
+        // Now you can access the duration without getting NaN
+        let music_dur = music.duration;
+        let min = Math.floor(music_dur / 60);
+        let sec = Math.floor(music_dur % 60);
+        if (sec <= 9) {
+            sec = "0" + sec;
+        }
+        if (min <= 9) {
+            min = "0" + min;
+        }
+        if (!isNaN(min) && !isNaN(sec)) {
+            currentEnd.innerHTML = `${min}:${sec}`;
+        }
+        const duration = music.duration;
+    });
+    currentEnd.innerHTML = "Buffering...";
 
+    // Start loading the audio
+    music.load();
+
+}
 // getting all play button and using this we play songs...
 Array.from(document.getElementsByClassName("bi-play-circle-fill")).forEach((e, i) => {
     e.addEventListener("click", () => {
         pauseAllBtns();
-        changeMasterPlay(e.getAttribute("id") - 1);
         document.querySelector("footer img").src = "./img/" + e.getAttribute("id") + ".jpg";
+        changeMasterPlay(e.getAttribute("id") - 1);
         if (music.paused) {
-            if(e.getAttribute("id") <= 7){
+            if (e.getAttribute("id") <= 7) {
                 Array.from(document.querySelectorAll(".menu-songs ul .song-list")).forEach(e => {
                     e.style.backgroundColor = "var(--color2)";
                     e.style.color = "var(--color)";
@@ -125,6 +151,7 @@ Array.from(document.getElementsByClassName("bi-play-circle-fill")).forEach((e, i
             document.querySelector("footer img").classList.add("spining");
             document.querySelector("footer .wave").classList.add("active1");
             music.src = "./audio/" + e.getAttribute("id") + ".mp3";
+            buffering()
             music.play();
             e.classList.remove("bi-play-circle-fill");
             e.classList.add("bi-pause-circle-fill");
@@ -154,34 +181,43 @@ function changeMasterPlay(i) {
     <h5 class="title">${songs[i].songName}</span></h5>
     <div class="icons">
         <i class="bi bi-shuffle"></i>
-        <i class="bi bi-skip-start-fill"></i>
-        <i class="bi bi-play-fill  play-and-pause" onclick="playmasterplay(this)" id="0${songs[i].id}"></i>
-        <i class="bi bi-skip-end-fill"></i>
+        <i class="bi bi-skip-start-fill" onclick="goPrev(this)"></i>
+        <i class="bi bi-play-fill  play-and-pause" onclick="playmasterplay(this)" id="0-${songs[i].id}"></i>
+        <i class="bi bi-skip-end-fill" onclick="goNext(this)"></i>
     </div>
     `;
+    document.querySelector("footer .tracker").style.pointerEvents = "all";
 }
-changeMasterPlay(0);
 
+function goPrev(e){
+    let songid = document.querySelector(".play-and-pause").getAttribute("id").split('-')[1];
+    changeMasterPlay(songid - 2);
+}
+function goNext(e){
+    let songid = document.querySelector(".play-and-pause").getAttribute("id").split('-')[1];
+    changeMasterPlay(parseInt(songid));
+}
 // when we click on masterplay play icon then ...
-function playmasterplay(e){
+function playmasterplay(e) {
     if (music.paused) {
-        
-        music.src = "./audio/" + e.getAttribute("id").split('0')[1] + ".mp3";
+
+        music.src = "./audio/" + e.getAttribute("id").split('-')[1] + ".mp3";
+        buffering();
         music.play();
         document.querySelector("footer img").classList.add("spining");
         document.querySelector("footer .wave").classList.add("active1");
         e.classList.remove("bi-play-fill");
         e.classList.add("bi-pause-fill");
-        document.getElementById(e.getAttribute("id").split('0')[1]).classList.remove("bi-play-circle-fill");
-        document.getElementById(e.getAttribute("id").split('0')[1]).classList.add("bi-pause-circle-fill");
+        document.getElementById(e.getAttribute("id").split('-')[1]).classList.remove("bi-play-circle-fill");
+        document.getElementById(e.getAttribute("id").split('-')[1]).classList.add("bi-pause-circle-fill");
     } else {
-        music.pause(); 
+        music.pause();
         document.querySelector("footer .wave").classList.remove("active1");
         document.querySelector("footer img").classList.remove("spining");
         e.classList.add("bi-play-fill");
         e.classList.remove("bi-pause-fill");
-        document.getElementById(e.getAttribute("id").split('0')[1]).classList.add("bi-play-circle-fill");
-        document.getElementById(e.getAttribute("id").split('0')[1]).classList.remove("bi-pause-circle-fill");
+        document.getElementById(e.getAttribute("id").split('-')[1]).classList.add("bi-play-circle-fill");
+        document.getElementById(e.getAttribute("id").split('-')[1]).classList.remove("bi-pause-circle-fill");
     }
 }
 
@@ -205,13 +241,58 @@ document.querySelector(".popular-artist .bi-caret-left-fill").addEventListener("
 document.querySelector(".popular-artist .bi-caret-right-fill").addEventListener("click", () => {
     document.getElementsByClassName("items")[1].scrollLeft += 300;
 })
-let i= 0;
-document.querySelector(".dark-btn").addEventListener("click",()=>{
-    if(i%2 == 0){
-        document.querySelector("meta[name='theme-color']").setAttribute('content',"#fff");
-    }else{
-        document.querySelector("meta[name='theme-color']").setAttribute('content',"#121213");
+let i = 0;
+document.querySelector(".dark-btn").addEventListener("click", () => {
+    if (i % 2 == 0) {
+        document.querySelector("meta[name='theme-color']").setAttribute('content', "#fff");
+    } else {
+        document.querySelector("meta[name='theme-color']").setAttribute('content', "#121213");
     }
     document.body.classList.toggle("dark");
     i++;
 })
+// let music_curr = music.currentTime;
+
+const progressBar = document.getElementById("seek");
+const seekBar = document.getElementById("bar1");
+music.addEventListener("timeupdate", () => {
+    let current_time = music.currentTime;
+    let duration = music.duration;
+    let min = Math.floor(current_time / 60);
+    let sec = Math.floor(current_time % 60);
+    if (min < 10) {
+        min = '0' + min;
+    }
+    if (sec < 10) {
+        sec = '0' + sec;
+    }
+    currentStart.innerHTML = `${min}:${sec}`;
+    let progressBarVal = parseInt((current_time / duration) * 100);
+    progressBar.value = progressBarVal;
+    seekBar.style.width = progressBarVal + "%";
+    if (progressBarVal == 100) {
+        document.querySelector(".icons .play-and-pause").classList.remove("bi-pause-fill")
+        document.querySelector(".icons .play-and-pause").classList.add("bi-play-fill")
+        pauseAllBtns();
+        document.querySelector("footer img").classList.remove("spining");
+        document.querySelector("footer .wave").classList.remove("active1");
+        progressBar.style.pointerEvents = "none";
+    }else{
+        progressBar.style.pointerEvents = "all";
+    }
+})
+progressBar.addEventListener("change", () => {
+    music.currentTime = (progressBar.value * music.duration) / 100;
+    music.play();
+})
+
+const hours = new Date().getHours()
+const isDayTime = hours > 6 && hours < 20;
+if (isDayTime === true) {
+    document.querySelector("meta[name='theme-color']").setAttribute('content', "#fff");
+    document.body.classList.remove("dark");
+} else {
+    document.querySelector("meta[name='theme-color']").setAttribute('content', "#121213");
+    document.body.classList.add("dark");
+}
+

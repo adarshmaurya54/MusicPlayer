@@ -35,7 +35,7 @@
 
     footer .controles,
     footer .tracker {
-
+        margin: unset;
         width: 100%;
     }
 
