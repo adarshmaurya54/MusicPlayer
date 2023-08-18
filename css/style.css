@@ -200,7 +200,7 @@ footer {
 
 .menu-songs {
     margin-top: 20px;
-    max-height: 60%;
+    max-height: 57%;
     overflow: auto;
     color: var(--textcolor1);
     border-radius: 15px;
@@ -297,6 +297,7 @@ footer .wave {
     justify-content: center;
     background: transparent;
     margin-right: 20px;
+    height: 20px;
 }
 footer .wave .wave1{
     width: 3px;
@@ -559,7 +560,7 @@ footer .vol input{
 }
 .content{
     width: 90%;
-    height: 30%;
+    height: auto;
     color: var(--textcolor1);
     margin: auto;
 }
@@ -577,6 +578,7 @@ footer .vol input{
     margin-top: 10px;
 }
 .buttons button{
+    margin-bottom: 5px;
     outline: none;
     width: 140px;
     color: var(--textcolor1);
@@ -611,6 +613,7 @@ footer .vol input{
     text-transform: uppercase;
 }
 .popular-container .upper .left-right-btn .bi{
+    cursor: pointer;
     color: var(--textcolor2);
     transition: color 0.5 ease;
 }
@@ -620,7 +623,6 @@ footer .vol input{
 
 .popular-container .items{
     padding: 5px 5px 5px 0;
-    border: 2px solid red;
     height: auto;
     overflow: auto;
     scroll-behavior: smooth;
@@ -655,17 +657,19 @@ footer .vol input{
     transition: opacity 0.5s ease;
 }
 .items .artist-list{
-    /* display: flex;
-    flex-direction: column;
-    justify-content: space-between; */
     width: 100px;
-    border: 1px solid green;
 }
 .items .artist-list .title{
     width: 100%;
     text-align: center;
 }
-.items .list img,.items .artist-list img{
+.items .artist-list img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.items .list img{
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -682,10 +686,12 @@ footer .vol input{
     height: 15%;
     font-size: 0.6em;
     text-align: center;
-    width: 100%;
+    width: 100px;
     line-height: 10px;
     display: block;
-    /* margin-top: 5px; */
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 body.dark .logo{
     filter: invert(0%);

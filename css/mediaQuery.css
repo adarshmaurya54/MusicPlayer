@@ -14,7 +14,7 @@
         width: 300px;
         z-index: 1000;
         background-color: var(--bg);
-        transition: transform 0.7s ease;
+        transition: transform 0.3s ease;
     }
 
     section .menu.show {
