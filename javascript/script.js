@@ -205,6 +205,13 @@ document.querySelector(".popular-artist .bi-caret-left-fill").addEventListener("
 document.querySelector(".popular-artist .bi-caret-right-fill").addEventListener("click", () => {
     document.getElementsByClassName("items")[1].scrollLeft += 300;
 })
+let i= 0;
 document.querySelector(".dark-btn").addEventListener("click",()=>{
+    if(i%2 == 0){
+        document.querySelector("meta[name='theme-color']").setAttribute('content',"#fff");
+    }else{
+        document.querySelector("meta[name='theme-color']").setAttribute('content',"#121213");
+    }
     document.body.classList.toggle("dark");
+    i++;
 })

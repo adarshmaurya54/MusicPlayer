@@ -27,7 +27,7 @@
     }
 
     footer {
-        height: 20%;
+        height: 15%;
         flex-direction: column;
         align-items: start;
         gap: 15px;
