@@ -35,6 +35,7 @@
 
     footer .controles,
     footer .tracker {
+
         width: 100%;
     }
 
@@ -56,13 +57,21 @@
         font-size: 0.7em;
     }
 
-    footer .controles .icons {
+    footer .controles {
         font-size: 0.7em;
+        position: relative;
+    }
+
+    footer .controles .icons {
+        font-size: 1em;
+        position: absolute;
+        right: 20px;
     }
 
     .songs nav img {
         position: absolute;
-        right: 6px;
+        top: 25px;
+        right: 0;
     }
 
     .songs nav {
@@ -74,9 +83,11 @@
         width: 60%;
         font-size: 0.7em;
     }
-    .songs nav .search .bi{
+
+    .songs nav .search .bi {
         left: 10px;
     }
+
     .menu .header .bi {
         display: inline-block;
     }
@@ -84,7 +95,11 @@
     .mobile-hamb {
         display: flex;
     }
-    .songs nav ul li{
+
+    .songs nav ul li {
         font-size: 0.6em;
+    }
+    .songs{
+        border-radius: unset;
     }
 }

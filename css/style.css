@@ -9,6 +9,7 @@
 
 :root {
     --textcolor1: #000000;
+    --imgbg: white;
     --color: white;
     --color2: #36ec63;
     --textcolor2: #8a8a8a;
@@ -17,12 +18,15 @@
     --songbg: #ffffffaf;
     --playerctrl: #ffffffaf;
     --border: rgb(230, 230, 230);
-    --playborder: rgba(255,255,255,0.1)
+    --playborder: rgba(255,255,255,0.1);
+    --darkbtnbg: rgba(1, 1, 1, 0.2);
 }
 ul li{
     list-style: none;
 }
 body.dark {
+    --darkbtnbg: rgba(250, 250, 250, 0.2);
+    --imgbg: #070d16;
     --textcolor1: #ffffff;
     --color: black;
     --menubg: #111727af;
@@ -31,10 +35,55 @@ body.dark {
     --border: rgba(255, 255, 255, 0.1);
     --bg: #121213;
 }
+.dark-mode{
+    z-index: 10;
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    color: var(--textcolor1);
+}
+.dark-btn{
+    cursor: pointer;
+    position: relative;
+    height: 30px;
+    width: 70px;
+    background-color: var(--darkbtnbg);
+    border-radius: 30px;
+}
+.dark-btn .btn{
+    color: var(--color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 20px;
+    width: 20px;
+    background: var(--textcolor1);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 5px;
+    border-radius: 50%;
+    transition: left 1s ease;
+}
+body.dark .dark-btn .btn{
+    left: 65%;
+}
+body.dark .bi-moon-stars{
+    display: inline-block;
+}
+body.dark .bi-sun-fill{
+    display: none;
+}
+body .bi-sun-fill{
+    display: inline-block;
+}
+body .bi-moon-stars{
+    display: none;
+}
 
 body {
     position: relative;
-    background: var(--bg);
+    background: var(--color);
     height: 100vh;
     width: 100vw;
     display: grid;
@@ -72,10 +121,11 @@ body {
 
 .bg {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 50%;
+    height: 50%;
 }
 
 .container {
@@ -106,7 +156,9 @@ section .menu {
     height: 100%;
     width: 25%;
 }
-
+section .songs::-webkit-scrollbar{
+    display: none;
+}
 section .songs {
     border-top-right-radius: 10px;
     background: var(--songbg);
@@ -226,9 +278,9 @@ footer {
     box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
-.menu-songs ul .list:hover {
-    color: var(--textcolor1);
-    background-color: var(--color);
+.hover {
+    color: var(--textcolor1)!important;
+    background-color: var(--color)!important;
 
 }
 
@@ -456,22 +508,33 @@ footer .vol input{
 .songs::before{
     position: absolute;
     content: '';
-    background: url(../bg2.png);
-    background-size: contain;
+    background: url(../bg3.png);
+    background-size: cover;
     top: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 90%;
-    height: 400px;
+    width: 100%;
+    height: 300px;
     background-repeat: no-repeat;
     z-index: -1;
+}
+.songs::after{
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    height: 300px;
+    z-index: -1;
+    width: 100%;
+    background: linear-gradient(to top, var(--imgbg) 5%,rgba(0,0,0,0) 100%);
 }
 .mobile-hamb{
     display: none;
     height: 25px;
     width: 30px;
     position: absolute;
-    left: 30px;
+    top: 25px;
+    left: 0;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
@@ -485,10 +548,11 @@ footer .vol input{
     background: var(--textcolor1);
 }
 .songs nav{
+    position: relative;
     height: 20%;
     overflow: hidden;
     width: 90%;
-    margin: auto;
+    margin: 30px auto 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -554,8 +618,8 @@ footer .vol input{
     transform: translateY(-50%);
 }
 .songs nav img{
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     object-fit: contain;
 }
 .content{
@@ -698,4 +762,7 @@ body.dark .logo{
 }
 body .logo{
     filter: invert(100%);
+}
+#loader{
+    display: none;
 }

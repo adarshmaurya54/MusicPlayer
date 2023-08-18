@@ -77,7 +77,7 @@ songs.forEach((element, i) => {
     if (i < 7) {
         let temp = (i < 9) ? "0" + (i + 1) : (i + 1);
         document.querySelector(".menu-songs ul").innerHTML += `
-                <li class="song-list list">
+                <li class="song-list list" onmouseover="this.classList.add('hover');" onmouseout="this.classList.remove('hover');">
                     <div>
                         <span>${temp}</span>
                         <img src="${element.poster}" class="" alt="">
@@ -114,6 +114,14 @@ Array.from(document.getElementsByClassName("bi-play-circle-fill")).forEach((e, i
         changeMasterPlay(e.getAttribute("id") - 1);
         document.querySelector("footer img").src = "./img/" + e.getAttribute("id") + ".jpg";
         if (music.paused) {
+            if(e.getAttribute("id") <= 7){
+                Array.from(document.querySelectorAll(".menu-songs ul .song-list")).forEach(e => {
+                    e.style.backgroundColor = "var(--color2)";
+                    e.style.color = "var(--color)";
+                })
+                document.querySelectorAll(".menu-songs ul .song-list")[e.getAttribute("id") - 1].style.backgroundColor = "var(--color)";
+                document.querySelectorAll(".menu-songs ul .song-list")[e.getAttribute("id") - 1].style.color = "var(--textcolor1)";
+            }
             document.querySelector("footer img").classList.add("spining");
             document.querySelector("footer .wave").classList.add("active1");
             music.src = "./audio/" + e.getAttribute("id") + ".mp3";
@@ -121,7 +129,7 @@ Array.from(document.getElementsByClassName("bi-play-circle-fill")).forEach((e, i
             e.classList.remove("bi-play-circle-fill");
             e.classList.add("bi-pause-circle-fill");
             document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
-            document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
+            document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill");
         } else {
             music.pause();
             document.querySelector("footer .wave").classList.remove("active1");
@@ -196,4 +204,7 @@ document.querySelector(".popular-artist .bi-caret-left-fill").addEventListener("
 })
 document.querySelector(".popular-artist .bi-caret-right-fill").addEventListener("click", () => {
     document.getElementsByClassName("items")[1].scrollLeft += 300;
+})
+document.querySelector(".dark-btn").addEventListener("click",()=>{
+    document.body.classList.toggle("dark");
 })
