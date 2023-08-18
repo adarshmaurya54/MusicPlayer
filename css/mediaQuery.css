@@ -1,0 +1,90 @@
+@media screen and (max-width: 950px) {
+    .container {
+        width: 100vw;
+        height: 100vh;
+    }
+
+    section {
+        position: relative;
+    }
+
+    section .menu {
+        transform: translateX(-100%);
+        position: absolute;
+        width: 300px;
+        z-index: 1000;
+        background-color: var(--bg);
+        transition: transform 0.7s ease;
+    }
+
+    section .menu.show {
+        transform: translateX(0%);
+    }
+
+    section .songs {
+        width: 100%;
+        border-top-left-radius: 10px;
+    }
+
+    footer {
+        height: 20%;
+        flex-direction: column;
+        align-items: start;
+        gap: 15px;
+    }
+
+    footer .controles,
+    footer .tracker {
+        width: 100%;
+    }
+
+    footer .vol {
+        margin-top: 20px;
+        width: 100px;
+    }
+
+    section {
+        height: 80%;
+    }
+
+    footer #poster {
+        width: 30px;
+        height: 30px;
+    }
+
+    footer .controles .title {
+        font-size: 0.7em;
+    }
+
+    footer .controles .icons {
+        font-size: 0.7em;
+    }
+
+    .songs nav img {
+        position: absolute;
+        right: 6px;
+    }
+
+    .songs nav {
+        flex-direction: column;
+        justify-content: space-evenly;
+    }
+
+    .songs nav .search {
+        width: 60%;
+        font-size: 0.7em;
+    }
+    .songs nav .search .bi{
+        left: 10px;
+    }
+    .menu .header .bi {
+        display: inline-block;
+    }
+
+    .mobile-hamb {
+        display: flex;
+    }
+    .songs nav ul li{
+        font-size: 0.6em;
+    }
+}

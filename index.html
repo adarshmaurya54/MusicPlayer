@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#121213">
     <title>Music Player Website</title>
     <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/mediaQuery.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
 
@@ -14,16 +16,27 @@
     <div class="container">
         <section>
             <div class="menu">
-                <h1>Playlist</h1>
+                <div class="header">
+                    <h1>Playlist</h1>
+                    <i class="bi bi-x-lg close"></i>
+                </div>
                 <div class="playlists">
-                    <h4 ><span></span><i class="bi bi-music-note-beamed"></i><p> playlist</p></h4>
-                    <h4 class="active"><span></span><i class="bi bi-music-note-beamed"></i><p> Last listening</p></h4>
-                    <h4><span></span><i class="bi bi-music-note-beamed"></i><p> trending</p></h4>
-                    <h4><span></span><i class="bi bi-music-note-beamed"></i><p> recomendation</p></h4>
+                    <h4><span></span><i class="bi bi-music-note-beamed"></i>
+                        <p> playlist</p>
+                    </h4>
+                    <h4 class="active"><span></span><i class="bi bi-music-note-beamed"></i>
+                        <p> Last listening</p>
+                    </h4>
+                    <h4><span></span><i class="bi bi-music-note-beamed"></i>
+                        <p> trending</p>
+                    </h4>
+                    <h4><span></span><i class="bi bi-music-note-beamed"></i>
+                        <p> recomendation</p>
+                    </h4>
                 </div>
                 <div class="menu-songs">
                     <ul>
-                        <li class="songs-list">
+                        <li class="song-list list">
                             <div>
                                 <span>01</span>
                                 <img src="./img/1.jpg" class="" alt="">
@@ -31,7 +44,7 @@
                             </div>
                             <i class="bi playbutton bi-play-circle-fill" id="1"></i>
                         </li>
-                        <li class="songs-list">
+                        <li class="song-list list">
                             <div>
                                 <span>02</span>
                                 <img src="./img/2.jpg" class="" alt="">
@@ -39,7 +52,7 @@
                             </div>
                             <i class="bi playbutton bi-play-circle-fill" id="2"></i>
                         </li>
-                        <li class="songs-list">
+                        <li class="song-list list">
                             <div>
                                 <span>03</span>
                                 <img src="./img/3.jpg" class="" alt="">
@@ -47,7 +60,7 @@
                             </div>
                             <i class="bi playbutton bi-play-circle-fill" id="3"></i>
                         </li>
-                        <li class="songs-list">
+                        <li class="song-list list">
                             <div>
                                 <span>04</span>
                                 <img src="./img/4.jpg" class="" alt="">
@@ -55,7 +68,7 @@
                             </div>
                             <i class="bi playbutton bi-play-circle-fill" id="4"></i>
                         </li>
-                        <li class="songs-list">
+                        <li class="song-list list">
                             <div>
                                 <span>05</span>
                                 <img src="./img/5.jpg" class="" alt="">
@@ -63,7 +76,7 @@
                             </div>
                             <i class="bi playbutton bi-play-circle-fill" id="5"></i>
                         </li>
-                        <li class="songs-list">
+                        <li class="song-list list">
                             <div>
                                 <span>06</span>
                                 <img src="./img/6.jpg" class="" alt="">
@@ -71,7 +84,7 @@
                             </div>
                             <i class="bi playbutton bi-play-circle-fill" id="6"></i>
                         </li>
-                        <li class="songs-list">
+                        <li class="song-list list">
                             <div>
                                 <span>07</span>
                                 <img src="./img/7.jpg" class="" alt="">
@@ -79,7 +92,7 @@
                             </div>
                             <i class="bi playbutton bi-play-circle-fill" id="7"></i>
                         </li>
-                        <li class="songs-list">
+                        <li class="song-list list">
                             <div>
                                 <span>08</span>
                                 <img src="./img/8.jpg" class="" alt="">
@@ -92,6 +105,11 @@
             </div>
             <div class="songs">
                 <nav>
+                    <div class="mobile-hamb">
+                        <div class="one"></div>
+                        <div class="two"></div>
+                        <div class="three"></div>
+                    </div>
                     <ul>
                         <li class="active2">Discover</li>
                         <li>My Library</li>
@@ -99,31 +117,136 @@
                     </ul>
                     <div class="search">
                         <i class="bi bi-search"></i>
-                        <input type="text" placeholder="Search" spellcheck="false" id="search">
+                        <input type="text" placeholder="Search song" spellcheck="false" id="search">
                     </div>
+                    <img src="./logo.png" class="logo" alt="">
                 </nav>
+                <div class="content">
+                    <h1>Alen walker-fade</h1>
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique nesciunt et molestiae, earum
+                        aspernatur labore! Consequatur fugit laborum, soluta nobis tenetur voluptatem ad, atque velit
+                        facilis consectetur vitae. Itaque enim, labore non voluptates tempore.</p>
+                    <div class="buttons">
+                        <button>Play</button>
+                        <button>Follow</button>
+                    </div>
+                </div>
+                <div class="popular-songs popular-container">
+                    <div class="upper">
+                        <h4>Popular songs</h4>
+                        <div class="left-right-btn">
+                            <i class="bi bi-caret-left-fill"></i>
+                            <i class="bi bi-caret-right-fill"></i>
+                        </div>
+                    </div>
+                    <div class="items">
+                        <ul>
+                            <li class="song-list list">
+                                <div class="song">
+                                    <img src="./img/1.jpg" class="" alt="">
+                                    <i class="bi playbutton bi-play-circle-fill" id="1"></i>
+                                </div>
+                                <h5 class="title">On My Way <br> <span class="subtitle">Alon Walker</span></h5>
+                            </li>
+                            <li class="song-list list">
+                                <div class="song">
+                                    <img src="./img/2.jpg" class="" alt="">
+                                    <i class="bi playbutton bi-play-circle-fill" id="2"></i>
+                                </div>
+                                <h5 class="title">On My Way <br> <span class="subtitle">Alon Walker</span></h5>
+                            </li>
+                            <li class="song-list list">
+                                <div class="song">
+                                    <img src="./img/3.jpg" class="" alt="">
+                                    <i class="bi playbutton bi-play-circle-fill" id="3"></i>
+                                </div>
+                                <h5 class="title">On My Way <br> <span class="subtitle">Alon Walker</span></h5>
+                            </li>
+                            <li class="song-list list">
+                                <div class="song">
+                                    <img src="./img/4.jpg" class="" alt="">
+                                    <i class="bi playbutton bi-play-circle-fill" id="4"></i>
+                                </div>
+                                <h5 class="title">On My Way <br> <span class="subtitle">Alon Walker</span></h5>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="popular-artist popular-container">
+                    <div class="upper">
+                        <h4>Popular artist</h4>
+                        <div class="left-right-btn">
+                            <i class="bi bi-caret-left-fill"></i>
+                            <i class="bi bi-caret-right-fill"></i>
+                        </div>
+                    </div>
+                    <div class="items">
+                        <ul>
+                            <li class="artist-list">
+                                <img src="./img/akhil.jpg" class="" alt="">
+                                <h5 class="title">Akhil</span></h5>
+                            </li>
+                            <li class="artist-list">
+                                <img src="./img/akhil.jpg" class="" alt="">
+                                <h5 class="title">Akhil</span></h5>
+                            </li>
+                            <li class="artist-list">
+                                <img src="./img/akhil.jpg" class="" alt="">
+                                <h5 class="title">Akhil</span></h5>
+                            </li>
+                            <li class="artist-list">
+                                <img src="./img/akhil.jpg" class="" alt="">
+                                <h5 class="title">Akhil</span></h5>
+                            </li>
+                            <li class="artist-list">
+                                <img src="./img/akhil.jpg" class="" alt="">
+                                <h5 class="title">Akhil</span></h5>
+                            </li>
+                            <li class="artist-list">
+                                <img src="./img/akhil.jpg" class="" alt="">
+                                <h5 class="title">Akhil</span></h5>
+                            </li>
+                            <li class="artist-list">
+                                <img src="./img/akhil.jpg" class="" alt="">
+                                <h5 class="title">Akhil</span></h5>
+                            </li>
+                            <li class="artist-list">
+                                <img src="./img/akhil.jpg" class="" alt="">
+                                <h5 class="title">Akhil</span></h5>
+                            </li>
+                            <li class="artist-list">
+                                <img src="./img/akhil.jpg" class="" alt="">
+                                <h5 class="title">Akhil</span></h5>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </section>
         <footer class="song-ctrl">
-            <div class="wave ">
-                <div class="wave1"></div>
-                <div class="wave1"></div>
-                <div class="wave1"></div>
+            <div class="controles">
+                <div class="wave ">
+                    <div class="wave1"></div>
+                    <div class="wave1"></div>
+                    <div class="wave1"></div>
+                </div>
+                <img src="./img/20.jpg" id="poster" alt="">
+                <h5 class="title">Vande Mataram <br> <span class="subtitle">Bankim Chandra</span></h5>
+                <div class="icons">
+                    <i class="bi bi-shuffle"></i>
+                    <i class="bi bi-skip-start-fill"></i>
+                    <i class="bi bi-play-fill"></i>
+                    <i class="bi bi-skip-end-fill"></i>
+                </div>
             </div>
-            <img src="./img/20.jpg" id="poster" alt="">
-            <h5 class="title">Vande Mataram <br> <span class="subtitle">Bankim Chandra</span></h5>
-            <div class="icons">
-                <i class="bi bi-shuffle"></i>
-                <i class="bi bi-skip-start-fill"></i>
-                <i class="bi bi-play-fill"></i>
-                <i class="bi bi-skip-end-fill"></i>
+            <div class="tracker">
+                <span id="currentStart">0:00</span>
+                <div class="bar">
+                    <input type="range" id="seek" min="0" value="0" max="100">
+                    <div class="bar1" id="bar1"></div>
+                </div>
+                <span id="currentEnd">3:00</span>
             </div>
-            <span id="currentStart">0:00</span>
-            <div class="bar">
-                <input type="range" id="seek" min="0" value="0" max="100">
-                <div class="bar1" id="bar1"></div>
-            </div>
-            <span id="currentEnd">3:00</span>
             <div class="vol">
                 <input type="range" id="seek" min="0" value="0" max="100">
                 <div class="bar2" id="bar2"></div>

@@ -19,7 +19,9 @@
     --border: rgb(230, 230, 230);
     --playborder: rgba(255,255,255,0.1)
 }
-
+ul li{
+    list-style: none;
+}
 body.dark {
     --textcolor1: #ffffff;
     --color: black;
@@ -34,10 +36,13 @@ body {
     position: relative;
     background: var(--bg);
     height: 100vh;
+    width: 100vw;
     display: grid;
     place-items: center;
 }
-
+::placeholder{
+    color: var(--textcolor1);
+}
 ::-webkit-scrollbar {
     width: 6px;
     /* Width of the scrollbar track */
@@ -76,8 +81,8 @@ body {
 .container {
     backdrop-filter: blur(10px);
     border-radius: 10px;
-    width: 90%;
-    height: 98%;
+    width: 90vw;
+    height: 98vh;
     border: 2px solid var(--border);
 }
 
@@ -92,6 +97,7 @@ section {
 }
 
 section .menu {
+    user-select: none;
     overflow: auto;
     padding: 10px 20px;
     border-right: 2px solid var(--border);
@@ -116,12 +122,23 @@ footer {
 }
 
 .menu h1 {
-    color: var(--textcolor1);
     font-weight: 500;
 }
-
+.menu .header{
+    height: 10%;
+    display: flex;
+    color: var(--textcolor1);
+    align-items: center;
+    justify-content: space-between;
+}
+.menu .header .bi{
+    display: none;
+    font-size: 1.5em;
+    cursor: pointer;
+}
 .menu .playlists {
-    margin-top: 20px;
+    margin-top: 10px;
+    height: 25%;
 }
 
 .menu .playlists h4 {
@@ -183,7 +200,7 @@ footer {
 
 .menu-songs {
     margin-top: 20px;
-    max-height: 270px;
+    max-height: 60%;
     overflow: auto;
     color: var(--textcolor1);
     border-radius: 15px;
@@ -193,7 +210,7 @@ footer {
     display: none;
 }
 
-.menu-songs ul .songs-list {
+.menu-songs ul .list {
     user-select: none;
     list-style: none;
     display: flex;
@@ -209,17 +226,17 @@ footer {
     box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
 
-.menu-songs ul .songs-list:hover {
+.menu-songs ul .list:hover {
     color: var(--textcolor1);
     background-color: var(--color);
 
 }
 
-.menu-songs ul .songs-list .bi {
+.menu-songs ul .list .bi {
     font-size: 2em;
 }
 
-.menu-songs ul .songs-list div:first-child {
+.menu-songs ul .list div:first-child {
     width: 80%;
     display: flex;
     align-items: center;
@@ -239,7 +256,7 @@ footer {
     font-weight: 500;
     color: var(--textcolor2);
 }
-.menu-songs ul .songs-list div:first-child img {
+.menu-songs ul .list div:first-child img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -257,17 +274,27 @@ footer {
 }
 
 footer {
+    user-select: none;
     display: flex;
     align-items: center;
-    padding: 0 20px;
+    padding:20px;
     color: var(--textcolor1);
 }
-
+footer .controles{
+    width: 35%;
+    display: flex;
+    align-items: center;
+}
+footer .tracker{
+    width: 50%;
+    display: flex;
+    align-items: center;
+}
+ 
 footer .wave {
     display: flex;
     align-items: flex-end;
     justify-content: center;
-    height: 30px;
     background: transparent;
     margin-right: 20px;
 }
@@ -342,7 +369,7 @@ footer .icons .bi:hover{
 .bar{
     position: relative;
     margin-left: 20px;
-    width: 40%;
+    width: 100%;
     height: 3px;
     background-color: var(--playborder);
 }
@@ -352,7 +379,7 @@ footer .icons .bi:hover{
     top: 0;
     left: 0;
     height: 100%;
-    width: 50%;
+    width: 100%;
     background-color: #36e2ec;
 }
 .bar input{
@@ -387,7 +414,7 @@ footer .icons .bi:hover{
 footer .vol{
     position: relative;
     height: 3px;
-    width: 10%;
+    width: 15%;
     background: var(--playborder);
     margin-left: 60px;
 }
@@ -420,8 +447,10 @@ footer .vol input{
     cursor: pointer;
 }
 .songs{
+    user-select: none;
     position: relative;
     z-index: 2;
+    overflow: auto;
 }
 .songs::before{
     position: absolute;
@@ -429,14 +458,34 @@ footer .vol input{
     background: url(../bg2.png);
     background-size: contain;
     top: 0;
-    left: 0;
-    width: 100%;
-    height: 300px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    height: 400px;
     background-repeat: no-repeat;
     z-index: -1;
 }
+.mobile-hamb{
+    display: none;
+    height: 25px;
+    width: 30px;
+    position: absolute;
+    left: 30px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.mobile-hamb .one,
+.mobile-hamb .two,
+.mobile-hamb .three{
+    border-radius: 2px;
+    height: 3px;
+    width: 100%;
+    background: var(--textcolor1);
+}
 .songs nav{
-    height: 15%;
+    height: 20%;
+    overflow: hidden;
     width: 90%;
     margin: auto;
     display: flex;
@@ -448,6 +497,8 @@ footer .vol input{
     align-items: center;
 }
 .songs nav ul li{
+    user-select: none;
+    text-align: center;
     position: relative;
     font-size: 0.9em;
     list-style: none;
@@ -474,7 +525,7 @@ footer .vol input{
 }
 .search{
     position: relative;
-    width: 60%;
+    width: 50%;
     height: 40px;
 }
 .search input{
@@ -487,17 +538,158 @@ footer .vol input{
     padding-left: 40px;
     color: var(--textcolor1);
     background: transparent;
-    backdrop-filter: blur(3px);
     height: 100%;
-    width: 80%;
+    backdrop-filter: blur(3px);
+    width: 100%;
     border: 2px solid var(--border);
     border-radius: 40px;
 }
 .search .bi{
     position: absolute;
     top: 50%;
-    left: 3%;
+    left: 15px;
     color: var(--textcolor1);
     z-index: 1;
     transform: translateY(-50%);
+}
+.songs nav img{
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+.content{
+    width: 90%;
+    height: 30%;
+    color: var(--textcolor1);
+    margin: auto;
+}
+.content h1{
+    text-transform: capitalize;
+    font-weight: 600;
+    font-size: 2em;
+}
+.content p{
+    color: var(--textcolor2);
+    font-size: .7em;
+    text-align: justify;
+}
+.buttons{
+    margin-top: 10px;
+}
+.buttons button{
+    outline: none;
+    width: 140px;
+    color: var(--textcolor1);
+    height: 30px;
+    border-radius: 30px;
+    border: 2px solid #36e2ec;
+    background-color: #5adae0;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+.buttons button:hover{
+    background: transparent;
+}
+.buttons button:nth-child(2){
+    background: transparent;
+}
+.buttons button:nth-child(2):hover{
+    background: #5adae0;
+}
+.popular-container{
+    width: 90%;
+    color: var(--textcolor1);
+    margin: 10px auto;
+}
+.popular-container .upper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.popular-container .upper h4{
+    font-weight: 400;
+    text-transform: uppercase;
+}
+.popular-container .upper .left-right-btn .bi{
+    color: var(--textcolor2);
+    transition: color 0.5 ease;
+}
+.popular-container .upper .left-right-btn .bi:hover{
+    color: var(--textcolor1);
+}
+
+.popular-container .items{
+    padding: 5px 5px 5px 0;
+    border: 2px solid red;
+    height: auto;
+    overflow: auto;
+    scroll-behavior: smooth;
+}
+.popular-container .items ul{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+}
+.popular-container .items::-webkit-scrollbar{
+    display: none;
+}
+.items .list:not(:nth-child(1)),
+.items .artist-list:not(:nth-child(1)){
+    margin-left: 10px;
+}
+.items .list .song{
+    height: 85%;
+    width: 100px;
+    position: relative;
+}
+.items .list .bi{
+    color: white;
+    position: absolute;
+    cursor: pointer;
+    top: 50%;
+    left: 50%;
+    font-size: 2em;
+    transform: translate(-50%,-50%);
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+.items .artist-list{
+    /* display: flex;
+    flex-direction: column;
+    justify-content: space-between; */
+    width: 100px;
+    border: 1px solid green;
+}
+.items .artist-list .title{
+    width: 100%;
+    text-align: center;
+}
+.items .list img,.items .artist-list img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+    transition: filter 0.5s ease;
+}
+.items .list:hover .bi{
+    opacity: 1;
+}
+.items .list:hover img{
+    filter: blur(2px);
+}
+.items .list .title{
+    height: 15%;
+    font-size: 0.6em;
+    text-align: center;
+    width: 100%;
+    line-height: 10px;
+    display: block;
+    /* margin-top: 5px; */
+}
+body.dark .logo{
+    filter: invert(0%);
+}
+body .logo{
+    filter: invert(100%);
 }
