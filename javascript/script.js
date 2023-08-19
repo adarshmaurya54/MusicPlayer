@@ -36,22 +36,22 @@ const seekBar = document.getElementById("bar1");
 
 // changing master play content dynamically when music is played
 function changeMasterPlay(i, id) {
-    document.querySelector("footer .controles").innerHTML = `
-        <div class="wave ">
+    document.querySelector("footer .controles .wave").innerHTML = `
             <div class="wave1"></div>
             <div class="wave1"></div>
             <div class="wave1"></div>
-        </div>
-        <img src="${songs[i].poster}" id="poster" alt="">
-
-        <h5 class="title">${songs[i].songName}</h5>
-        <div class="icons">
-            <i class="bi bi-shuffle"></i>
-            <i class="bi bi-skip-start-fill" onclick="goPrev(this)"></i>
-            <i class="bi bi-play-fill  play-and-pause" data-custom-value="${i} ${id}" onclick="playmasterplay(this)" id="0-${id}"></i>
-            <i class="bi bi-skip-end-fill" onclick="goNext(this)" ></i>
-        </div>
-`;
+    `
+    document.querySelector("footer .controles .imgandname").innerHTML = `
+            <img src="${songs[i].poster}" id="poster" alt="">
+            <h5 class="title">${songs[i].songName}</h5>
+    `
+    document.querySelector(".control-icons").innerHTML = `
+            <div class="control-icons-inner">
+                <i class="bi bi-skip-start-fill" onclick="goPrev(this)"></i>
+                <i class="bi bi-play-fill  play-and-pause" data-custom-value="${i} ${id}" onclick="playmasterplay(this)" id="0-${id}"></i>
+                <i class="bi bi-skip-end-fill" onclick="goNext('linear')" ></i>
+            </div>       
+    `;
     document.querySelector("footer .tracker").style.pointerEvents = "all";
 }
 // function to go previous song
@@ -77,13 +77,28 @@ function goPrev(e) {
 }
 
 // function to go next song
-function goNext(e) {
+function goNext(msg) {
+    pauseAllBtns()
     let index = document.querySelector(".play-and-pause").dataset.customValue.split(" ")[0];
     let songid = document.querySelector(".play-and-pause").dataset.customValue.split(" ")[1];
-    index = parseInt(index) + 1;
-    if (index >= songs.length) {
-        customAlertShow("This is the last song that you are listening!")
-    } else {
+    if (msg == "linear") {
+        console.log("linear");
+        index = parseInt(index) + 1;
+        if (index >= songs.length) {
+            customAlertShow("This is the last song that you are listening!")
+        } else {
+            songid = parseInt(songs[index].id);
+            changeMasterPlay(index, songid);
+            music.src = `./audio/${songid}.mp3`;
+            buffering();
+            music.play();
+            document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
+            document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
+            document.querySelector("footer img").classList.add("spining");
+            document.querySelector("footer .wave").classList.add("active1");
+        }
+    } else if (msg == "loopCurrent") {
+        console.log("loopCurrent");
         songid = parseInt(songs[index].id);
         changeMasterPlay(index, songid);
         music.src = `./audio/${songid}.mp3`;
@@ -93,6 +108,22 @@ function goNext(e) {
         document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
         document.querySelector("footer img").classList.add("spining");
         document.querySelector("footer .wave").classList.add("active1");
+    } else if (msg == "loopAll") {
+        console.log("loopall");
+        index = parseInt(index) + 1;
+        if (index >= songs.length) {
+            index = 0;
+        }
+        songid = parseInt(songs[index].id);
+        changeMasterPlay(index, songid);
+        music.src = `./audio/${songid}.mp3`;
+        buffering();
+        music.play();
+        document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
+        document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
+        document.querySelector("footer img").classList.add("spining");
+        document.querySelector("footer .wave").classList.add("active1");
+
     }
 }
 // this function used to show buffering of the music
@@ -120,7 +151,7 @@ function buffering() {
 
 }
 
-function deactiveMenuSongs(){
+function deactiveMenuSongs() {
     Array.from(document.querySelectorAll(".menu-songs ul .song-list")).forEach(e => {
         e.style.backgroundColor = "var(--color2)";
         e.style.color = "var(--color)";
@@ -238,8 +269,15 @@ xhr.onreadystatechange = function () {
             document.querySelector("footer img").classList.remove("spining");
             document.querySelector("footer .wave").classList.remove("active1");
             progressBar.style.pointerEvents = "none";
-            if(document.querySelector(".icons .bi-shuffle")){
-                goNext();
+            if (document.querySelector(".icons .bi-shuffle")) {
+                console.log("shuffle");
+                goNext("linear");
+            } else if (document.querySelector(".icons .bi-repeat")) {
+                console.log("repeat loopAll");
+                goNext("loopAll");
+            } else if (document.querySelector(".icons .bi-repeat-1")) {
+                console.log("repeat-1");
+                goNext("loopCurrent");
             }
         } else {
             progressBar.style.pointerEvents = "all";
@@ -264,7 +302,7 @@ document.querySelector(".close").addEventListener("click", () => {
 });
 
 // when darkmode button clicked then meta tag of theme color change logic and dark class toggle logic also...
-let i = 0;
+
 document.querySelector(".dark-btn").addEventListener("click", () => {
     if (document.body.classList.contains('dark')) {
         document.querySelector("meta[name='theme-color']").setAttribute('content', "#fff");
@@ -272,12 +310,31 @@ document.querySelector(".dark-btn").addEventListener("click", () => {
         document.querySelector("meta[name='theme-color']").setAttribute('content', "#121213");
     }
     document.body.classList.toggle("dark");
+
+})
+let i = 0;
+function loop(e) {
+    console.log("clicked");
+    const arr = [
+        "bi-repeat",
+        "bi-repeat-1",
+        "bi-shuffle"
+    ];
+    e.removeAttribute("class");
+    e.classList.add("bi");
+    e.classList.add(arr[i]);
+    if (arr[i] == "bi-repeat") {
+        document.querySelector(".bi-skip-end-fill").setAttribute("onclick", "goNext('loopAll')")
+    } else if (arr[i] == "bi-repeat-1") {
+        document.querySelector(".bi-skip-end-fill").setAttribute("onclick", "goNext('loopCurrent')")
+    } else if (arr[i] == "bi-shuffle") {
+        document.querySelector(".bi-skip-end-fill").setAttribute("onclick", "goNext('linear')")
+    }
     i++;
-})
-
-document.querySelector(".icons .loop").addEventListener("click",()=>{
-
-})
+    if (i >= 3) {
+        i = 0;
+    }
+}
 
 // when we click on masterplay play icon then ...
 function playmasterplay(e) {
@@ -319,3 +376,13 @@ document.querySelector(".customAlert .alert .bi").addEventListener("click", () =
 document.getElementById("no-song").addEventListener("click", () => {
     customAlertShow("There is no song to play!");
 })
+
+setInterval(() => {
+    if (document.querySelector(".icons .bi-shuffle")) {
+        document.querySelector(".bi-skip-end-fill").setAttribute("onclick", "goNext('linear')")
+    } else if (document.querySelector(".icons .bi-repeat")) {
+        document.querySelector(".bi-skip-end-fill").setAttribute("onclick", "goNext('loopAll')")
+    } else if (document.querySelector(".icons .bi-repeat-1")) {
+        document.querySelector(".bi-skip-end-fill").setAttribute("onclick", "goNext('loopCurrent')")
+    }
+}, 300)

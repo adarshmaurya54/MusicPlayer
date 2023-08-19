@@ -451,8 +451,13 @@ footer .icons .bi:nth-child(1) {
     margin-right: 0px;
 }
 
-footer .icons .bi:nth-child(3) {
+footer .icons .bi:nth-child(2) {
     font-size: 1.8em;
+}
+
+footer .icons .control-icons,footer .icons .control-icons-inner{
+    display: flex;
+    align-items: center;
 }
 
 footer .icons .bi:hover {
@@ -635,10 +640,9 @@ footer .vol input {
     position: relative;
     font-size: 0.9em;
     list-style: none;
-    color: var(--textcolor1);
+    color: black;
     text-transform: uppercase;
     cursor: pointer;
-    color: var(--textcolor2);
     margin-right: 20px;
     transition: 0.3s ease;
 }
@@ -908,4 +912,8 @@ body .logo {
     text-align: center;
     border-radius: 5px;
     cursor: pointer;
+}
+.imgandname{
+    display: flex;
+    align-items: center;
 }
