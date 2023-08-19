@@ -2,7 +2,25 @@
 const currentStart = document.getElementById("currentStart");
 const currentEnd = document.getElementById("currentEnd");
 const music = new Audio();
-
+function customAlertShow(msg) {
+    document.querySelector(".customAlert .alert .message").innerHTML = msg;
+    pauseAllBtns();
+    document.querySelector(".customAlert").style.opacity = "1";
+    document.querySelector(".customAlert").style.zIndex = "10";
+    document.querySelector(".customAlert .alert").style.width = "300px";
+    document.querySelector(".customAlert .alert").style.transform = "translateY(0%)";
+    music.pause();
+    document.querySelector("footer img").classList.remove("spining");
+    document.querySelector("footer .wave").classList.remove("active1");
+    document.querySelector(".icons .play-and-pause").classList.remove("bi-pause-fill")
+    document.querySelector(".icons .play-and-pause").classList.add("bi-play-fill")
+}
+function customAlertHide() {
+    document.querySelector(".customAlert").style.opacity = "0";
+    document.querySelector(".customAlert").style.zIndex = "-10";
+    document.querySelector(".customAlert .alert").style.width = "350px";
+    document.querySelector(".customAlert .alert").style.transform = "translateY(-105%)";
+}
 const songs = [
     {
         id: 1,
@@ -189,21 +207,44 @@ function changeMasterPlay(i) {
     document.querySelector("footer .tracker").style.pointerEvents = "all";
 }
 
-function goPrev(e){
+function goPrev(e) {
     let songid = document.querySelector(".play-and-pause").getAttribute("id").split('-')[1];
-    changeMasterPlay(songid - 2);
+    if (parseInt(songid) <= 1) {
+        customAlertShow("This is the first song that you are listening!");
+    } else {
+        songid = parseInt(songid) - 2;
+        changeMasterPlay(songid);
+        music.src = `./audio/${songid + 1}.mp3`;
+        music.play();
+        document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
+        document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
+    }
 }
-function goNext(e){
+function goNext(e) {
     let songid = document.querySelector(".play-and-pause").getAttribute("id").split('-')[1];
-    changeMasterPlay(parseInt(songid));
+    songid = parseInt(songid);
+    if (songid >= 14) {
+        customAlertShow("This is the last song that you are listening!")
+    } else {
+        changeMasterPlay(songid);
+        console.log();
+        music.src = `./audio/${songid + 1}.mp3`;
+        music.play();
+        document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
+        document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
+    }
 }
 // when we click on masterplay play icon then ...
 function playmasterplay(e) {
     if (music.paused) {
-
-        music.src = "./audio/" + e.getAttribute("id").split('-')[1] + ".mp3";
-        buffering();
-        music.play();
+        if (progressBar.value == 0) {
+            music.src = "./audio/" + e.getAttribute("id").split('-')[1] + ".mp3";
+            buffering();
+            music.play();
+        } else {
+            music.currentTime = (progressBar.value * music.duration) / 100;
+            music.play();
+        }
         document.querySelector("footer img").classList.add("spining");
         document.querySelector("footer .wave").classList.add("active1");
         e.classList.remove("bi-play-fill");
@@ -243,7 +284,7 @@ document.querySelector(".popular-artist .bi-caret-right-fill").addEventListener(
 })
 let i = 0;
 document.querySelector(".dark-btn").addEventListener("click", () => {
-    if (i % 2 == 0) {
+    if (document.body.classList.contains('dark')) {
         document.querySelector("meta[name='theme-color']").setAttribute('content', "#fff");
     } else {
         document.querySelector("meta[name='theme-color']").setAttribute('content', "#121213");
@@ -277,14 +318,17 @@ music.addEventListener("timeupdate", () => {
         document.querySelector("footer img").classList.remove("spining");
         document.querySelector("footer .wave").classList.remove("active1");
         progressBar.style.pointerEvents = "none";
-    }else{
+    } else {
         progressBar.style.pointerEvents = "all";
     }
 })
 progressBar.addEventListener("change", () => {
     music.currentTime = (progressBar.value * music.duration) / 100;
     music.play();
+    document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
+    document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
 })
+
 
 const hours = new Date().getHours()
 const isDayTime = hours > 6 && hours < 20;
@@ -296,3 +340,11 @@ if (isDayTime === true) {
     document.body.classList.add("dark");
 }
 
+
+// when user want to close alert box...
+document.querySelector(".customAlert .alert .bi").addEventListener("click", () => {
+    customAlertHide()
+})
+document.getElementById("no-song").addEventListener("click", () => {
+    customAlertShow("There is no song to play!");
+})

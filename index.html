@@ -131,11 +131,11 @@
                 </div>
                 <img src="./otherImages/music-icon.svg" id="poster" alt="">
                 <h5 class="title">No Song</span></h5>
-                <div class="icons" style="pointer-events: none;">
-                    <i class="bi bi-shuffle"></i>
-                    <i class="bi bi-skip-start-fill"></i>
-                    <i class="bi bi-play-fill"></i>
-                    <i class="bi bi-skip-end-fill"></i>
+                <div class="icons" id="no-song">
+                    <i class="bi bi-shuffle" style="pointer-events: none;"></i>
+                    <i class="bi bi-skip-start-fill" style="pointer-events: none;"></i>
+                    <i class="bi bi-play-fill play-and-pause" style="pointer-events: none;"></i>
+                    <i class="bi bi-skip-end-fill" style="pointer-events: none;"></i>
                 </div>
             </div>
             <div class="tracker">
@@ -155,6 +155,12 @@
                 Buffering...
             </div>
         </footer>
+    </div>
+    <div class="customAlert">
+        <div class="alert">
+            <i class="bi bi-x-lg close"></i>
+            <span class="message"></span>
+        </div>
     </div>
     <script src="./javascript/script.js"></script>
 </body>
