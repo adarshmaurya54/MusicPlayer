@@ -13,7 +13,7 @@
     --color: white;
     /* --color2: #36ec63; */
     --color2: #1db954;
-    --textcolor2: #777;
+    --textcolor2: #777777;
     --bg: #e2e2e3;
     --menubg: #ffffffaf;
     --songbg: #ffffffaf;
@@ -21,6 +21,7 @@
     --border: rgb(230, 230, 230);
     --playborder: rgba(0, 0, 0, 0.1);
     --darkbtnbg: #0101016e;
+    --menuSongSubtitle: #363636;
 }
 
 ul li {
@@ -324,9 +325,10 @@ footer {
 }
 
 .subtitle {
+    text-transform: capitalize;
     font-size: 0.8em;
     font-weight: 500;
-    color: var(--textcolor2);
+    color: var(--menuSongSubtitle);
 }
 
 .menu-songs ul .list div:first-child img {
