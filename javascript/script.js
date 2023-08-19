@@ -94,7 +94,7 @@ function changeMasterPlay(i, id) {
         </div>
 `;
     document.querySelector("footer .tracker").style.pointerEvents = "all";
-    getImageThumbnail(`../audio/${id}.mp3`, document.getElementById("poster"), document.getElementById(`title-${id}&`))
+    getImageThumbnail(`./audio/${id}.mp3`, document.getElementById("poster"), document.getElementById(`title-${id}&`))
 }
 // function to go previous song
 function goPrev(e) {
@@ -204,7 +204,7 @@ xhr.onreadystatechange = function () {
             }
         });
         for (let index = 0; index < songs.length; index++) {
-            getImageThumbnail(`../audio/${index + 1}.mp3`, document.getElementById(`img-${index + 1}`), document.getElementById(`title-${index + 1}`))
+            getImageThumbnail(`./audio/${index + 1}.mp3`, document.getElementById(`img-${index + 1}`), document.getElementById(`title-${index + 1}`))
         }
     }
 
