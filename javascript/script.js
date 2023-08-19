@@ -1,40 +1,5 @@
 
 
-function getImageThumbnail(path, img, title) {
-    const filePath = path; // Replace with your desired file path
-    fetch(filePath)
-        .then(response => response.blob())
-        .then(blob => {
-            jsmediatags.read(blob, {
-                onSuccess: function (tag) {
-                    const artistName = tag.tags.artist || "Unknown Artist"; // Get the artist name or use "Unknown Artist" if not available
-                    const songName = tag.tags.title || "Unknown Song";
-                    title.innerHTML = `${songName.split('(')[0]} <br/> <span class=\"subtitle\">${artistName}</span>`
-                    // if (tag && tag.tags.picture) {
-                    //     // const picture = tag.tags.picture;
-                    //     // const base64String = btoa(
-                    //     //     new Uint8Array(picture.data).reduce((data, byte) => data + String.fromCharCode(byte), '')
-                    //     // );
-                    //     // const imageSrc = `data:${picture.format};base64,${base64String}`;
-                    //     // img.src = imageSrc;
-                    // } else {
-                    //     const artistName = tag.tags.artist || "Unknown Artist"; // Get the artist name or use "Unknown Artist" if not available
-                    //     const songName = tag.tags.title || "Unknown Song";
-                    //     title.innerHTML = `${songName.split('(')[0]} <br/> <span class=\"subtitle\">${artistName}</span>`
-                    //     img.src = './otherImages/music-icon.svg'
-                    // }
-                },
-                onError: function (error) {
-                    console.log("Error reading metadata:", error);
-                }
-            });
-        })
-        .catch(error => {
-            console.log("Error fetching the file:", error);
-        });
-
-}
-
 const currentStart = document.getElementById("currentStart");
 const currentEnd = document.getElementById("currentEnd");
 const music = new Audio();
@@ -71,21 +36,15 @@ const seekBar = document.getElementById("bar1");
 
 // changing master play content dynamically when music is played
 function changeMasterPlay(i, id) {
-    const searchSongById = (id) => {
-        const song = songs.find(item => item.id === id);
-        return song ? song.songName : "Song not found";
-    };
-    const searchedSong = searchSongById(parseInt(i));
-    console.log(i + " " + id);
     document.querySelector("footer .controles").innerHTML = `
         <div class="wave ">
             <div class="wave1"></div>
             <div class="wave1"></div>
             <div class="wave1"></div>
         </div>
-        <img src="" id="poster" alt="">
+        <img src="${songs[i].poster}" id="poster" alt="">
 
-        <h5 class="title" id="title-${id}&"></h5>
+        <h5 class="title">${songs[i].songName}</h5>
         <div class="icons">
             <i class="bi bi-shuffle"></i>
             <i class="bi bi-skip-start-fill" onclick="goPrev(this)"></i>
@@ -94,7 +53,6 @@ function changeMasterPlay(i, id) {
         </div>
 `;
     document.querySelector("footer .tracker").style.pointerEvents = "all";
-    getImageThumbnail(`./audio/${id}.mp3`, document.getElementById("poster"), document.getElementById(`title-${id}&`))
 }
 // function to go previous song
 function goPrev(e) {
@@ -184,8 +142,8 @@ xhr.onreadystatechange = function () {
                         <li class="song-list list" onmouseover="this.classList.add('hover');" onmouseout="this.classList.remove('hover');">
                             <div>
                                 <span>${temp}</span>
-                                <img src="" id="img-${element.id}" class="" alt="">
-                                <h5 class="title" id="title-${element.id}"></h5>
+                                <img src="./img/${element.id}.jpg">
+                                <h5 class="title">${songs[i].songName}</h5>
                             </div>
                             <i class="bi playbutton bi-play-circle-fill" data-custom-value="${i}" id="${element.id}"></i>
                         </li>
@@ -193,19 +151,15 @@ xhr.onreadystatechange = function () {
             } else {
                 document.querySelector(".items ul").innerHTML += `
                         <li class="song-list list">
-                        <div class="song">
-                        <img src="" id="img-${element.id}" class="" alt="">
-                        <i class="bi playbutton bi-play-circle-fill" data-custom-value="${i}" id="${element.id}"></i>
-                        </div>
-                        <h5 class="title" id="title-${element.id}"></h5>
+                            <div class="song">
+                            <img src="./img/${element.id}.jpg">
+                            <i class="bi playbutton bi-play-circle-fill" data-custom-value="${i}" id="${element.id}"></i>
+                            </div>
+                            <h5 class="title">${songs[i].songName}</h5>
                         </li>
                         `
-
             }
         });
-        for (let index = 0; index < songs.length; index++) {
-            getImageThumbnail(`./audio/${index + 1}.mp3`, document.getElementById(`img-${index + 1}`), document.getElementById(`title-${index + 1}`))
-        }
     }
 
 
