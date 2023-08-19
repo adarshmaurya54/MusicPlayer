@@ -459,6 +459,10 @@ footer .icons .control-icons,footer .icons .control-icons-inner{
     display: flex;
     align-items: center;
 }
+footer .icons .control-icons-inner{
+    gap: 10px;
+    margin-left: 30px;
+}
 
 footer .icons .bi:hover {
     cursor: pointer;

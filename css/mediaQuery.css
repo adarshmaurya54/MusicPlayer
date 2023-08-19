@@ -102,9 +102,15 @@
     .songs{
         border-radius: unset;
     }
+    footer .icons .control-icons-inner{
+        margin: unset;
+    }
 }
 
 @media screen and (max-width: 320px) {
+    footer .icons .control-icons-inner{
+        gap: unset;
+    }
     footer .controles .icons {
         font-size: 1.4em;
         right: -5px;
