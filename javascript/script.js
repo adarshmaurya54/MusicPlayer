@@ -7,22 +7,22 @@ function getImageThumbnail(path, img, title) {
         .then(blob => {
             jsmediatags.read(blob, {
                 onSuccess: function (tag) {
-                    if (tag && tag.tags.picture) {
-                        const picture = tag.tags.picture;
-                        const base64String = btoa(
-                            new Uint8Array(picture.data).reduce((data, byte) => data + String.fromCharCode(byte), '')
-                        );
-                        const imageSrc = `data:${picture.format};base64,${base64String}`;
-                        img.src = imageSrc;
-                        const artistName = tag.tags.artist || "Unknown Artist"; // Get the artist name or use "Unknown Artist" if not available
-                        const songName = tag.tags.title || "Unknown Song";
-                        title.innerHTML = `${songName.split('(')[0]} <br/> <span class=\"subtitle\">${artistName}</span>`
-                    } else {
-                        const artistName = tag.tags.artist || "Unknown Artist"; // Get the artist name or use "Unknown Artist" if not available
-                        const songName = tag.tags.title || "Unknown Song";
-                        title.innerHTML = `${songName.split('(')[0]} <br/> <span class=\"subtitle\">${artistName}</span>`
-                        img.src = './otherImages/music-icon.svg'
-                    }
+                    const artistName = tag.tags.artist || "Unknown Artist"; // Get the artist name or use "Unknown Artist" if not available
+                    const songName = tag.tags.title || "Unknown Song";
+                    title.innerHTML = `${songName.split('(')[0]} <br/> <span class=\"subtitle\">${artistName}</span>`
+                    // if (tag && tag.tags.picture) {
+                    //     // const picture = tag.tags.picture;
+                    //     // const base64String = btoa(
+                    //     //     new Uint8Array(picture.data).reduce((data, byte) => data + String.fromCharCode(byte), '')
+                    //     // );
+                    //     // const imageSrc = `data:${picture.format};base64,${base64String}`;
+                    //     // img.src = imageSrc;
+                    // } else {
+                    //     const artistName = tag.tags.artist || "Unknown Artist"; // Get the artist name or use "Unknown Artist" if not available
+                    //     const songName = tag.tags.title || "Unknown Song";
+                    //     title.innerHTML = `${songName.split('(')[0]} <br/> <span class=\"subtitle\">${artistName}</span>`
+                    //     img.src = './otherImages/music-icon.svg'
+                    // }
                 },
                 onError: function (error) {
                     console.log("Error reading metadata:", error);
