@@ -284,10 +284,14 @@ xhr.onreadystatechange = function () {
             document.querySelector("footer img").classList.remove("spining");
             document.querySelector("footer .wave").classList.remove("active1");
             progressBar.style.pointerEvents = "none";
+            if(document.querySelector(".icons .bi-shuffle")){
+                goNext();
+            }
         } else {
             progressBar.style.pointerEvents = "all";
         }
     })
+
     progressBar.addEventListener("change", () => {
         music.currentTime = (progressBar.value * music.duration) / 100;
         music.play();
@@ -317,7 +321,9 @@ document.querySelector(".dark-btn").addEventListener("click", () => {
     i++;
 })
 
+document.querySelector(".icons .loop").addEventListener("click",()=>{
 
+})
 
 // when we click on masterplay play icon then ...
 function playmasterplay(e) {
@@ -348,17 +354,7 @@ function playmasterplay(e) {
     }
 }
 
-// this code change initial dark mode to systems dark mode
-setInterval(() => {
-    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        // Dark mode is enabled
-        document.querySelector("meta[name='theme-color']").setAttribute('content', "#121213");
-        document.body.classList.add("dark");
-    } else {
-        document.querySelector("meta[name='theme-color']").setAttribute('content', "#fff");
-        document.body.classList.remove("dark");
-    }
-}, 1000);
+
 
 
 
