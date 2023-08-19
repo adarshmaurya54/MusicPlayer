@@ -155,7 +155,30 @@ function changeMasterPlay(i) {
 `;
     document.querySelector("footer .tracker").style.pointerEvents = "all";
 }
+// this function used to show buffering of the music
+function buffering() {
+    music.addEventListener("loadedmetadata", function () {
+        // Now you can access the duration without getting NaN
+        let music_dur = music.duration;
+        let min = Math.floor(music_dur / 60);
+        let sec = Math.floor(music_dur % 60);
+        if (sec <= 9) {
+            sec = "0" + sec;
+        }
+        if (min <= 9) {
+            min = "0" + min;
+        }
+        if (!isNaN(min) && !isNaN(sec)) {
+            currentEnd.innerHTML = `${min}:${sec}`;
+        }
+        const duration = music.duration;
+    });
+    currentEnd.innerHTML = "Buffering...";
 
+    // Start loading the audio
+    music.load();
+
+}
 var songs;
 // Xhr requestion to getting all the songs stored on songs.json file
 var xhr = new XMLHttpRequest();
@@ -194,30 +217,7 @@ xhr.onreadystatechange = function () {
 
 
 
-    // this function used to show buffering of the music
-    function buffering() {
-        music.addEventListener("loadedmetadata", function () {
-            // Now you can access the duration without getting NaN
-            let music_dur = music.duration;
-            let min = Math.floor(music_dur / 60);
-            let sec = Math.floor(music_dur % 60);
-            if (sec <= 9) {
-                sec = "0" + sec;
-            }
-            if (min <= 9) {
-                min = "0" + min;
-            }
-            if (!isNaN(min) && !isNaN(sec)) {
-                currentEnd.innerHTML = `${min}:${sec}`;
-            }
-            const duration = music.duration;
-        });
-        currentEnd.innerHTML = "Buffering...";
-
-        // Start loading the audio
-        music.load();
-
-    }
+    
 
     // getting all play button and using this we play songs...
     Array.from(document.getElementsByClassName("bi-play-circle-fill")).forEach((e, i) => {
@@ -315,6 +315,8 @@ document.querySelector(".mobile-hamb").addEventListener("click", () => {
 document.querySelector(".close").addEventListener("click", () => {
     document.querySelector(".menu").classList.remove("show");
 });
+
+// when darkmode button clicked then meta tag of theme color change logic and dark class toggle logic also...
 let i = 0;
 document.querySelector(".dark-btn").addEventListener("click", () => {
     if (document.body.classList.contains('dark')) {
@@ -326,6 +328,7 @@ document.querySelector(".dark-btn").addEventListener("click", () => {
     i++;
 })
 
+// function to go previous song
 function goPrev(e) {
     let songid = document.querySelector(".play-and-pause").getAttribute("id").split('-')[1];
     if (parseInt(songid) <= 1) {
@@ -334,12 +337,14 @@ function goPrev(e) {
         songid = parseInt(songid) - 2;
         changeMasterPlay(songid);
         music.src = `./audio/${songid + 1}.mp3`;
+        buffering();
         music.play();
         document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
         document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
     }
 }
 
+// function to go next song
 function goNext(e) {
     let songid = document.querySelector(".play-and-pause").getAttribute("id").split('-')[1];
     songid = parseInt(songid);
@@ -349,11 +354,13 @@ function goNext(e) {
         changeMasterPlay(songid);
         console.log();
         music.src = `./audio/${songid + 1}.mp3`;
+        buffering();
         music.play();
         document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
         document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
     }
 }
+
 // when we click on masterplay play icon then ...
 function playmasterplay(e) {
     if (music.paused) {
@@ -382,16 +389,20 @@ function playmasterplay(e) {
     }
 }
 
+// this code change initial dark mode to systems dark mode
+setInterval(() => {
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // Dark mode is enabled
+        document.querySelector("meta[name='theme-color']").setAttribute('content', "#121213");
+        document.body.classList.add("dark");
+    } else {
+        document.querySelector("meta[name='theme-color']").setAttribute('content', "#fff");
+        document.body.classList.remove("dark");
+    }
+}, 1000);
 
-const hours = new Date().getHours()
-const isDayTime = hours > 6 && hours < 20;
-if (isDayTime === true) {
-    document.querySelector("meta[name='theme-color']").setAttribute('content', "#fff");
-    document.body.classList.remove("dark");
-} else {
-    document.querySelector("meta[name='theme-color']").setAttribute('content', "#121213");
-    document.body.classList.add("dark");
-}
+
+
 // when user want to close alert box...
 document.querySelector(".customAlert .alert .bi").addEventListener("click", () => {
     customAlertHide()
