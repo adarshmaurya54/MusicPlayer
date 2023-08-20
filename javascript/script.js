@@ -83,7 +83,6 @@ function goNext(msg) {
     let index = document.querySelector(".play-and-pause").dataset.customValue.split(" ")[0];
     let songid = document.querySelector(".play-and-pause").dataset.customValue.split(" ")[1];
     if (msg == "linear") {
-        console.log("linear");
         index = parseInt(index) + 1;
         if (index >= songs.length) {
             customAlertShow("This is the last song that you are listening!")
@@ -99,7 +98,6 @@ function goNext(msg) {
             document.querySelector("footer .wave").classList.add("active1");
         }
     } else if (msg == "loopCurrent") {
-        console.log("loopCurrent");
         songid = parseInt(songs[index].id);
         changeMasterPlay(index, songid);
         music.src = `./audio/${songid}.mp3`;
@@ -110,7 +108,6 @@ function goNext(msg) {
         document.querySelector("footer img").classList.add("spining");
         document.querySelector("footer .wave").classList.add("active1");
     } else if (msg == "loopAll") {
-        console.log("loopall");
         index = parseInt(index) + 1;
         if (index >= songs.length) {
             index = 0;
@@ -150,6 +147,34 @@ function buffering() {
     // Start loading the audio
     music.load();
 
+}
+function playSearchedSong(e) {
+    pauseAllBtns();
+    changeMasterPlay(e.dataset.customValue, e.getAttribute("id"));
+    if (music.paused) {
+        if (e.getAttribute("id") <= 7) {
+            deactiveMenuSongs();
+            document.querySelectorAll(".menu-songs ul .song-list")[e.getAttribute("id") - 1].style.backgroundColor = "var(--color)";
+            document.querySelectorAll(".menu-songs ul .song-list")[e.getAttribute("id") - 1].style.color = "var(--textcolor1)";
+        }
+        document.querySelector("footer img").classList.add("spining");
+        document.querySelector("footer .wave").classList.add("active1");
+        music.src = "./audio/" + e.getAttribute("id") + ".mp3";
+        buffering()
+        music.play();
+        e.classList.remove("bi-play-circle-fill");
+        e.classList.add("bi-pause-circle-fill");
+        document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
+        document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill");
+    } else {
+        music.pause();
+        document.querySelector("footer .wave").classList.remove("active1");
+        document.querySelector("footer img").classList.remove("spining");
+        document.querySelector(".icons .play-and-pause").classList.remove("bi-pause-fill")
+        document.querySelector(".icons .play-and-pause").classList.add("bi-play-fill")
+        e.classList.add("bi-play-circle-fill");
+        e.classList.remove("bi-pause-circle-fill");
+    }
 }
 
 function deactiveMenuSongs() {
@@ -271,13 +296,10 @@ xhr.onreadystatechange = function () {
                 document.querySelector("footer .wave").classList.remove("active1");
                 progressBar.style.pointerEvents = "none";
                 if (document.querySelector(".icons .bi-shuffle")) {
-                    console.log("shuffle");
                     goNext("linear");
                 } else if (document.querySelector(".icons .bi-repeat")) {
-                    console.log("repeat loopAll");
                     goNext("loopAll");
                 } else if (document.querySelector(".icons .bi-repeat-1")) {
-                    console.log("repeat-1");
                     goNext("loopCurrent");
                 }
             } else {
@@ -340,7 +362,6 @@ document.querySelector(".dark-btn").addEventListener("click", () => {
 
 let i = 0;
 function loop(e) {
-    console.log("clicked");
     const arr = [
         "bi-repeat",
         "bi-repeat-1",
@@ -366,7 +387,6 @@ function loop(e) {
 function playmasterplay(e) {
     if (music.paused) {
         if (progressBar.value == 0) {
-            console.log(e.getAttribute("id").split('-')[1]);
             music.src = "./audio/" + e.getAttribute("id").split('-')[1] + ".mp3";
             buffering();
             music.play();
@@ -439,16 +459,27 @@ document.getElementById("search-item").addEventListener("input", (e) => {
             .then(data => {
                 // Data is now a JavaScript object
                 const results = [];
+                const indexs = [];
                 const lowercaseSearchTerm = searchTerm.toLowerCase();
                 // console.log(data);
                 // // Perform a basic search by iterating through the object
-                for (const item of data) {
-                    const lowercaseSongName = item.songName.toLowerCase();
+                data.forEach((e,i)=>{
+                    const lowercaseSongName = e.songName.toLowerCase();
                     // You'll need to adapt this condition based on your JSON structure
                     if (lowercaseSongName.includes(lowercaseSearchTerm)) {
-                        results.push(item);
+                        // console.log(item);
+                        indexs.push(i)
+                        results.push(e);
                     }
-                }
+                })
+                // for (const item of data) {
+                //     const lowercaseSongName = item.songName.toLowerCase();
+                //     // You'll need to adapt this condition based on your JSON structure
+                //     if (lowercaseSongName.includes(lowercaseSearchTerm)) {
+                //         // console.log(item);
+                //         results.push(item);
+                //     }
+                // }
                 results.forEach((songlist, i) => {
                     let temp;
                     temp = (i < 9) ? "0" + (i + 1) : (i + 1);
@@ -459,7 +490,7 @@ document.getElementById("search-item").addEventListener("input", (e) => {
                     <img src="${songlist.poster}">
                     <h5 class="title">${songlist.songName}</h5>
                     </div>
-                    <i class="bi playbutton bi-play-circle-fill" data-custom-value="${i}"
+                    <i class="bi playbutton bi-play-circle-fill" onclick="playSearchedSong(this)" data-custom-value="${indexs[i]}"
                     id="${songlist.id}"></i>
                     </li>
                     `;
