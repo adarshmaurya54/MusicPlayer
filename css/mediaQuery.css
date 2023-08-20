@@ -90,7 +90,8 @@
     }
 
     .songs nav .search .bi {
-        left: 10px;
+        font-size: 1.5em;
+        left: 16px;
     }
 
     .menu .header .bi {

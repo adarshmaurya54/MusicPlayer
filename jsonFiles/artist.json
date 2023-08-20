@@ -55,12 +55,6 @@
     }
     ,
     {
-        "id" : 10,
-        "artistName": "Justin Bieber Lede",
-        "img": "justin.jpg"
-    }
-    ,
-    {
         "id" : 11,
         "artistName": "Neha Kakker",
         "img": "neha.jpg"

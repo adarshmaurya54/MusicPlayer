@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+.songs {
+    padding: 20px;
+    padding-top: 80px;
+}
+
+.img-artist {
+    width: 150px;
+    height: 150px;
+    box-shadow: rgb(255 255 255 / 64%) 0px 1px 1px 0px inset, rgb(50 50 93 / 53%) 0px 50px 100px -20px, rgb(0 0 0 / 69%) 0px 30px 60px -30px;
+    object-fit: cover;
+    border-radius: 50%;
+    transition: height 0.6s ease,width 0.6s ease;
+}
+
+.mobile-hamb {
+    cursor: pointer;
+    top: 20px;
+    left: 10px;
+}
+
+.songs::before,
+.songs::after {
+    background: unset;
+}
+
+.songs .backimg {
+    position: absolute;
+    background-size: cover;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.songs .img-overlay {
+    position: absolute;
+    backdrop-filter: blur(3px);
+    top: 0;
+    left: 0;
+    height: 510px;
+    z-index: -1;
+    width: 100%;
+    background: linear-gradient(to top, var(--imgbg) 5%, rgba(0, 0, 0, 0) 100%);
+}
+
+.bg {
+    display: none;
+}
+
+.artist-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.artist-info .name-artist {
+    font-family: 'Pacifico', cursive;
+    font-size: 3em;
+    text-transform: capitalize;
+    color: var(--textcolor1);
+    transition: font-size 0.6s ease;
+}
+
+.artist-songs {
+    margin-top: 50px;
+}
+
+.artist-songs h3 {
+    font-size: 1.8em;
+    color: var(--textcolor1);
+}
+
+.artist-songs table {
+    width: 100%;
+    color: var(--textcolor1);
+}
+
+.artist-songs table tr {
+    position: relative;
+    /* display: block;
+    border-bottom: 2px solid var(--border); */
+}
+
+.artist-songs table tr:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--border);
+    /* display: block;
+    border-bottom: 2px solid var(--border); */
+}
+
+.artist-songs table tr td:nth-child(1) {
+    font-size: 1.5em;
+}
+
+.artist-songs table tr td:nth-child(2) .bi {
+    font-size: 1.5em;
+}
+
+.artist-songs table tr td:nth-child(3) {
+    text-align: end;
+}
+
+.artist-songs table tr td:nth-child(3) .bi {
+    font-size: 2.5em;
+    cursor: pointer;
+}
+.song-table{
+    padding: 20px;
+    margin-top: 20px;
+    height: 300px;
+    overflow: auto;
+}
+
+@media screen and (max-width: 537px) {
+    .img-artist{
+        height: 100px;
+        width: 100px;
+    }
+    .artist-info .name-artist{
+        font-size: 1.7em;
+    }
+}
+@media screen and (max-width: 316px) {
+    .artist-info .name-artist{
+        font-size: 1.5em;
+    }
+}

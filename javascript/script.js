@@ -521,7 +521,7 @@ document.getElementById("search-item").addEventListener("input", (e) => {
                     <li class="search-result-artist">
                         <img src="./img/${artistList.img}" alt="">
                         <p>${artistList.artistName}</p>
-                        <button id="artist-${artistList.id}">all songs</button>
+                        <button onclick="getAllSongsOfArtist('${artistList.artistName}','${artistList.img}')">all songs</button>
                     </li>
                     `
                 })
@@ -536,3 +536,8 @@ document.getElementById("search-item").addEventListener("input", (e) => {
         document.querySelector(".result").style.zIndex = "-1";
     }
 })
+
+function getAllSongsOfArtist(name,img){
+    localStorage.setItem("object",JSON.stringify({name: name,img: img}));
+    window.location.href = "./allsongsfromartist.html";
+}
