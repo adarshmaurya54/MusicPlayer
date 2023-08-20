@@ -78,6 +78,7 @@ function goPrev(e) {
 
 // function to go next song
 function goNext(msg) {
+    deactiveMenuSongs();
     pauseAllBtns()
     let index = document.querySelector(".play-and-pause").dataset.customValue.split(" ")[0];
     let songid = document.querySelector(".play-and-pause").dataset.customValue.split(" ")[1];
@@ -312,6 +313,7 @@ document.querySelector(".dark-btn").addEventListener("click", () => {
     document.body.classList.toggle("dark");
 
 })
+
 let i = 0;
 function loop(e) {
     console.log("clicked");
@@ -365,8 +367,14 @@ function playmasterplay(e) {
     }
 }
 
-
-
+// initial dark mode active or deactive if user's device has on dark mode or not... 
+if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    console.log("dark");
+    document.querySelector("meta[name='theme-color']").setAttribute('content', "#121213");
+} else {
+    document.body.classList.remove("dark");
+    document.querySelector("meta[name='theme-color']").setAttribute('content', "#fff");
+}
 
 
 // when user want to close alert box...
@@ -376,6 +384,7 @@ document.querySelector(".customAlert .alert .bi").addEventListener("click", () =
 document.getElementById("no-song").addEventListener("click", () => {
     customAlertShow("There is no song to play!");
 })
+
 
 setInterval(() => {
     if (document.querySelector(".icons .bi-shuffle")) {
