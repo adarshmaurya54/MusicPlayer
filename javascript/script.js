@@ -171,7 +171,7 @@ xhr.onreadystatechange = function () {
             if (i < 7) {
                 let temp = (i < 9) ? "0" + (i + 1) : (i + 1);
                 document.querySelector(".menu-songs ul").innerHTML += `
-                        <li class="song-list list" onmouseover="this.classList.add('hover');" onmouseout="this.classList.remove('hover');">
+                        <li class="song-list list " onmouseover="this.classList.add('hover');" onmouseout="this.classList.remove('hover');">
                             <div>
                                 <span>${temp}</span>
                                 <img src="./img/${element.id}.jpg">
@@ -418,3 +418,90 @@ setInterval(() => {
         document.querySelector(".bi-skip-end-fill").setAttribute("onclick", "goNext('loopCurrent')")
     }
 }, 300)
+
+
+
+
+
+// searching logic
+
+document.getElementById("search-item").addEventListener("input", (e) => {
+    // // Assuming you have a JSON file named data.json
+    // // Load JSON data using Fetch API
+    searchTerm = e.target.value.trim();
+    if (searchTerm != "") {
+        document.querySelector(".result").style.opacity = "1";
+        document.querySelector(".result").style.zIndex = "100";
+        document.querySelector(".song-results ul").innerHTML = "";
+        document.querySelector(".artist-results ul").innerHTML = "";
+        fetch('./jsonFiles/songs.json')
+        .then(response => response.json())
+            .then(data => {
+                // Data is now a JavaScript object
+                const results = [];
+                const lowercaseSearchTerm = searchTerm.toLowerCase();
+                // console.log(data);
+                // // Perform a basic search by iterating through the object
+                for (const item of data) {
+                    const lowercaseSongName = item.songName.toLowerCase();
+                    // You'll need to adapt this condition based on your JSON structure
+                    if (lowercaseSongName.includes(lowercaseSearchTerm)) {
+                        results.push(item);
+                    }
+                }
+                results.forEach((songlist, i) => {
+                    let temp;
+                    temp = (i < 10) ? "0" + (i + 1) : (i + 1);
+                    document.querySelector(".song-results ul").innerHTML += `
+                    <li class="search-result-song" onmouseover="this.classList.add('hover');" onmouseout="this.classList.remove('hover');">
+                    <div>
+                    <span>${temp}</span>
+                    <img src="${songlist.poster}">
+                    <h5 class="title">${songlist.songName}</h5>
+                    </div>
+                    <i class="bi playbutton bi-play-circle-fill" data-custom-value="${i}"
+                    id="${songlist.id}"></i>
+                    </li>
+                    `;
+                })
+
+                // // Do something with the results
+                // console.log('Search Results:', results);
+            })
+            .catch(error => console.error('Error loading JSON:', error));
+
+            fetch('./jsonFiles/artist.json')
+            .then(response => response.json())
+            .then(data => {
+                // Data is now a JavaScript object
+                const results = [];
+                const lowercaseSearchTerm = searchTerm.toLowerCase();
+                // console.log(data);
+                // // Perform a basic search by iterating through the object
+                for (const item of data) {
+                    const lowercaseArtistName = item.artistName.toLowerCase();
+                    // You'll need to adapt this condition based on your JSON structure
+                    if (lowercaseArtistName.includes(lowercaseSearchTerm)) {
+                        results.push(item);
+                    }
+                }
+                results.forEach((artistList, i) => {
+                    document.querySelector(".artist-results ul").innerHTML += `
+                    <li class="search-result-artist">
+                    <img src="./img/${artistList.img}" alt="">
+                    <p>${artistList.artistName}</p>
+                    <button id="artist-${artistList.id}">all songs</button>
+                    </li>
+                    `
+                })
+                
+                // // Do something with the results
+                // console.log('Search Results:', results);
+            })
+            .catch(error => console.error('Error loading JSON:', error));
+            
+        } else {
+        document.querySelector(".result").style.opacity = "0";
+        document.querySelector(".result").style.zIndex = "-1";
+    }
+})

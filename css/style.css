@@ -23,6 +23,7 @@
     --playborder: rgba(0, 0, 0, 0.1);
     --darkbtnbg: #0101016e;
     --menuSongSubtitle: #363636;
+    --result: #ffffffe0;
 }
 
 ul li {
@@ -41,6 +42,7 @@ body.dark {
     --playerctrl: #111727af;
     --border: rgba(255, 255, 255, 0.1);
     --bg: #121213;
+    --result: #000000e0;
 }
 
 .dark-mode {
@@ -283,7 +285,8 @@ footer {
     display: none;
 }
 
-.menu-songs ul .list {
+.menu-songs ul .list,
+.song-results ul .search-result-song {
     user-select: none;
     list-style: none;
     display: flex;
@@ -298,18 +301,22 @@ footer {
     transition: background-color 0.3s linear, color 0.3s linear;
     box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
 }
-
+.song-results ul .search-result-song{
+    margin: unset;
+    margin-bottom: 10px;
+}
 .hover {
     color: var(--textcolor1) !important;
     background-color: var(--color) !important;
 
 }
-
-.menu-songs ul .list .bi {
+.menu-songs ul .list .bi,
+.song-results ul .search-result-song .bi {
     font-size: 2em;
 }
 
-.menu-songs ul .list div:first-child {
+.menu-songs ul .list div:first-child ,
+.song-results ul .search-result-song div:first-child{
     width: 80%;
     display: flex;
     align-items: center;
@@ -332,7 +339,8 @@ footer {
     color: var(--menuSongSubtitle);
 }
 
-.menu-songs ul .list div:first-child img {
+.menu-songs ul .list div:first-child img,
+.song-results ul .search-result-song div:first-child img {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -630,7 +638,6 @@ footer .vol input {
 .songs nav {
     position: relative;
     height: 20%;
-    overflow: hidden;
     width: 90%;
     margin: 30px auto 0;
     display: flex;
@@ -638,12 +645,12 @@ footer .vol input {
     justify-content: space-between;
 }
 
-.songs nav ul {
+.songs nav .nav-links {
     display: flex;
     align-items: center;
 }
 
-.songs nav ul li {
+.songs nav .nav-links li {
     user-select: none;
     text-align: center;
     position: relative;
@@ -656,13 +663,13 @@ footer .vol input {
     transition: 0.3s ease;
 }
 
-.songs nav ul li:hover,
-.songs nav ul li.active2 {
+.songs nav .nav-links li:hover,
+.songs nav .nav-links li.active2 {
     color: var(--textcolor1);
 }
 
-.songs nav ul li:hover::after,
-.songs nav ul li.active2::after {
+.songs nav .nav-links li:hover::after,
+.songs nav .nav-links li.active2::after {
     position: absolute;
     width: 100%;
     bottom: -5px;
@@ -694,8 +701,76 @@ footer .vol input {
     border: 2px solid var(--border);
     border-radius: 40px;
 }
+.result{
+    opacity: 0;
+    padding: 10px;
+    border-radius: 10px;
+    position: absolute;
+    top: 120%;
+    width: 100%;
+    height: 300px;
+    z-index: -1;
+    color: var(--textcolor1);
+    background-color: var(--result);
+    backdrop-filter: blur(11px);
+    overflow: auto;
+    scroll-behavior: smooth;
+    transition: opacity 0.5s ease,z-index 0.5s ease;
+}
+.result::-webkit-scrollbar{
+    display: none;
+}
+.result h2{
+     font-size: 1.5em;
+     text-transform: uppercase;
+     letter-spacing: 2px;
+     margin-bottom: 10px;
+}
+.result .second h2{
+    margin-top: 20px;
+}
 
-.search .bi {
+.song-results ul .search-result-song{
+    width: 100%;
+    height: 100%;
+    font-size: 1.3em;
+}
+.song-results ul .search-result-song .title{
+    width: unset;
+}
+.song-results ul{
+    opacity: 0;
+    animation: all 0.5s;
+}
+.artist-results .search-result-artist
+{
+    margin-bottom: 10px;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.artist-results .search-result-artist button{
+    background-color: transparent;
+    color: var(--textcolor1);
+    outline: none;
+    text-transform: capitalize;
+    padding: 5px 20px;
+    border-radius: 10px;
+    border: 2px solid var(--textcolor1);
+    transition: color 0.5s ease,background-color 0.5s ease;
+}
+.artist-results .search-result-artist button:hover{
+    background-color: var(--textcolor1);
+    color: var(--color);
+}
+.artist-results .search-result-artist img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+.search .bi:nth-child(1) {
     position: absolute;
     top: 50%;
     left: 15px;

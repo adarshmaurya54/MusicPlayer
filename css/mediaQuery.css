@@ -73,7 +73,7 @@
         height: 100%;
     }
 
-    .songs nav img {
+    .logo {
         position: absolute;
         top: 25px;
         right: 0;
@@ -101,7 +101,7 @@
         display: flex;
     }
 
-    .songs nav ul li {
+    .songs nav .nav-links li {
         font-size: 0.6em;
     }
 
@@ -118,6 +118,12 @@
     footer .controles .title {
 
         width: 100px!important;
+    }
+    .result{
+        left: 50%;
+        transform: translateX(-50%);
+
+        width: 80vw;
     }
 }
 
