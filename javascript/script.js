@@ -435,7 +435,7 @@ document.getElementById("search-item").addEventListener("input", (e) => {
         document.querySelector(".song-results ul").innerHTML = "";
         document.querySelector(".artist-results ul").innerHTML = "";
         fetch('./jsonFiles/songs.json')
-        .then(response => response.json())
+            .then(response => response.json())
             .then(data => {
                 // Data is now a JavaScript object
                 const results = [];
@@ -451,7 +451,7 @@ document.getElementById("search-item").addEventListener("input", (e) => {
                 }
                 results.forEach((songlist, i) => {
                     let temp;
-                    temp = (i < 10) ? "0" + (i + 1) : (i + 1);
+                    temp = (i < 9) ? "0" + (i + 1) : (i + 1);
                     document.querySelector(".song-results ul").innerHTML += `
                     <li class="search-result-song" onmouseover="this.classList.add('hover');" onmouseout="this.classList.remove('hover');">
                     <div>
@@ -470,7 +470,7 @@ document.getElementById("search-item").addEventListener("input", (e) => {
             })
             .catch(error => console.error('Error loading JSON:', error));
 
-            fetch('./jsonFiles/artist.json')
+        fetch('./jsonFiles/artist.json')
             .then(response => response.json())
             .then(data => {
                 // Data is now a JavaScript object
@@ -488,19 +488,19 @@ document.getElementById("search-item").addEventListener("input", (e) => {
                 results.forEach((artistList, i) => {
                     document.querySelector(".artist-results ul").innerHTML += `
                     <li class="search-result-artist">
-                    <img src="./img/${artistList.img}" alt="">
-                    <p>${artistList.artistName}</p>
-                    <button id="artist-${artistList.id}">all songs</button>
+                        <img src="./img/${artistList.img}" alt="">
+                        <p>${artistList.artistName}</p>
+                        <button id="artist-${artistList.id}">all songs</button>
                     </li>
                     `
                 })
-                
+
                 // // Do something with the results
                 // console.log('Search Results:', results);
             })
             .catch(error => console.error('Error loading JSON:', error));
-            
-        } else {
+
+    } else {
         document.querySelector(".result").style.opacity = "0";
         document.querySelector(".result").style.zIndex = "-1";
     }

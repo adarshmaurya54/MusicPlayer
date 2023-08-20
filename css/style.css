@@ -738,10 +738,6 @@ footer .vol input {
 .song-results ul .search-result-song .title{
     width: unset;
 }
-.song-results ul{
-    opacity: 0;
-    animation: all 0.5s;
-}
 .artist-results .search-result-artist
 {
     margin-bottom: 10px;
@@ -749,6 +745,10 @@ footer .vol input {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.artist-results .search-result-artist p{
+    margin-left: 5px;
+    text-align: center;
 }
 .artist-results .search-result-artist button{
     background-color: transparent;
