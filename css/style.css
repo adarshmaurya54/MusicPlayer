@@ -10,6 +10,7 @@
 :root {
     --textcolor1: #000000;
     --imgbg: white;
+    --footerbg: #ffffffd5;
     --color: white;
     /* --color2: #36ec63; */
     --color2: #1db954;
@@ -31,6 +32,7 @@ ul li {
 body.dark {
     --playborder: rgba(255, 255, 255, 0.1);
     --darkbtnbg: #fafafa6e;
+    --footerbg: #000000d5;
     --imgbg: #070d16;
     --textcolor1: #ffffff;
     --color: black;
@@ -171,7 +173,6 @@ section .menu {
     height: 100%;
     width: 25%;
 }
-
 section .songs::-webkit-scrollbar {
     display: none;
 }
@@ -270,7 +271,7 @@ footer {
     margin-right: 20px;
 }
 
-.menu-songs {
+.menu .menu-songs {
     margin-top: 20px;
     max-height: 57%;
     overflow: auto;
@@ -358,6 +359,10 @@ footer {
 
 footer .controles {
     width: 40%;
+    display: flex;
+    align-items: center;
+}
+footer .controles .song-info{
     display: flex;
     align-items: center;
 }
@@ -920,4 +925,7 @@ body .logo {
 .imgandname{
     display: flex;
     align-items: center;
+}
+.imgandname .subtitle{
+    color: var(--textcolor2);
 }

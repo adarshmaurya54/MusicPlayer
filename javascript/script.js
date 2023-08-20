@@ -181,7 +181,7 @@ xhr.onreadystatechange = function () {
                         </li>
                         `;
             } else {
-                document.querySelector(".items ul").innerHTML += `
+                document.querySelector(".pop-songs ul").innerHTML += `
                         <li class="song-list list">
                             <div class="song">
                             <img src="./img/${element.id}.jpg">
@@ -192,114 +192,138 @@ xhr.onreadystatechange = function () {
                         `
             }
         });
-    }
 
 
 
 
 
-    // getting all play button and using this we play songs...
-    Array.from(document.getElementsByClassName("bi-play-circle-fill")).forEach((e, i) => {
-        e.addEventListener("click", () => {
-            pauseAllBtns();
-            changeMasterPlay(e.dataset.customValue, e.getAttribute("id"));
-            if (music.paused) {
-                if (e.getAttribute("id") <= 7) {
-                    deactiveMenuSongs();
-                    document.querySelectorAll(".menu-songs ul .song-list")[e.getAttribute("id") - 1].style.backgroundColor = "var(--color)";
-                    document.querySelectorAll(".menu-songs ul .song-list")[e.getAttribute("id") - 1].style.color = "var(--textcolor1)";
+
+        // getting all play button and using this we play songs...
+        Array.from(document.getElementsByClassName("bi-play-circle-fill")).forEach((e, i) => {
+            e.addEventListener("click", () => {
+                pauseAllBtns();
+                changeMasterPlay(e.dataset.customValue, e.getAttribute("id"));
+                if (music.paused) {
+                    if (e.getAttribute("id") <= 7) {
+                        deactiveMenuSongs();
+                        document.querySelectorAll(".menu-songs ul .song-list")[e.getAttribute("id") - 1].style.backgroundColor = "var(--color)";
+                        document.querySelectorAll(".menu-songs ul .song-list")[e.getAttribute("id") - 1].style.color = "var(--textcolor1)";
+                    }
+                    document.querySelector("footer img").classList.add("spining");
+                    document.querySelector("footer .wave").classList.add("active1");
+                    music.src = "./audio/" + e.getAttribute("id") + ".mp3";
+                    buffering()
+                    music.play();
+                    e.classList.remove("bi-play-circle-fill");
+                    e.classList.add("bi-pause-circle-fill");
+                    document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
+                    document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill");
+                } else {
+                    music.pause();
+                    document.querySelector("footer .wave").classList.remove("active1");
+                    document.querySelector("footer img").classList.remove("spining");
+                    document.querySelector(".icons .play-and-pause").classList.remove("bi-pause-fill")
+                    document.querySelector(".icons .play-and-pause").classList.add("bi-play-fill")
+                    e.classList.add("bi-play-circle-fill");
+                    e.classList.remove("bi-pause-circle-fill");
                 }
-                document.querySelector("footer img").classList.add("spining");
-                document.querySelector("footer .wave").classList.add("active1");
-                music.src = "./audio/" + e.getAttribute("id") + ".mp3";
-                buffering()
-                music.play();
-                e.classList.remove("bi-play-circle-fill");
-                e.classList.add("bi-pause-circle-fill");
-                document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
-                document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill");
-            } else {
-                music.pause();
-                document.querySelector("footer .wave").classList.remove("active1");
-                document.querySelector("footer img").classList.remove("spining");
+            })
+        })
+
+
+
+
+        document.querySelector(".popular-songs .bi-caret-left-fill").addEventListener("click", () => {
+            document.getElementsByClassName("items")[0].scrollLeft -= 300;
+        })
+        document.querySelector(".popular-songs .bi-caret-right-fill").addEventListener("click", () => {
+            document.getElementsByClassName("items")[0].scrollLeft += 300;
+        })
+        document.querySelector(".popular-artist .bi-caret-left-fill").addEventListener("click", () => {
+            document.getElementsByClassName("items")[1].scrollLeft -= 300;
+        })
+        document.querySelector(".popular-artist .bi-caret-right-fill").addEventListener("click", () => {
+            document.getElementsByClassName("items")[1].scrollLeft += 300;
+        })
+
+        // let music_curr = music.currentTime;
+
+        music.addEventListener("timeupdate", () => {
+            let current_time = music.currentTime;
+            let duration = music.duration;
+            let min = Math.floor(current_time / 60);
+            let sec = Math.floor(current_time % 60);
+            if (min < 10) {
+                min = '0' + min;
+            }
+            if (sec < 10) {
+                sec = '0' + sec;
+            }
+            currentStart.innerHTML = `${min}:${sec}`;
+            let progressBarVal = parseInt((current_time / duration) * 100);
+            progressBar.value = progressBarVal;
+            seekBar.style.width = progressBarVal + "%";
+            if (progressBarVal == 100) {
                 document.querySelector(".icons .play-and-pause").classList.remove("bi-pause-fill")
                 document.querySelector(".icons .play-and-pause").classList.add("bi-play-fill")
-                e.classList.add("bi-play-circle-fill");
-                e.classList.remove("bi-pause-circle-fill");
+                pauseAllBtns();
+                document.querySelector("footer img").classList.remove("spining");
+                document.querySelector("footer .wave").classList.remove("active1");
+                progressBar.style.pointerEvents = "none";
+                if (document.querySelector(".icons .bi-shuffle")) {
+                    console.log("shuffle");
+                    goNext("linear");
+                } else if (document.querySelector(".icons .bi-repeat")) {
+                    console.log("repeat loopAll");
+                    goNext("loopAll");
+                } else if (document.querySelector(".icons .bi-repeat-1")) {
+                    console.log("repeat-1");
+                    goNext("loopCurrent");
+                }
+            } else {
+                progressBar.style.pointerEvents = "all";
             }
         })
-    })
 
-
-
-
-    document.querySelector(".popular-songs .bi-caret-left-fill").addEventListener("click", () => {
-        document.getElementsByClassName("items")[0].scrollLeft -= 300;
-    })
-    document.querySelector(".popular-songs .bi-caret-right-fill").addEventListener("click", () => {
-        document.getElementsByClassName("items")[0].scrollLeft += 300;
-    })
-    document.querySelector(".popular-artist .bi-caret-left-fill").addEventListener("click", () => {
-        document.getElementsByClassName("items")[1].scrollLeft -= 300;
-    })
-    document.querySelector(".popular-artist .bi-caret-right-fill").addEventListener("click", () => {
-        document.getElementsByClassName("items")[1].scrollLeft += 300;
-    })
-
-    // let music_curr = music.currentTime;
-
-    music.addEventListener("timeupdate", () => {
-        let current_time = music.currentTime;
-        let duration = music.duration;
-        let min = Math.floor(current_time / 60);
-        let sec = Math.floor(current_time % 60);
-        if (min < 10) {
-            min = '0' + min;
-        }
-        if (sec < 10) {
-            sec = '0' + sec;
-        }
-        currentStart.innerHTML = `${min}:${sec}`;
-        let progressBarVal = parseInt((current_time / duration) * 100);
-        progressBar.value = progressBarVal;
-        seekBar.style.width = progressBarVal + "%";
-        if (progressBarVal == 100) {
-            document.querySelector(".icons .play-and-pause").classList.remove("bi-pause-fill")
-            document.querySelector(".icons .play-and-pause").classList.add("bi-play-fill")
-            pauseAllBtns();
-            document.querySelector("footer img").classList.remove("spining");
-            document.querySelector("footer .wave").classList.remove("active1");
-            progressBar.style.pointerEvents = "none";
-            if (document.querySelector(".icons .bi-shuffle")) {
-                console.log("shuffle");
-                goNext("linear");
-            } else if (document.querySelector(".icons .bi-repeat")) {
-                console.log("repeat loopAll");
-                goNext("loopAll");
-            } else if (document.querySelector(".icons .bi-repeat-1")) {
-                console.log("repeat-1");
-                goNext("loopCurrent");
-            }
-        } else {
-            progressBar.style.pointerEvents = "all";
-        }
-    })
-
-    progressBar.addEventListener("change", () => {
-        music.currentTime = (progressBar.value * music.duration) / 100;
-        music.play();
-        document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
-        document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
-    })
+        progressBar.addEventListener("change", () => {
+            music.currentTime = (progressBar.value * music.duration) / 100;
+            music.play();
+            document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
+            document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
+        })
+    }
 };
 xhr.send();
+
+// ajax for artist
+let artist;
+let xhr1 = new XMLHttpRequest();
+xhr1.open("GET", "./jsonFiles/artist.json", true);
+xhr1.onreadystatechange = function () {
+    if (xhr1.readyState === 4 && xhr1.status === 200) {
+        artist = JSON.parse(xhr1.responseText);
+        artist.forEach((element) => {
+            document.querySelector(".pop-artist ul").innerHTML += `
+                    <li class="artist-list">
+                        <img src="./img/${element.img}" class="" alt="">
+                        <h5 class="title">${element.artistName}</span></h5>
+                    </li>
+        `
+        })
+    }
+};
+xhr1.send();
 
 // hamburgure toggle
 document.querySelector(".mobile-hamb").addEventListener("click", () => {
     document.querySelector(".menu").classList.add("show");
+    document.querySelector(".songs").style.pointerEvents = "none";
+    document.querySelector(".songs").style.filter = "blur(5px)";
 });
 document.querySelector(".close").addEventListener("click", () => {
     document.querySelector(".menu").classList.remove("show");
+    document.querySelector(".songs").style.pointerEvents = "all";
+    document.querySelector(".songs").style.filter = "unset";
 });
 
 // when darkmode button clicked then meta tag of theme color change logic and dark class toggle logic also...
@@ -369,7 +393,6 @@ function playmasterplay(e) {
 
 // initial dark mode active or deactive if user's device has on dark mode or not... 
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    console.log("dark");
     document.querySelector("meta[name='theme-color']").setAttribute('content', "#121213");
 } else {
     document.body.classList.remove("dark");
