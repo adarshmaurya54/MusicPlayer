@@ -6,9 +6,9 @@ if (localStorage.length == 0) {
 
 const data = JSON.parse(localStorage.getItem("object"))
 let imgurl = "./img/" + data.img;
-// $(".backimg").attr("src", imgurl);
-// $(".img-artist").attr("src", imgurl);
-// $(".name-artist").html(data.name);
+$(".backimg").attr("src", imgurl);
+$(".img-artist").attr("src", imgurl);
+$(".name-artist").html(data.name);
 const indexs = [];
 const results = [];
 const searchTerm = data.name;
@@ -45,29 +45,11 @@ fetch('./jsonFiles/songs.json')
         // console.log('Search Results:', results);
     })
     .catch(error => console.error('Error loading JSON:', error));
-function changeMasterPlay(indexs,id) {
-    document.querySelector("footer .controles .wave").innerHTML = `
-                <div class="wave1"></div>
-                <div class="wave1"></div>
-                <div class="wave1"></div>
-        `
-    document.querySelector("footer .controles .imgandname").innerHTML = `
-                <img src="${results[indexs].poster}" id="poster" alt="">
-                <h5 class="title">${results[indexs].songName}</h5>
-        `
-    document.querySelector(".control-icons").innerHTML = `
-                <div class="control-icons-inner">
-                    <i class="bi bi-skip-start-fill" onclick="goPrev(this)"></i>
-                    <i class="bi bi-play-fill  play-and-pause" data-custom-value="${indexs}" onclick="playmasterplay(this)" id="0-${id}"></i>
-                    <i class="bi bi-skip-end-fill" onclick="goNext('linear')" ></i>
-                </div>       
-        `;
-    document.querySelector("footer .tracker").style.pointerEvents = "all";
-}
+
 
 function PlaySong(e) {
     pauseAllBtns();
-    changeMasterPlay(e.dataset.customValue.split(" ")[1],e.getAttribute("id"));
+    changeMasterPlay(e.dataset.customValue.split(" ")[1],e.getAttribute("id"),results);
     if (music.paused) {
         document.querySelector("footer img").classList.add("spining");
         document.querySelector("footer .wave").classList.add("active1");
@@ -135,7 +117,7 @@ function goPrev(e) {
         customAlertShow("This is the first song that you are listening!")
     } else {
         songid = parseInt(results[index].id);
-        changeMasterPlay(index, songid);
+        changeMasterPlay(index, songid,results);
         music.src = `./audio/${songid}.mp3`;
         buffering();
         music.play();
@@ -157,7 +139,7 @@ function goNext(msg) {
             customAlertShow("This is the last song that you are listening!")
         } else {
             songid = parseInt(results[index].id);
-            changeMasterPlay(index,songid);
+            changeMasterPlay(index,songid,results);
             music.src = `./audio/${songid}.mp3`;
             buffering();
             music.play();
@@ -168,7 +150,7 @@ function goNext(msg) {
         }
     } else if (msg == "loopCurrent") {
         songid = parseInt(results[index].id);
-        changeMasterPlay(index,songid);
+        changeMasterPlay(index,songid,results);
         music.src = `./audio/${songid}.mp3`;
         buffering();
         music.play();
@@ -182,7 +164,7 @@ function goNext(msg) {
             index = 0; 
         }
         songid = parseInt(results[index].id);
-        changeMasterPlay(index, songid);
+        changeMasterPlay(index, songid,results);
         music.src = `./audio/${songid}.mp3`;
         buffering();
         music.play();

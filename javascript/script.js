@@ -3,26 +3,7 @@
 const currentStart = document.getElementById("currentStart");
 
 
-// changing master play content dynamically when music is played
-function changeMasterPlay(i, id, arrayname) {
-    document.querySelector("footer .controles .wave").innerHTML = `
-            <div class="wave1"></div>
-            <div class="wave1"></div>
-            <div class="wave1"></div>
-    `
-    document.querySelector("footer .controles .imgandname").innerHTML = `
-            <img src="${arrayname[i].poster}" id="poster" alt="">
-            <h5 class="title">${arrayname[i].songName}</h5>
-    `
-    document.querySelector(".control-icons").innerHTML = `
-            <div class="control-icons-inner">
-                <i class="bi bi-skip-start-fill" onclick="goPrev(this)"></i>
-                <i class="bi bi-play-fill  play-and-pause" data-custom-value="${i} ${id}" onclick="playmasterplay(this)" id="0-${id}"></i>
-                <i class="bi bi-skip-end-fill" onclick="goNext('linear')" ></i>
-            </div>       
-    `;
-    document.querySelector("footer .tracker").style.pointerEvents = "all";
-}
+
 // function to go previous song
 function goPrev(e) {
     let index = document.querySelector(".play-and-pause").dataset.customValue.split(" ")[0];
