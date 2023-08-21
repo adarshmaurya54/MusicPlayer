@@ -15,7 +15,7 @@ function goPrev(e) {
         customAlertShow("This is the first song that you are listening!")
     } else {
         songid = parseInt(songs[index].id);
-        changeMasterPlay(index, songid, songs);
+        changeMasterPlay(index, songid, songs,"playmasterplay");
         music.src = `./audio/${songid}.mp3`;
         buffering();
         music.play();
@@ -40,7 +40,7 @@ function goNext(msg) {
         } else {
             // songid = parseInt(songs[index].id);
             songid = songs[index].id;
-            changeMasterPlay(index, songid, songs);
+            changeMasterPlay(index, songid, songs,"playmasterplay");
             music.src = `./audio/${songid}.mp3`;
             buffering();
 
@@ -54,7 +54,7 @@ function goNext(msg) {
     } else if (msg == "loopCurrent") {
         songid = songs[index].id;
         // songid = parseInt(songs[index].id);
-        changeMasterPlay(index, songid, songs);
+        changeMasterPlay(index, songid, songs,"playmasterplay");
         music.src = `./audio/${songid}.mp3`;
         buffering();
 
@@ -71,7 +71,7 @@ function goNext(msg) {
         }
         // songid = parseInt(songs[index].id);
         songid = songs[index].id;
-        changeMasterPlay(index, songid, songs);
+        changeMasterPlay(index, songid, songs,"playmasterplay");
         music.src = `./audio/${songid}.mp3`;
         buffering();
 
@@ -90,7 +90,7 @@ function playSearchedSong(e) {
     let isOn = e.querySelector(".bi").classList.contains("bi-play-circle-fill");
     progressBar.value = 0;
     pauseAllBtns();
-    changeMasterPlay(e.dataset.customValue, e.getAttribute("id"), songs);
+    changeMasterPlay(e.dataset.customValue, e.getAttribute("id"), songs,"playmasterplay");
     if (isOn) {
 
         document.querySelector("footer img").classList.add("spining");
@@ -168,7 +168,7 @@ xhr.onreadystatechange = function () {
                 let isOn = e.querySelector(".bi").classList.contains("bi-play-circle-fill");
                 progressBar.value = 0;
                 pauseAllBtns();
-                changeMasterPlay(e.dataset.customValue, e.getAttribute("id"), songs);
+                changeMasterPlay(e.dataset.customValue, e.getAttribute("id"), songs,"playmasterplay");
                 if (isOn) {
                     
                     document.querySelector("footer img").classList.add("spining");

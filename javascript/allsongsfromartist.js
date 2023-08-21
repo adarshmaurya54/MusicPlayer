@@ -12,7 +12,6 @@ $(".name-artist").html(data.name);
 const indexs = [];
 const results = [];
 const searchTerm = data.name;
-console.log(searchTerm);
 fetch('./jsonFiles/songs.json')
     .then(response => response.json())
     .then(data => {
@@ -47,10 +46,9 @@ fetch('./jsonFiles/songs.json')
     })
     .catch(error => console.error('Error loading JSON:', error));
 
-console.log(results);
 function PlaySong(e) {
-    pauseAllBtns();
-    changeMasterPlay(e.dataset.customValue.split(" ")[1],e.getAttribute("id"),results);
+    pauseAllBtns(); 
+    changeMasterPlay(e.dataset.customValue.split(" ")[1],e.getAttribute("id"),results,"playmasterplayofaritistsongs");
     if (music.paused) {
         document.querySelector("footer img").classList.add("spining");
         document.querySelector("footer .wave").classList.add("active1");
@@ -84,7 +82,7 @@ function goPrev(e) {
         customAlertShow("This is the first song that you are listening!")
     } else {
         songid = parseInt(results[index].id);
-        changeMasterPlay(index, songid,results);
+        changeMasterPlay(index, songid,results,"playmasterplayofaritistsongs");
         music.src = `./audio/${songid}.mp3`;
         buffering();
         music.play();
@@ -106,7 +104,7 @@ function goNext(msg) {
             customAlertShow("This is the last song that you are listening!")
         } else {
             songid = parseInt(results[index].id);
-            changeMasterPlay(index,songid,results);
+            changeMasterPlay(index,songid,results,"playmasterplayofaritistsongs");
             music.src = `./audio/${songid}.mp3`;
             buffering();
             music.play();
@@ -117,7 +115,7 @@ function goNext(msg) {
         }
     } else if (msg == "loopCurrent") {
         songid = parseInt(results[index].id);
-        changeMasterPlay(index,songid,results);
+        changeMasterPlay(index,songid,results,"playmasterplayofaritistsongs");
         music.src = `./audio/${songid}.mp3`;
         buffering();
         music.play();
@@ -131,7 +129,7 @@ function goNext(msg) {
             index = 0; 
         }
         songid = parseInt(results[index].id);
-        changeMasterPlay(index, songid,results);
+        changeMasterPlay(index, songid,results,"playmasterplayofaritistsongs");
         music.src = `./audio/${songid}.mp3`;
         buffering();
         music.play();
@@ -143,4 +141,29 @@ function goNext(msg) {
 }
 
 
-{/* <br> <span class=\"subtitle\">Daniel Levi</span> */}
+function playmasterplayofaritistsongs(e) {
+    if (music.paused) {
+        if (progressBar.value == 0) {
+            music.src = "./audio/" + e.getAttribute("id").split('-')[1] + ".mp3";
+            buffering();
+            music.play();
+        } else {
+            music.currentTime = (progressBar.value * music.duration) / 100;
+            music.play();
+        }
+        document.querySelector("footer img").classList.add("spining");
+        document.querySelector("footer .wave").classList.add("active1");
+        e.classList.remove("bi-play-fill");
+        e.classList.add("bi-pause-fill");
+        document.getElementById(e.getAttribute("id").split('-')[1]).classList.remove("bi-play-circle-fill");
+        document.getElementById(e.getAttribute("id").split('-')[1]).classList.add("bi-pause-circle-fill");
+    } else {
+        music.pause();
+        document.querySelector("footer .wave").classList.remove("active1");
+        document.querySelector("footer img").classList.remove("spining");
+        e.classList.add("bi-play-fill");
+        e.classList.remove("bi-pause-fill");
+        document.getElementById(e.getAttribute("id").split('-')[1]).classList.add("bi-play-circle-fill");
+        document.getElementById(e.getAttribute("id").split('-')[1]).classList.remove("bi-pause-circle-fill");
+    }
+}

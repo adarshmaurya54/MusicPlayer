@@ -159,7 +159,7 @@ document.getElementById("no-song").addEventListener("click", () => {
     customAlertShow("There is no song to play!");
 })
 
-function changeMasterPlay(indexs, id, arrayname) {
+function changeMasterPlay(indexs, id, arrayname,functionName) {
     document.querySelector("footer .controles .wave").innerHTML = `
                 <div class="wave1"></div>
                 <div class="wave1"></div>
@@ -174,7 +174,7 @@ function changeMasterPlay(indexs, id, arrayname) {
     document.querySelector(".control-icons").innerHTML = `
                 <div class="control-icons-inner">
                     <i class="bi bi-skip-start-fill" onclick="goPrev(this)"></i>
-                    <i class="bi bi-play-fill  play-and-pause" data-custom-value="${indexs}" onclick="playmasterplay(this)" id="0-${id}"></i>
+                    <i class="bi bi-play-fill  play-and-pause" data-custom-value="${indexs}" onclick="${functionName}(this)" id="0-${id}"></i>
                     <i class="bi bi-skip-end-fill" onclick="goNext('linear')" ></i>
                 </div>       
         `;
