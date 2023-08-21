@@ -86,18 +86,22 @@ function goNext(msg) {
 }
 
 function playSearchedSong(e) {
+
+    let isOn = e.querySelector(".bi").classList.contains("bi-play-circle-fill");
+    progressBar.value = 0;
     pauseAllBtns();
     changeMasterPlay(e.dataset.customValue, e.getAttribute("id"), songs);
-    if (music.paused) {
+    if (isOn) {
+
         document.querySelector("footer img").classList.add("spining");
         document.querySelector("footer .wave").classList.add("active1");
         music.src = "./audio/" + e.getAttribute("id") + ".mp3";
         buffering()
 
+
         music.play();
-         
-        e.classList.remove("bi-play-circle-fill");
-        e.classList.add("bi-pause-circle-fill");
+        e.querySelector(".bi").classList.remove("bi-play-circle-fill");
+        e.querySelector(".bi").classList.add("bi-pause-circle-fill");
         document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
         document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill");
     } else {
@@ -106,9 +110,10 @@ function playSearchedSong(e) {
         document.querySelector("footer img").classList.remove("spining");
         document.querySelector(".icons .play-and-pause").classList.remove("bi-pause-fill")
         document.querySelector(".icons .play-and-pause").classList.add("bi-play-fill")
-        e.classList.add("bi-play-circle-fill");
-        e.classList.remove("bi-pause-circle-fill");
+        e.querySelector(".bi").classList.add("bi-play-circle-fill");
+        e.querySelector(".bi").classList.remove("bi-pause-circle-fill");
     }
+
 }
 setInterval(()=>{
     if(currentEnd.innerHTML == "Buffering..."){
@@ -136,21 +141,21 @@ xhr.onreadystatechange = function () {
             if (i < 7) {
                 let temp = (i < 9) ? "0" + (i + 1) : (i + 1);
                 document.querySelector(".menu-songs ul").innerHTML += `
-                        <li class="song-list list " onmouseover="this.classList.add('hover');" onmouseout="this.classList.remove('hover');">
+                        <li class="song-list list playsong" data-custom-value="${i}" id="${element.id}" onmouseover="this.classList.add('hover');" onmouseout="this.classList.remove('hover');">
                             <div>
                                 <span>${temp}</span>
                                 <img src="${element.poster}">
                                 <h5 class="title">${songs[i].songName} <br> <span class="subtitle">${songs[i].artistName}</span> </h5>
                             </div>
-                            <i class="bi playbutton bi-play-circle-fill" data-custom-value="${i}" id="${element.id}"></i>
+                            <i class="bi playbutton bi-play-circle-fill" ></i>
                         </li>
                         `;
             } else {
                 document.querySelector(".pop-songs ul").innerHTML += `
-                        <li class="song-list list">
+                        <li class="song-list list playsong" data-custom-value="${i}" id="${element.id}">
                             <div class="song">
                             <img src="${element.poster}">
-                            <i class="bi playbutton bi-play-circle-fill" data-custom-value="${i}" id="${element.id}"></i>
+                            <i class="bi playbutton bi-play-circle-fill" ></i>
                             </div>
                             <h5 class="title">${songs[i].songName} <br> <span class="subtitle">${songs[i].artistName}</span></h5>
                         </li>
@@ -164,21 +169,23 @@ xhr.onreadystatechange = function () {
 
 
         // getting all play button and using this we play songs...
-        Array.from(document.getElementsByClassName("bi-play-circle-fill")).forEach((e, i) => {
+        Array.from(document.getElementsByClassName("playsong")).forEach((e, i) => {
             e.addEventListener("click", () => {
-                
+                let isOn = e.querySelector(".bi").classList.contains("bi-play-circle-fill");
+                progressBar.value = 0;
                 pauseAllBtns();
                 changeMasterPlay(e.dataset.customValue, e.getAttribute("id"), songs);
-                if (music.paused) {
+                if (isOn) {
+                    
                     document.querySelector("footer img").classList.add("spining");
                     document.querySelector("footer .wave").classList.add("active1");
                     music.src = "./audio/" + e.getAttribute("id") + ".mp3";
                     buffering()
-
+                    
                      
                     music.play();
-                    e.classList.remove("bi-play-circle-fill");
-                    e.classList.add("bi-pause-circle-fill");
+                    e.querySelector(".bi").classList.remove("bi-play-circle-fill");
+                    e.querySelector(".bi").classList.add("bi-pause-circle-fill");
                     document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
                     document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill");
                 } else {
@@ -187,9 +194,10 @@ xhr.onreadystatechange = function () {
                     document.querySelector("footer img").classList.remove("spining");
                     document.querySelector(".icons .play-and-pause").classList.remove("bi-pause-fill")
                     document.querySelector(".icons .play-and-pause").classList.add("bi-play-fill")
-                    e.classList.add("bi-play-circle-fill");
-                    e.classList.remove("bi-pause-circle-fill");
+                    e.querySelector(".bi").classList.add("bi-play-circle-fill");
+                    e.querySelector(".bi").classList.remove("bi-pause-circle-fill");
                 }
+               
             })
         })
 
@@ -298,14 +306,13 @@ document.getElementById("search-item").addEventListener("input", (e) => {
                     let temp;
                     temp = (i < 9) ? "0" + (i + 1) : (i + 1);
                     document.querySelector(".song-results ul").innerHTML += `
-                    <li class="search-result-song" onmouseover="this.classList.add('hover');" onmouseout="this.classList.remove('hover');">
+                    <li class="search-result-song" onclick="playSearchedSong(this)" data-custom-value="${indexs[i]}" id="${songlist.id}" onmouseover="this.classList.add('hover');" onmouseout="this.classList.remove('hover');">
                         <div>
                         <span>${temp}</span>
                         <img src="${songlist.poster}">
                         <h5 class="title">${songlist.songName} <br> <span class=\"subtitle\">${songlist.artistName}</span></h5>
                         </div>
-                        <i class="bi playbutton bi-play-circle-fill" onclick="playSearchedSong(this)" data-custom-value="${indexs[i]}"
-                        id="${songlist.id}"></i>
+                        <i class="bi playbutton bi-play-circle-fill" ></i>
                     </li>
                     `;
                 })

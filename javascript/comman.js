@@ -75,7 +75,6 @@ function customAlertHide() {
     document.querySelector(".customAlert .alert").style.transform = "translateY(-105%)";
 }
 
-// when we click on masterplay play icon then ...
 function playmasterplay(e) {
     if (music.paused) {
         if (progressBar.value == 0) {
@@ -90,16 +89,16 @@ function playmasterplay(e) {
         document.querySelector("footer .wave").classList.add("active1");
         e.classList.remove("bi-play-fill");
         e.classList.add("bi-pause-fill");
-        document.getElementById(e.getAttribute("id").split('-')[1]).classList.remove("bi-play-circle-fill");
-        document.getElementById(e.getAttribute("id").split('-')[1]).classList.add("bi-pause-circle-fill");
+        document.getElementById(e.getAttribute("id").split('-')[1]).querySelector(".bi").classList.remove("bi-play-circle-fill");
+        document.getElementById(e.getAttribute("id").split('-')[1]).querySelector(".bi").classList.add("bi-pause-circle-fill");
     } else {
         music.pause();
         document.querySelector("footer .wave").classList.remove("active1");
         document.querySelector("footer img").classList.remove("spining");
         e.classList.add("bi-play-fill");
         e.classList.remove("bi-pause-fill");
-        document.getElementById(e.getAttribute("id").split('-')[1]).classList.add("bi-play-circle-fill");
-        document.getElementById(e.getAttribute("id").split('-')[1]).classList.remove("bi-pause-circle-fill");
+        document.getElementById(e.getAttribute("id").split('-')[1]).querySelector(".bi").classList.add("bi-play-circle-fill");
+        document.getElementById(e.getAttribute("id").split('-')[1]).querySelector(".bi").classList.remove("bi-pause-circle-fill");
     }
 }
 

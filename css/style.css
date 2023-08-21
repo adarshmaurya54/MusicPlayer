@@ -892,11 +892,15 @@ footer .vol input {
     width: 100px;
     position: relative;
 }
-
+.playsong:hover{
+    cursor: pointer;
+}
+.items .list:hover img {
+    filter: brightness(59%);
+}
 .items .list .bi {
     color: white;
     position: absolute;
-    cursor: pointer;
     top: 50%;
     left: 50%;
     font-size: 2em;
@@ -935,9 +939,7 @@ footer .vol input {
     opacity: 1;
 }
 
-.items .list:hover img {
-    filter: blur(2px);
-}
+
 
 .items .list .title {
     height: 15%;
