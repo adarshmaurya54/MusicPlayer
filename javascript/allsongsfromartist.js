@@ -71,40 +71,6 @@ function PlaySong(e) {
     }
 }
 
-music.addEventListener("timeupdate", () => {
-    let current_time = music.currentTime;
-    let duration = music.duration;
-    let min = Math.floor(current_time / 60);
-    let sec = Math.floor(current_time % 60);
-    if (min < 10) {
-        min = '0' + min;
-    }
-    if (sec < 10) {
-        sec = '0' + sec;
-    }
-    currentStart.innerHTML = `${min}:${sec}`;
-    let progressBarVal = parseInt((current_time / duration) * 100);
-    progressBar.value = progressBarVal;
-    seekBar.style.width = progressBarVal + "%";
-    if (progressBarVal == 100) {
-        document.querySelector(".icons .play-and-pause").classList.remove("bi-pause-fill")
-        document.querySelector(".icons .play-and-pause").classList.add("bi-play-fill")
-        pauseAllBtns();
-        document.querySelector("footer img").classList.remove("spining");
-        document.querySelector("footer .wave").classList.remove("active1");
-        progressBar.style.pointerEvents = "none";
-        if (document.querySelector(".icons .bi-shuffle")) {
-            goNext("linear");
-        } else if (document.querySelector(".icons .bi-repeat")) {
-            goNext("loopAll");
-        } else if (document.querySelector(".icons .bi-repeat-1")) {
-            goNext("loopCurrent");
-        }
-    } else {
-        progressBar.style.pointerEvents = "all";
-    }
-})
-
 
 
 
