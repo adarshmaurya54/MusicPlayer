@@ -1,15 +1,4 @@
 [
-
-    {
-        "id": 1,
-        "songName": "On My Way <br> <span class=\"subtitle\">Alon Walker</span>",
-        "poster": "./img/1.jpg"
-    },
-    {
-        "id": 2,
-        "songName": "Alon Walker-Fade <br> <span class=\"subtitle\">Alon Walker</span>",
-        "poster": "./img/2.jpg"
-    },
     {
         "id": 3,
         "songName": "Cartoon - On & On <br> <span class=\"subtitle\">Daniel Levi</span>",
@@ -36,14 +25,8 @@
         "poster": "./img/7.jpg"
     },
     {
-        "id": "gadar2",
-        "songName": "Udd ja kale kawan | Gadar 2 <br> <span class=\"subtitle\">  Udit Narayan, Alka Yagnik</span>",
-        "poster": "./img/gadar2.jpeg"
-    }
-    ,
-    {
         "id": 8,
-        "songName": "Suna Hai <br> <span class=\"subtitle\">Jubin Nautiyal</span>",
+        "songName": "Suna Hai <br> <span class=\"subtitle\">Jubin Nautiyal </span>",
         "poster": "./img/8.jpg"
     },
     {
@@ -51,6 +34,12 @@
         "songName": "Dilbar <br> <span class=\"subtitle\">Neha kakker, Dhvani Bhanushali, Ikka</span>",
         "poster": "./img/9.jpg"
     },
+    {
+        "id": "gadar2",
+        "songName": "Udd ja kale kawan | Gadar 2 <br> <span class=\"subtitle\">  Udit Narayan, Alka Yagnik</span>",
+        "poster": "./img/gadar2.jpeg"
+    }
+    ,
     {
         "id": 10,
         "songName": "Dunia <br> <span class=\"subtitle\">Abhijit Vaghani, Akhil, Dhvani Bhanushali, Bob</span>",

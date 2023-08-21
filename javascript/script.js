@@ -82,11 +82,6 @@ function playSearchedSong(e) {
     pauseAllBtns();
     changeMasterPlay(e.dataset.customValue, e.getAttribute("id"),songs);
     if (music.paused) {
-        if (e.getAttribute("id") <= 7) {
-            deactiveMenuSongs();
-            document.querySelectorAll(".menu-songs ul .song-list")[e.getAttribute("id") - 1].style.backgroundColor = "var(--color)";
-            document.querySelectorAll(".menu-songs ul .song-list")[e.getAttribute("id") - 1].style.color = "var(--textcolor1)";
-        }
         document.querySelector("footer img").classList.add("spining");
         document.querySelector("footer .wave").classList.add("active1");
         music.src = "./audio/" + e.getAttribute("id") + ".mp3";
@@ -159,11 +154,6 @@ xhr.onreadystatechange = function () {
                 pauseAllBtns();
                 changeMasterPlay(e.dataset.customValue, e.getAttribute("id"),songs);
                 if (music.paused) {
-                    if (e.getAttribute("id") <= 7) {
-                        deactiveMenuSongs();
-                        document.querySelectorAll(".menu-songs ul .song-list")[e.getAttribute("id") - 1].style.backgroundColor = "var(--color)";
-                        document.querySelectorAll(".menu-songs ul .song-list")[e.getAttribute("id") - 1].style.color = "var(--textcolor1)";
-                    }
                     document.querySelector("footer img").classList.add("spining");
                     document.querySelector("footer .wave").classList.add("active1");
                     music.src = "./audio/" + e.getAttribute("id") + ".mp3";
@@ -224,7 +214,7 @@ xhr1.onreadystatechange = function () {
         artist = JSON.parse(xhr1.responseText);
         artist.forEach((element) => {
             document.querySelector(".pop-artist ul").innerHTML += `
-                    <li class="artist-list">
+                    <li class="artist-list" onclick="getAllSongsOfArtist('${element.artistName}','${element.img}')">
                         <img src="./img/${element.img}" class="" alt="">
                         <h5 class="title">${element.artistName}</span></h5>
                     </li>
@@ -245,30 +235,6 @@ document.querySelector(".close").addEventListener("click", () => {
     document.querySelector(".songs").style.pointerEvents = "all";
     document.querySelector(".songs").style.filter = "unset";
 });
-
-// when darkmode button clicked then meta tag of theme color change logic and dark class toggle logic also...
-
-document.querySelector(".dark-btn").addEventListener("click", () => {
-    if (document.body.classList.contains('dark')) {
-        document.querySelector("meta[name='theme-color']").setAttribute('content', "#fff");
-    } else {
-        document.querySelector("meta[name='theme-color']").setAttribute('content', "#121213");
-    }
-    document.body.classList.toggle("dark");
-
-})
-
-
-
-
-
-// initial dark mode active or deactive if user's device has on dark mode or not... 
-if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.querySelector("meta[name='theme-color']").setAttribute('content', "#121213");
-} else {
-    document.body.classList.remove("dark");
-    document.querySelector("meta[name='theme-color']").setAttribute('content', "#fff");
-}
 
 
 

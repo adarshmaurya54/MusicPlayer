@@ -125,7 +125,6 @@ document.querySelector(".dark-btn").addEventListener("click", () => {
         document.querySelector("meta[name='theme-color']").setAttribute('content', "#121213");
     }
     document.body.classList.toggle("dark");
-
 })
 // initial dark mode active or deactive if user's device has on dark mode or not... 
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -150,6 +149,8 @@ progressBar.addEventListener("change", () => {
     music.play();
     document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
     document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
+    document.querySelector("footer img").classList.add("spining");
+    document.querySelector("footer .wave").classList.add("active1");
 })
 
 // when user want to close alert box...
@@ -160,7 +161,7 @@ document.getElementById("no-song").addEventListener("click", () => {
     customAlertShow("There is no song to play!");
 })
 
-function changeMasterPlay(indexs,id,arrayname) {
+function changeMasterPlay(indexs, id, arrayname) {
     document.querySelector("footer .controles .wave").innerHTML = `
                 <div class="wave1"></div>
                 <div class="wave1"></div>

@@ -1,4 +1,11 @@
 @media screen and (max-width: 950px) {
+    
+    .songs nav {
+        margin: 9% auto 0;
+    }
+    .mobile-hamb,.logo {
+        top: 27px;
+    }
     .container {
         width: 100vw;
         height: 100vh;
@@ -103,7 +110,9 @@
     }
 
     .songs nav .nav-links li {
-        font-size: 0.6em;
+        font-size: 0.8em;
+        letter-spacing: 1px;
+        font-size: bold;
     }
 
     .songs {
@@ -126,15 +135,16 @@
 
         width: 80vw;
     }
-    .artist-songs table tr td:nth-child(2) {
-        max-width: 150px;
-    }
-
 }
 
 @media screen and (max-width: 375px) {
     footer .controles .title {
         width: 20x !important;
+    }
+    .songs nav .nav-links li {
+        font-size: 0.6em;
+        letter-spacing: unset;
+        font-size: bold;
     }
 }
 
@@ -150,6 +160,8 @@
     footer .controles .title {
         width: 80px !important;
     }
+    
+
 }
 
 @media screen and (max-width: 1127px) {
@@ -158,5 +170,13 @@
     }
     footer .tracker{
         margin-left: 50px;
+    }
+    .artist-songs table tr td:nth-child(2) {
+        max-width: 150px;
+    }
+}
+@media screen and (max-width: 550px) {
+    .createdbyname{
+        font-size: 1.5em;
     }
 }
