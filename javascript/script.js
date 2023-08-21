@@ -115,13 +115,7 @@ function playSearchedSong(e) {
     }
 
 }
-setInterval(()=>{
-    if(currentEnd.innerHTML == "Buffering..."){
-        document.querySelector(".poster-container").classList.add("loading");
-    }else{
-        document.querySelector(".poster-container").classList.remove("loading");
-    }
-},500)
+
 function deactiveMenuSongs() {
     Array.from(document.querySelectorAll(".menu-songs ul .song-list")).forEach(e => {
         e.style.backgroundColor = "var(--color2)";

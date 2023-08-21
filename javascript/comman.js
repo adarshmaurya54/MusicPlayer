@@ -236,3 +236,11 @@ music.addEventListener("timeupdate", () => {
         progressBar.style.pointerEvents = "all";
     }
 })
+
+setInterval(()=>{
+    if(currentEnd.innerHTML == "Buffering..."){
+        document.querySelector(".poster-container").classList.add("loading");
+    }else{
+        document.querySelector(".poster-container").classList.remove("loading");
+    }
+},500)
