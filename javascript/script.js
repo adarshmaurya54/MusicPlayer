@@ -19,6 +19,7 @@ function goPrev(e) {
         music.src = `./audio/${songid}.mp3`;
         buffering();
         music.play();
+         
         document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
         document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
         document.querySelector("footer img").classList.add("spining");
@@ -42,6 +43,8 @@ function goNext(msg) {
             changeMasterPlay(index, songid, songs);
             music.src = `./audio/${songid}.mp3`;
             buffering();
+
+             
             music.play();
             document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
             document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
@@ -54,6 +57,8 @@ function goNext(msg) {
         changeMasterPlay(index, songid, songs);
         music.src = `./audio/${songid}.mp3`;
         buffering();
+
+         
         music.play();
         document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
         document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
@@ -69,6 +74,8 @@ function goNext(msg) {
         changeMasterPlay(index, songid, songs);
         music.src = `./audio/${songid}.mp3`;
         buffering();
+
+         
         music.play();
         document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
         document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
@@ -86,7 +93,9 @@ function playSearchedSong(e) {
         document.querySelector("footer .wave").classList.add("active1");
         music.src = "./audio/" + e.getAttribute("id") + ".mp3";
         buffering()
+
         music.play();
+         
         e.classList.remove("bi-play-circle-fill");
         e.classList.add("bi-pause-circle-fill");
         document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
@@ -101,7 +110,13 @@ function playSearchedSong(e) {
         e.classList.remove("bi-pause-circle-fill");
     }
 }
-
+setInterval(()=>{
+    if(currentEnd.innerHTML == "Buffering..."){
+        document.querySelector(".poster-container").classList.add("loading");
+    }else{
+        document.querySelector(".poster-container").classList.remove("loading");
+    }
+},500)
 function deactiveMenuSongs() {
     Array.from(document.querySelectorAll(".menu-songs ul .song-list")).forEach(e => {
         e.style.backgroundColor = "var(--color2)";
@@ -151,6 +166,7 @@ xhr.onreadystatechange = function () {
         // getting all play button and using this we play songs...
         Array.from(document.getElementsByClassName("bi-play-circle-fill")).forEach((e, i) => {
             e.addEventListener("click", () => {
+                
                 pauseAllBtns();
                 changeMasterPlay(e.dataset.customValue, e.getAttribute("id"), songs);
                 if (music.paused) {
@@ -158,6 +174,8 @@ xhr.onreadystatechange = function () {
                     document.querySelector("footer .wave").classList.add("active1");
                     music.src = "./audio/" + e.getAttribute("id") + ".mp3";
                     buffering()
+
+                     
                     music.play();
                     e.classList.remove("bi-play-circle-fill");
                     e.classList.add("bi-pause-circle-fill");
@@ -245,7 +263,7 @@ document.querySelector(".close").addEventListener("click", () => {
 document.getElementById("search-item").addEventListener("input", (e) => {
     // // Load JSON data using Fetch API
     const searchTerm = e.target.value.trim();
-    const unwantedCharacters = ['<', '>', '\\', '"', ' ', '\n', '\t', '\r','/',',','|'];
+    const unwantedCharacters = ['<', '>', '\\', '"', ' ', '\n', '\t', '\r', '/', ',', '|'];
 
     const unwantedArray = Array.from(searchTerm).filter(character => {
         return unwantedCharacters.includes(character);
@@ -270,7 +288,7 @@ document.getElementById("search-item").addEventListener("input", (e) => {
                     const lowercaseSongName = e.songName.toLowerCase();
                     const lowercaseArtistName = e.artistName.toLowerCase();
                     // You'll need to adapt this condition based on your JSON structure
-                    if (lowercaseSongName.includes(lowercaseSearchTerm) || lowercaseArtistName.includes(lowercaseSearchTerm) ) {
+                    if (lowercaseSongName.includes(lowercaseSearchTerm) || lowercaseArtistName.includes(lowercaseSearchTerm)) {
                         // console.log(item);
                         indexs.push(i)
                         results.push(e);

@@ -63,9 +63,13 @@
     }
     
     
-    footer #poster {
+    footer #poster ,.poster-container{
         width: 30px;
         height: 30px;
+    }
+    .poster-container.loading::after{
+        width: 140%;
+        height: 140%;
     }
     
     footer .controles .title {

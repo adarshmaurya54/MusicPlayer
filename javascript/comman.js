@@ -2,7 +2,8 @@
 const music = new Audio();
 const currentEnd = document.getElementById("currentEnd");
 function buffering() {
-    music.addEventListener("loadedmetadata", function () {
+    document.querySelector(".poster-container").classList.add("loading");
+    music.addEventListener("loadedmetadata", function () { 
         // Now you can access the duration without getting NaN
         let music_dur = music.duration;
         let min = Math.floor(music_dur / 60);
@@ -17,7 +18,7 @@ function buffering() {
             currentEnd.innerHTML = `${min}:${sec}`;
         }
         const duration = music.duration;
-    });
+    }); 
     currentEnd.innerHTML = "Buffering...";
 
     // Start loading the audio
@@ -166,7 +167,9 @@ function changeMasterPlay(indexs, id, arrayname) {
                 <div class="wave1"></div>
         `
     document.querySelector("footer .controles .imgandname").innerHTML = `
-                <img src="${arrayname[indexs].poster}" id="poster" alt="">
+                <div class="poster-container">
+                    <img src="${arrayname[indexs].poster}" id="poster" alt="">
+                </div>
                 <h5 class="title">${arrayname[indexs].songName}</h5>
         `
     document.querySelector(".control-icons").innerHTML = `

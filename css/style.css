@@ -446,7 +446,6 @@ footer img {
     height: 50px;
     border-radius: 50%;
     object-fit: cover;
-    margin-right: 10px;
 }
 
 footer .title {
@@ -455,11 +454,11 @@ footer .title {
 }
 
 footer .icons {
-
     font-size: 1.5em;
     display: flex;
     gap: 10px;
     align-items: center;
+    justify-content: end;
 }
 
 footer .icons .bi:nth-child(1) {
@@ -1024,4 +1023,49 @@ body .logo {
 }
 .imgandname .subtitle{
     color: var(--textcolor2);
+}
+#poster{
+    display: inline-block;
+
+}
+.poster-container{
+    position: relative;
+    display: inline-block;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+.poster-container.loading::after{
+    border: 3px solid #1db954c7;
+    border-left-color: transparent;
+    border-bottom-color:transparent;
+    height: 130%;
+    width: 130%;
+    border-radius: 50%;
+    content: '';
+    position: absolute;
+    animation: circ-anim 3s linear infinite; 
+}
+.poster-container.loading::before{
+    border: 3px solid #1db954;
+    border-left-color: transparent;
+    border-bottom-color:transparent;
+    height: 110%;
+    width: 110%;
+    border-radius: 50%;
+    content: '';
+    position: absolute;
+    animation: circ-anim 1.5s reverse linear infinite; 
+}
+@keyframes circ-anim {
+    from {
+      transform: rotate(0);
+    }
+    to {
+      transform: rotate(360deg);
+    }
 }
