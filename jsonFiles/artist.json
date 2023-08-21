@@ -59,4 +59,10 @@
         "artistName": "Neha Kakker",
         "img": "neha.jpg"
     }
+    ,
+    {
+        "id" : 12,
+        "artistName": "Udit Narayan",
+        "img": "udit.jpg"
+    }
 ]

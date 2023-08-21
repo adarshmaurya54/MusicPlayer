@@ -36,6 +36,12 @@
         "poster": "./img/7.jpg"
     },
     {
+        "id": "gadar2",
+        "songName": "Udd ja kale kawan | Gadar 2 <br> <span class=\"subtitle\">  Udit Narayan, Alka Yagnik</span>",
+        "poster": "./img/gadar2.jpeg"
+    }
+    ,
+    {
         "id": 8,
         "songName": "Suna Hai <br> <span class=\"subtitle\">Jubin Nautiyal</span>",
         "poster": "./img/8.jpg"

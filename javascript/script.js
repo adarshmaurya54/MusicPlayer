@@ -37,7 +37,8 @@ function goNext(msg) {
         if (index >= songs.length) {
             customAlertShow("This is the last song that you are listening!")
         } else {
-            songid = parseInt(songs[index].id);
+            // songid = parseInt(songs[index].id);
+            songid = songs[index].id;
             changeMasterPlay(index, songid,songs);
             music.src = `./audio/${songid}.mp3`;
             buffering();
@@ -48,7 +49,8 @@ function goNext(msg) {
             document.querySelector("footer .wave").classList.add("active1");
         }
     } else if (msg == "loopCurrent") {
-        songid = parseInt(songs[index].id);
+        songid = songs[index].id;
+        // songid = parseInt(songs[index].id);
         changeMasterPlay(index, songid, songs);
         music.src = `./audio/${songid}.mp3`;
         buffering();
@@ -62,7 +64,8 @@ function goNext(msg) {
         if (index >= songs.length) {
             index = 0;
         }
-        songid = parseInt(songs[index].id);
+        // songid = parseInt(songs[index].id);
+        songid = songs[index].id;
         changeMasterPlay(index, songid,songs);
         music.src = `./audio/${songid}.mp3`;
         buffering();
@@ -126,7 +129,7 @@ xhr.onreadystatechange = function () {
                         <li class="song-list list " onmouseover="this.classList.add('hover');" onmouseout="this.classList.remove('hover');">
                             <div>
                                 <span>${temp}</span>
-                                <img src="./img/${element.id}.jpg">
+                                <img src="${element.poster}">
                                 <h5 class="title">${songs[i].songName}</h5>
                             </div>
                             <i class="bi playbutton bi-play-circle-fill" data-custom-value="${i}" id="${element.id}"></i>
@@ -136,7 +139,7 @@ xhr.onreadystatechange = function () {
                 document.querySelector(".pop-songs ul").innerHTML += `
                         <li class="song-list list">
                             <div class="song">
-                            <img src="./img/${element.id}.jpg">
+                            <img src="${element.poster}">
                             <i class="bi playbutton bi-play-circle-fill" data-custom-value="${i}" id="${element.id}"></i>
                             </div>
                             <h5 class="title">${songs[i].songName}</h5>
