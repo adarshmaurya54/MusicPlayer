@@ -49,6 +49,12 @@
     }
     ,
     {
+        "id": "zahra",
+        "songName": "Zahra",
+        "artistName": "Unknown",
+        "poster": "./img/no-music-icon.svg"
+    },
+    {
         "id": 10,
         "songName": "Dunia",
         "artistName": "Abhijit Vaghani, Akhil, Dhvani Bhanushali, Bob",
