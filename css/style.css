@@ -22,7 +22,8 @@
     --border: rgb(230, 230, 230);
     --playborder: rgba(0, 0, 0, 0.1);
     --darkbtnbg: #0101016e;
-    --menuSongSubtitle: #363636;
+    --menuSongSubtitle: #424242;
+    --Subtitle: #a5a5a5;
     --result: #ffffffe0;
 }
 
@@ -165,6 +166,7 @@ section {
 }
 
 section .menu {
+    transform: translateX(0%);
     user-select: none;
     overflow: auto;
     padding: 10px 20px;
@@ -901,7 +903,9 @@ footer .vol input {
     opacity: 0;
     transition: opacity 0.5s ease;
 }
-
+.song-list .subtitle{
+    color: var(--menuSongSubtitle)!important;
+}
 .items .artist-list {
     width: 100px;
 }

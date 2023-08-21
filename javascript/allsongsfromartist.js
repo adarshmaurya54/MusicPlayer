@@ -1,53 +1,22 @@
-if(localStorage.length == 0){
+
+if (localStorage.length == 0) {
     window.location.href = "./index.html";
 }
-// hamburgure toggle
-document.querySelector(".mobile-hamb").addEventListener("click", () => {
-    document.querySelector(".menu").classList.add("show");
-    document.querySelector(".songs").style.pointerEvents = "none";
-    document.querySelector(".songs").style.filter = "blur(5px)";
-});
-document.querySelector(".close").addEventListener("click", () => {
-    document.querySelector(".menu").classList.remove("show");
-    document.querySelector(".songs").style.pointerEvents = "all";
-    document.querySelector(".songs").style.filter = "unset";
-});
 
-$(document).ready(function () {
-
-});
-
-
-document.querySelector(".dark-btn").addEventListener("click", () => {
-    if (document.body.classList.contains('dark')) {
-        document.querySelector("meta[name='theme-color']").setAttribute('content', "#fff");
-    } else {
-        document.querySelector("meta[name='theme-color']").setAttribute('content', "#121213");
-    }
-    document.body.classList.toggle("dark");
-
-})
-// initial dark mode active or deactive if user's device has on dark mode or not... 
-if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.querySelector("meta[name='theme-color']").setAttribute('content', "#121213");
-} else {
-    document.body.classList.remove("dark");
-    document.querySelector("meta[name='theme-color']").setAttribute('content', "#fff");
-}
 
 const data = JSON.parse(localStorage.getItem("object"))
 let imgurl = "./img/" + data.img;
-$(".backimg").attr("src", imgurl);
-$(".img-artist").attr("src", imgurl);
-$(".name-artist").html(data.name);
+// $(".backimg").attr("src", imgurl);
+// $(".img-artist").attr("src", imgurl);
+// $(".name-artist").html(data.name);
+const indexs = [];
+const results = [];
 const searchTerm = data.name;
 fetch('./jsonFiles/songs.json')
     .then(response => response.json())
     .then(data => {
 
         // Data is now a JavaScript object
-        const results = [];
-        const indexs = [];
         const lowercaseSearchTerm = searchTerm.toLowerCase();
         // console.log(data);
         // // Perform a basic search by iterating through the object
@@ -61,17 +30,165 @@ fetch('./jsonFiles/songs.json')
         })
         results.forEach((songlist, i) => {
             let temp;
-                temp = (i < 9) ? "0" + (i + 1) : (i + 1);
-                $(".song-table table").append(`
-                    <tr>
-                        <td>${temp}</td>
-                        <td>${songlist.songName}</td>
-                        <td><i class="bi bi-play-circle-fill"></i></td>
-                    </tr>
-                `)
+            temp = (i < 9) ? "0" + (i + 1) : (i + 1);
+            $(".song-table table").append(`
+                <tr>
+                    <td>${temp}</td>
+                    <td>${songlist.songName}</td>
+                    <td><i class="bi bi-play-circle-fill" onclick="PlaySong(this)" data-custom-value="${indexs[i]} ${i}"
+                    id="${songlist.id}"></i></td>
+                </tr>
+            `)
         })
 
         // // Do something with the results
         // console.log('Search Results:', results);
     })
     .catch(error => console.error('Error loading JSON:', error));
+function changeMasterPlay(indexs,id) {
+    document.querySelector("footer .controles .wave").innerHTML = `
+                <div class="wave1"></div>
+                <div class="wave1"></div>
+                <div class="wave1"></div>
+        `
+    document.querySelector("footer .controles .imgandname").innerHTML = `
+                <img src="${results[indexs].poster}" id="poster" alt="">
+                <h5 class="title">${results[indexs].songName}</h5>
+        `
+    document.querySelector(".control-icons").innerHTML = `
+                <div class="control-icons-inner">
+                    <i class="bi bi-skip-start-fill" onclick="goPrev(this)"></i>
+                    <i class="bi bi-play-fill  play-and-pause" data-custom-value="${indexs}" onclick="playmasterplay(this)" id="0-${id}"></i>
+                    <i class="bi bi-skip-end-fill" onclick="goNext('linear')" ></i>
+                </div>       
+        `;
+    document.querySelector("footer .tracker").style.pointerEvents = "all";
+}
+
+function PlaySong(e) {
+    pauseAllBtns();
+    changeMasterPlay(e.dataset.customValue.split(" ")[1],e.getAttribute("id"));
+    if (music.paused) {
+        document.querySelector("footer img").classList.add("spining");
+        document.querySelector("footer .wave").classList.add("active1");
+        music.src = "./audio/" + e.getAttribute("id") + ".mp3";
+        buffering()
+        music.play();
+        e.classList.remove("bi-play-circle-fill");
+        e.classList.add("bi-pause-circle-fill");
+        document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
+        document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill");
+    } else {
+        music.pause();
+        document.querySelector("footer .wave").classList.remove("active1");
+        document.querySelector("footer img").classList.remove("spining");
+        document.querySelector(".icons .play-and-pause").classList.remove("bi-pause-fill")
+        document.querySelector(".icons .play-and-pause").classList.add("bi-play-fill")
+        e.classList.add("bi-play-circle-fill");
+        e.classList.remove("bi-pause-circle-fill");
+    }
+}
+
+music.addEventListener("timeupdate", () => {
+    let current_time = music.currentTime;
+    let duration = music.duration;
+    let min = Math.floor(current_time / 60);
+    let sec = Math.floor(current_time % 60);
+    if (min < 10) {
+        min = '0' + min;
+    }
+    if (sec < 10) {
+        sec = '0' + sec;
+    }
+    currentStart.innerHTML = `${min}:${sec}`;
+    let progressBarVal = parseInt((current_time / duration) * 100);
+    progressBar.value = progressBarVal;
+    seekBar.style.width = progressBarVal + "%";
+    if (progressBarVal == 100) {
+        document.querySelector(".icons .play-and-pause").classList.remove("bi-pause-fill")
+        document.querySelector(".icons .play-and-pause").classList.add("bi-play-fill")
+        pauseAllBtns();
+        document.querySelector("footer img").classList.remove("spining");
+        document.querySelector("footer .wave").classList.remove("active1");
+        progressBar.style.pointerEvents = "none";
+        if (document.querySelector(".icons .bi-shuffle")) {
+            goNext("linear");
+        } else if (document.querySelector(".icons .bi-repeat")) {
+            goNext("loopAll");
+        } else if (document.querySelector(".icons .bi-repeat-1")) {
+            goNext("loopCurrent");
+        }
+    } else {
+        progressBar.style.pointerEvents = "all";
+    }
+})
+
+
+
+
+// function to go previous song
+function goPrev(e) {
+    let index = document.querySelector(".play-and-pause").dataset.customValue.split(" ")[0];
+    pauseAllBtns();
+    index = parseInt(index) - 1;
+    if (index < 0) {
+        customAlertShow("This is the first song that you are listening!")
+    } else {
+        songid = parseInt(results[index].id);
+        changeMasterPlay(index, songid);
+        music.src = `./audio/${songid}.mp3`;
+        buffering();
+        music.play();
+        document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
+        document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
+        document.querySelector("footer img").classList.add("spining");
+        document.querySelector("footer .wave").classList.add("active1");
+    }
+}
+
+// function to go next song
+function goNext(msg) {
+    pauseAllBtns()
+    let index = document.querySelector(".play-and-pause").dataset.customValue.split(" ")[0];
+    let songid;
+    if (msg == "linear") {
+        index = parseInt(index) + 1;
+        if (index >= indexs.length) {
+            customAlertShow("This is the last song that you are listening!")
+        } else {
+            songid = parseInt(results[index].id);
+            changeMasterPlay(index,songid);
+            music.src = `./audio/${songid}.mp3`;
+            buffering();
+            music.play();
+            document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
+            document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
+            document.querySelector("footer img").classList.add("spining");
+            document.querySelector("footer .wave").classList.add("active1");
+        }
+    } else if (msg == "loopCurrent") {
+        songid = parseInt(results[index].id);
+        changeMasterPlay(index,songid);
+        music.src = `./audio/${songid}.mp3`;
+        buffering();
+        music.play();
+        document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
+        document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
+        document.querySelector("footer img").classList.add("spining");
+        document.querySelector("footer .wave").classList.add("active1");
+    } else if (msg == "loopAll") {
+        index = parseInt(index) + 1;
+        if (index >= indexs.length) {
+            index = 0; 
+        }
+        songid = parseInt(results[index].id);
+        changeMasterPlay(index, songid);
+        music.src = `./audio/${songid}.mp3`;
+        buffering();
+        music.play();
+        document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill")
+        document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
+        document.querySelector("footer img").classList.add("spining");
+        document.querySelector("footer .wave").classList.add("active1");
+    }
+}

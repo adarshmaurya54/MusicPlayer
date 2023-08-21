@@ -10,7 +10,7 @@
 
     section .menu {
         padding: 20px;
-        transform: translateX(-110%);
+        transform: translateX(-103%);
         position: absolute;
         width: 320px;
         z-index: 1000;
@@ -126,6 +126,10 @@
 
         width: 80vw;
     }
+    .artist-songs table tr td:nth-child(2) {
+        max-width: 150px;
+    }
+
 }
 
 @media screen and (max-width: 375px) {

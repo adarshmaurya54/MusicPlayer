@@ -1,49 +1,18 @@
 
 
 const currentStart = document.getElementById("currentStart");
-const currentEnd = document.getElementById("currentEnd");
-const music = new Audio();
-function customAlertShow(msg) {
-    document.querySelector(".customAlert .alert .message").innerHTML = msg;
-    pauseAllBtns();
-    document.querySelector(".customAlert").style.opacity = "1";
-    document.querySelector(".customAlert").style.zIndex = "10";
-    document.querySelector(".customAlert .alert").style.width = "300px";
-    document.querySelector(".customAlert .alert").style.transform = "translateY(0%)";
-    music.pause();
-    document.querySelector("footer img").classList.remove("spining");
-    document.querySelector("footer .wave").classList.remove("active1");
-    document.querySelector(".icons .play-and-pause").classList.remove("bi-pause-fill")
-    document.querySelector(".icons .play-and-pause").classList.add("bi-play-fill")
-}
-function customAlertHide() {
-    document.querySelector(".customAlert").style.opacity = "0";
-    document.querySelector(".customAlert").style.zIndex = "-10";
-    document.querySelector(".customAlert .alert").style.width = "350px";
-    document.querySelector(".customAlert .alert").style.transform = "translateY(-105%)";
-}
 
-// we pause all the buttons when another music is played
-function pauseAllBtns() {
-    Array.from(document.getElementsByClassName("bi-pause-circle-fill")).forEach(e => {
-        e.classList.remove("bi-pause-circle-fill");
-        e.classList.add("bi-play-circle-fill");
-    })
-}
-
-const progressBar = document.getElementById("seek");
-const seekBar = document.getElementById("bar1");
 
 // changing master play content dynamically when music is played
-function changeMasterPlay(i, id) {
+function changeMasterPlay(i, id, arrayname) {
     document.querySelector("footer .controles .wave").innerHTML = `
             <div class="wave1"></div>
             <div class="wave1"></div>
             <div class="wave1"></div>
     `
     document.querySelector("footer .controles .imgandname").innerHTML = `
-            <img src="${songs[i].poster}" id="poster" alt="">
-            <h5 class="title">${songs[i].songName}</h5>
+            <img src="${arrayname[i].poster}" id="poster" alt="">
+            <h5 class="title">${arrayname[i].songName}</h5>
     `
     document.querySelector(".control-icons").innerHTML = `
             <div class="control-icons-inner">
@@ -65,7 +34,7 @@ function goPrev(e) {
         customAlertShow("This is the first song that you are listening!")
     } else {
         songid = parseInt(songs[index].id);
-        changeMasterPlay(index, songid);
+        changeMasterPlay(index, songid,songs);
         music.src = `./audio/${songid}.mp3`;
         buffering();
         music.play();
@@ -88,7 +57,7 @@ function goNext(msg) {
             customAlertShow("This is the last song that you are listening!")
         } else {
             songid = parseInt(songs[index].id);
-            changeMasterPlay(index, songid);
+            changeMasterPlay(index, songid,songs);
             music.src = `./audio/${songid}.mp3`;
             buffering();
             music.play();
@@ -99,7 +68,7 @@ function goNext(msg) {
         }
     } else if (msg == "loopCurrent") {
         songid = parseInt(songs[index].id);
-        changeMasterPlay(index, songid);
+        changeMasterPlay(index, songid, songs);
         music.src = `./audio/${songid}.mp3`;
         buffering();
         music.play();
@@ -113,7 +82,7 @@ function goNext(msg) {
             index = 0;
         }
         songid = parseInt(songs[index].id);
-        changeMasterPlay(index, songid);
+        changeMasterPlay(index, songid,songs);
         music.src = `./audio/${songid}.mp3`;
         buffering();
         music.play();
@@ -124,33 +93,10 @@ function goNext(msg) {
 
     }
 }
-// this function used to show buffering of the music
-function buffering() {
-    music.addEventListener("loadedmetadata", function () {
-        // Now you can access the duration without getting NaN
-        let music_dur = music.duration;
-        let min = Math.floor(music_dur / 60);
-        let sec = Math.floor(music_dur % 60);
-        if (sec <= 9) {
-            sec = "0" + sec;
-        }
-        if (min <= 9) {
-            min = "0" + min;
-        }
-        if (!isNaN(min) && !isNaN(sec)) {
-            currentEnd.innerHTML = `${min}:${sec}`;
-        }
-        const duration = music.duration;
-    });
-    currentEnd.innerHTML = "Buffering...";
 
-    // Start loading the audio
-    music.load();
-
-}
 function playSearchedSong(e) {
     pauseAllBtns();
-    changeMasterPlay(e.dataset.customValue, e.getAttribute("id"));
+    changeMasterPlay(e.dataset.customValue, e.getAttribute("id"),songs);
     if (music.paused) {
         if (e.getAttribute("id") <= 7) {
             deactiveMenuSongs();
@@ -227,7 +173,7 @@ xhr.onreadystatechange = function () {
         Array.from(document.getElementsByClassName("bi-play-circle-fill")).forEach((e, i) => {
             e.addEventListener("click", () => {
                 pauseAllBtns();
-                changeMasterPlay(e.dataset.customValue, e.getAttribute("id"));
+                changeMasterPlay(e.dataset.customValue, e.getAttribute("id"),songs);
                 if (music.paused) {
                     if (e.getAttribute("id") <= 7) {
                         deactiveMenuSongs();
@@ -360,56 +306,9 @@ document.querySelector(".dark-btn").addEventListener("click", () => {
 
 })
 
-let i = 0;
-function loop(e) {
-    const arr = [
-        "bi-repeat",
-        "bi-repeat-1",
-        "bi-shuffle"
-    ];
-    e.removeAttribute("class");
-    e.classList.add("bi");
-    e.classList.add(arr[i]);
-    if (arr[i] == "bi-repeat") {
-        document.querySelector(".bi-skip-end-fill").setAttribute("onclick", "goNext('loopAll')")
-    } else if (arr[i] == "bi-repeat-1") {
-        document.querySelector(".bi-skip-end-fill").setAttribute("onclick", "goNext('loopCurrent')")
-    } else if (arr[i] == "bi-shuffle") {
-        document.querySelector(".bi-skip-end-fill").setAttribute("onclick", "goNext('linear')")
-    }
-    i++;
-    if (i >= 3) {
-        i = 0;
-    }
-}
 
-// when we click on masterplay play icon then ...
-function playmasterplay(e) {
-    if (music.paused) {
-        if (progressBar.value == 0) {
-            music.src = "./audio/" + e.getAttribute("id").split('-')[1] + ".mp3";
-            buffering();
-            music.play();
-        } else {
-            music.currentTime = (progressBar.value * music.duration) / 100;
-            music.play();
-        }
-        document.querySelector("footer img").classList.add("spining");
-        document.querySelector("footer .wave").classList.add("active1");
-        e.classList.remove("bi-play-fill");
-        e.classList.add("bi-pause-fill");
-        document.getElementById(e.getAttribute("id").split('-')[1]).classList.remove("bi-play-circle-fill");
-        document.getElementById(e.getAttribute("id").split('-')[1]).classList.add("bi-pause-circle-fill");
-    } else {
-        music.pause();
-        document.querySelector("footer .wave").classList.remove("active1");
-        document.querySelector("footer img").classList.remove("spining");
-        e.classList.add("bi-play-fill");
-        e.classList.remove("bi-pause-fill");
-        document.getElementById(e.getAttribute("id").split('-')[1]).classList.add("bi-play-circle-fill");
-        document.getElementById(e.getAttribute("id").split('-')[1]).classList.remove("bi-pause-circle-fill");
-    }
-}
+
+
 
 // initial dark mode active or deactive if user's device has on dark mode or not... 
 if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
@@ -418,26 +317,6 @@ if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
     document.body.classList.remove("dark");
     document.querySelector("meta[name='theme-color']").setAttribute('content', "#fff");
 }
-
-
-// when user want to close alert box...
-document.querySelector(".customAlert .alert .bi").addEventListener("click", () => {
-    customAlertHide()
-})
-document.getElementById("no-song").addEventListener("click", () => {
-    customAlertShow("There is no song to play!");
-})
-
-
-setInterval(() => {
-    if (document.querySelector(".icons .bi-shuffle")) {
-        document.querySelector(".bi-skip-end-fill").setAttribute("onclick", "goNext('linear')")
-    } else if (document.querySelector(".icons .bi-repeat")) {
-        document.querySelector(".bi-skip-end-fill").setAttribute("onclick", "goNext('loopAll')")
-    } else if (document.querySelector(".icons .bi-repeat-1")) {
-        document.querySelector(".bi-skip-end-fill").setAttribute("onclick", "goNext('loopCurrent')")
-    }
-}, 300)
 
 
 
@@ -463,7 +342,7 @@ document.getElementById("search-item").addEventListener("input", (e) => {
                 const lowercaseSearchTerm = searchTerm.toLowerCase();
                 // console.log(data);
                 // // Perform a basic search by iterating through the object
-                data.forEach((e,i)=>{
+                data.forEach((e, i) => {
                     const lowercaseSongName = e.songName.toLowerCase();
                     // You'll need to adapt this condition based on your JSON structure
                     if (lowercaseSongName.includes(lowercaseSearchTerm)) {
@@ -472,26 +351,18 @@ document.getElementById("search-item").addEventListener("input", (e) => {
                         results.push(e);
                     }
                 })
-                // for (const item of data) {
-                //     const lowercaseSongName = item.songName.toLowerCase();
-                //     // You'll need to adapt this condition based on your JSON structure
-                //     if (lowercaseSongName.includes(lowercaseSearchTerm)) {
-                //         // console.log(item);
-                //         results.push(item);
-                //     }
-                // }
                 results.forEach((songlist, i) => {
                     let temp;
                     temp = (i < 9) ? "0" + (i + 1) : (i + 1);
                     document.querySelector(".song-results ul").innerHTML += `
                     <li class="search-result-song" onmouseover="this.classList.add('hover');" onmouseout="this.classList.remove('hover');">
-                    <div>
-                    <span>${temp}</span>
-                    <img src="${songlist.poster}">
-                    <h5 class="title">${songlist.songName}</h5>
-                    </div>
-                    <i class="bi playbutton bi-play-circle-fill" onclick="playSearchedSong(this)" data-custom-value="${indexs[i]}"
-                    id="${songlist.id}"></i>
+                        <div>
+                        <span>${temp}</span>
+                        <img src="${songlist.poster}">
+                        <h5 class="title">${songlist.songName}</h5>
+                        </div>
+                        <i class="bi playbutton bi-play-circle-fill" onclick="playSearchedSong(this)" data-custom-value="${indexs[i]}"
+                        id="${songlist.id}"></i>
                     </li>
                     `;
                 })
@@ -537,7 +408,45 @@ document.getElementById("search-item").addEventListener("input", (e) => {
     }
 })
 
-function getAllSongsOfArtist(name,img){
-    localStorage.setItem("object",JSON.stringify({name: name,img: img}));
+function getAllSongsOfArtist(name, img) {
+    localStorage.setItem("object", JSON.stringify({ name: name, img: img }));
     window.location.href = "./allsongsfromartist.html";
 }
+
+
+
+const element = document.querySelector('.result');
+const element2 = document.querySelector('section .menu');
+
+document.addEventListener('click', function (event) {
+    const isClickInsideElement = element.contains(event.target);
+    const isClickInsideElement2 = element2.contains(event.target);
+
+    if (!isClickInsideElement) {
+        if (element.style.opacity != 0) {
+            element.style.opacity = "0";
+            element.style.zIndex = "-1";
+            // Event listener for clicks anywhere in the document
+        }
+        // You can perform actions here that should happen when a click occurs outside the element.
+    }
+
+    if (!isClickInsideElement2) {
+        // Get the computed style of the element
+        const computedStyle = getComputedStyle(element2);
+
+        // Extract the transformation matrix values from the computed style
+        const transformMatrix = computedStyle.transform || computedStyle.webkitTransform || computedStyle.mozTransform;
+        const matrixValues = transformMatrix.match(/matrix.*\((.+)\)/)[1].split(', ');
+
+        // The translateX value is in the fourth position of the matrix
+        const translateXValueInPixel = parseFloat(matrixValues[4]);
+        const elementWidth = element2.offsetWidth;
+        const translateXValueInPercentage = (translateXValueInPixel / elementWidth) * 100;
+        if(translateXValueInPercentage != -103){
+            document.querySelector(".menu").classList.remove("show");
+            document.querySelector(".songs").style.pointerEvents = "all";
+            document.querySelector(".songs").style.filter = "unset";
+        }
+    }
+});
