@@ -61,7 +61,6 @@ function customAlertShow(msg) {
     pauseAllBtns();
     document.querySelector(".customAlert").style.opacity = "1";
     document.querySelector(".customAlert").style.zIndex = "10";
-    document.querySelector(".customAlert .alert").style.width = "300px";
     document.querySelector(".customAlert .alert").style.transform = "translateY(0%)";
     music.pause();
     document.querySelector("footer img").classList.remove("spining");
@@ -72,7 +71,6 @@ function customAlertShow(msg) {
 function customAlertHide() {
     document.querySelector(".customAlert").style.opacity = "0";
     document.querySelector(".customAlert").style.zIndex = "-10";
-    document.querySelector(".customAlert .alert").style.width = "350px";
     document.querySelector(".customAlert .alert").style.transform = "translateY(-105%)";
 }
 

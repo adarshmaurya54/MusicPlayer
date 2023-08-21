@@ -988,9 +988,10 @@ body .logo {
     backdrop-filter: blur(4px);
     justify-content: center;
     padding: 5px;
+    transition: opacity 0.5s ease, z-index 0.5s ease;
 }
 .customAlert .alert{
-    transition: transform 0.5s ease, width 0.5s ease;
+    transition: transform 0.5s ease;
     position: relative;
     background-color: white;
     width: 350px;
