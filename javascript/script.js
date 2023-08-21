@@ -15,7 +15,7 @@ function goPrev(e) {
         customAlertShow("This is the first song that you are listening!")
     } else {
         songid = parseInt(songs[index].id);
-        changeMasterPlay(index, songid,songs);
+        changeMasterPlay(index, songid, songs);
         music.src = `./audio/${songid}.mp3`;
         buffering();
         music.play();
@@ -39,7 +39,7 @@ function goNext(msg) {
         } else {
             // songid = parseInt(songs[index].id);
             songid = songs[index].id;
-            changeMasterPlay(index, songid,songs);
+            changeMasterPlay(index, songid, songs);
             music.src = `./audio/${songid}.mp3`;
             buffering();
             music.play();
@@ -66,7 +66,7 @@ function goNext(msg) {
         }
         // songid = parseInt(songs[index].id);
         songid = songs[index].id;
-        changeMasterPlay(index, songid,songs);
+        changeMasterPlay(index, songid, songs);
         music.src = `./audio/${songid}.mp3`;
         buffering();
         music.play();
@@ -80,7 +80,7 @@ function goNext(msg) {
 
 function playSearchedSong(e) {
     pauseAllBtns();
-    changeMasterPlay(e.dataset.customValue, e.getAttribute("id"),songs);
+    changeMasterPlay(e.dataset.customValue, e.getAttribute("id"), songs);
     if (music.paused) {
         document.querySelector("footer img").classList.add("spining");
         document.querySelector("footer .wave").classList.add("active1");
@@ -125,7 +125,7 @@ xhr.onreadystatechange = function () {
                             <div>
                                 <span>${temp}</span>
                                 <img src="${element.poster}">
-                                <h5 class="title">${songs[i].songName}</h5>
+                                <h5 class="title">${songs[i].songName} <br> <span class="subtitle">${songs[i].artistName}</span> </h5>
                             </div>
                             <i class="bi playbutton bi-play-circle-fill" data-custom-value="${i}" id="${element.id}"></i>
                         </li>
@@ -137,7 +137,7 @@ xhr.onreadystatechange = function () {
                             <img src="${element.poster}">
                             <i class="bi playbutton bi-play-circle-fill" data-custom-value="${i}" id="${element.id}"></i>
                             </div>
-                            <h5 class="title">${songs[i].songName}</h5>
+                            <h5 class="title">${songs[i].songName} <br> <span class="subtitle">${songs[i].artistName}</span></h5>
                         </li>
                         `
             }
@@ -152,7 +152,7 @@ xhr.onreadystatechange = function () {
         Array.from(document.getElementsByClassName("bi-play-circle-fill")).forEach((e, i) => {
             e.addEventListener("click", () => {
                 pauseAllBtns();
-                changeMasterPlay(e.dataset.customValue, e.getAttribute("id"),songs);
+                changeMasterPlay(e.dataset.customValue, e.getAttribute("id"), songs);
                 if (music.paused) {
                     document.querySelector("footer img").classList.add("spining");
                     document.querySelector("footer .wave").classList.add("active1");
@@ -243,10 +243,16 @@ document.querySelector(".close").addEventListener("click", () => {
 // searching logic
 
 document.getElementById("search-item").addEventListener("input", (e) => {
-    // // Assuming you have a JSON file named data.json
     // // Load JSON data using Fetch API
-    searchTerm = e.target.value.trim();
-    if (searchTerm != "") {
+    const searchTerm = e.target.value.trim();
+    const unwantedCharacters = ['<', '>', '\\', '"', ' ', '\n', '\t', '\r','/',',','|'];
+
+    const unwantedArray = Array.from(searchTerm).filter(character => {
+        return unwantedCharacters.includes(character);
+    });
+
+
+    if (searchTerm != "" && unwantedArray.length == 0) {
         document.querySelector(".result").style.opacity = "1";
         document.querySelector(".result").style.zIndex = "100";
         document.querySelector(".song-results ul").innerHTML = "";
@@ -262,8 +268,9 @@ document.getElementById("search-item").addEventListener("input", (e) => {
                 // // Perform a basic search by iterating through the object
                 data.forEach((e, i) => {
                     const lowercaseSongName = e.songName.toLowerCase();
+                    const lowercaseArtistName = e.artistName.toLowerCase();
                     // You'll need to adapt this condition based on your JSON structure
-                    if (lowercaseSongName.includes(lowercaseSearchTerm)) {
+                    if (lowercaseSongName.includes(lowercaseSearchTerm) || lowercaseArtistName.includes(lowercaseSearchTerm) ) {
                         // console.log(item);
                         indexs.push(i)
                         results.push(e);
@@ -277,7 +284,7 @@ document.getElementById("search-item").addEventListener("input", (e) => {
                         <div>
                         <span>${temp}</span>
                         <img src="${songlist.poster}">
-                        <h5 class="title">${songlist.songName}</h5>
+                        <h5 class="title">${songlist.songName} <br> <span class=\"subtitle\">${songlist.artistName}</span></h5>
                         </div>
                         <i class="bi playbutton bi-play-circle-fill" onclick="playSearchedSong(this)" data-custom-value="${indexs[i]}"
                         id="${songlist.id}"></i>
@@ -361,7 +368,7 @@ document.addEventListener('click', function (event) {
         const translateXValueInPixel = parseFloat(matrixValues[4]);
         const elementWidth = element2.offsetWidth;
         const translateXValueInPercentage = (translateXValueInPixel / elementWidth) * 100;
-        if(translateXValueInPercentage != -103){
+        if (translateXValueInPercentage != -103) {
             document.querySelector(".menu").classList.remove("show");
             document.querySelector(".songs").style.pointerEvents = "all";
             document.querySelector(".songs").style.filter = "unset";

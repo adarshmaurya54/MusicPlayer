@@ -6,12 +6,13 @@ if (localStorage.length == 0) {
 
 const data = JSON.parse(localStorage.getItem("object"))
 let imgurl = "./img/" + data.img;
-$(".backimg").attr("src", imgurl);
-$(".img-artist").attr("src", imgurl);
-$(".name-artist").html(data.name);
+// $(".backimg").attr("src", imgurl);
+// $(".img-artist").attr("src", imgurl);
+// $(".name-artist").html(data.name);
 const indexs = [];
 const results = [];
 const searchTerm = data.name;
+console.log(searchTerm);
 fetch('./jsonFiles/songs.json')
     .then(response => response.json())
     .then(data => {
@@ -21,7 +22,7 @@ fetch('./jsonFiles/songs.json')
         // console.log(data);
         // // Perform a basic search by iterating through the object
         data.forEach((e, i) => {
-            const lowercaseSongName = e.songName.toLowerCase();
+            const lowercaseSongName = e.artistName.toLowerCase();
             // You'll need to adapt this condition based on your JSON structure
             if (lowercaseSongName.includes(lowercaseSearchTerm)) {
                 indexs.push(i)
@@ -34,7 +35,7 @@ fetch('./jsonFiles/songs.json')
             $(".song-table table").append(`
                 <tr>
                     <td>${temp}</td>
-                    <td>${songlist.songName}</td>
+                    <td>${songlist.songName}<br> <span class=\"subtitle\">${songlist.artistName}</span></td>
                     <td><i class="bi bi-play-circle-fill" onclick="PlaySong(this)" data-custom-value="${indexs[i]} ${i}"
                     id="${songlist.id}"></i></td>
                 </tr>
@@ -46,7 +47,7 @@ fetch('./jsonFiles/songs.json')
     })
     .catch(error => console.error('Error loading JSON:', error));
 
-
+console.log(results);
 function PlaySong(e) {
     pauseAllBtns();
     changeMasterPlay(e.dataset.customValue.split(" ")[1],e.getAttribute("id"),results);
@@ -140,3 +141,6 @@ function goNext(msg) {
         document.querySelector("footer .wave").classList.add("active1");
     }
 }
+
+
+{/* <br> <span class=\"subtitle\">Daniel Levi</span> */}

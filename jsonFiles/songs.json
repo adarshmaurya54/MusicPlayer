@@ -1,117 +1,139 @@
 [
     {
         "id": 3,
-        "songName": "Cartoon - On & On <br> <span class=\"subtitle\">Daniel Levi</span>",
+        "songName": "Cartoon - On & On",
+        "artistName": "Daniel Levi",
         "poster": "./img/3.jpg"
     },
     {
         "id": 4,
-        "songName": "Warriyo - Mortals <br> <span class=\"subtitle\">Mortals</span>",
+        "songName": "Warriyo - Mortals",
+        "artistName": "Mortals",
         "poster": "./img/4.jpg"
     },
     {
         "id": 5,
-        "songName": "Ertugrul Gazi <br> <span class=\"subtitle\">Ertugrul</span>",
+        "songName": "Ertugrul Gazi",
+        "artistName": "Ertugrul",
         "poster": "./img/5.jpg"
     },
     {
         "id": 6,
-        "songName": "Electronic Music <br> <span class=\"subtitle\">Electro</span>",
+        "songName": "Electronic Music",
+        "artistName": "Electro",
         "poster": "./img/6.jpg"
     },
     {
         "id": 7,
-        "songName": "Agar Tum Sath Ho<br> <span class=\"subtitle\">Tamashaa</span>",
+        "songName": "Agar Tum Sath Ho",
+        "artistName": "Tamashaa",
         "poster": "./img/7.jpg"
     },
     {
         "id": 8,
-        "songName": "Suna Hai <br> <span class=\"subtitle\">Jubin Nautiyal </span>",
+        "songName": "Suna Hai",
+        "artistName": "Jubin Nautiyal",
         "poster": "./img/8.jpg"
     },
     {
         "id": 9,
-        "songName": "Dilbar <br> <span class=\"subtitle\">Neha kakker, Dhvani Bhanushali, Ikka</span>",
+        "songName": "Dilbar",
+        "artistName": "Neha kakker, Dhvani Bhanushali, Ikka",
         "poster": "./img/9.jpg"
     },
     {
         "id": "gadar2",
-        "songName": "Udd ja kale kawan | Gadar 2 <br> <span class=\"subtitle\">  Udit Narayan, Alka Yagnik</span>",
+        "songName": "Udd ja kale kawan | Gadar 2",
+        "artistName": "Udit Narayan, Alka Yagnik",
         "poster": "./img/gadar2.jpeg"
     }
     ,
     {
         "id": 10,
-        "songName": "Dunia <br> <span class=\"subtitle\">Abhijit Vaghani, Akhil, Dhvani Bhanushali, Bob</span>",
+        "songName": "Dunia",
+        "artistName": "Abhijit Vaghani, Akhil, Dhvani Bhanushali, Bob",
         "poster": "./img/10.jpg"
     },
     {
         "id": 11,
-        "songName": "Lagdi Lahore Di <br> <span class=\"subtitle\">Guru Randhawa, Tulsi kumar adsfasdfasdfasdfasdf</span>",
+        "songName": "Lagdi Lahore Di",
+        "artistName": "Guru Randhawa, Tulsi kumar",
         "poster": "./img/11.jpg"
     },
     {
         "id": 12,
-        "songName": "Putt Jatt De <br> <span class=\"subtitle\">Diljit Dosanjh, Kaater</span>",
+        "songName": "Putt Jatt De",
+        "artistName": "Diljit Dosanjh, Kaater",
         "poster": "./img/12.jpg"
     },
     {
         "id": 13,
-        "songName": "Baarishein <br> <span class=\"subtitle\">Atif Aslam</span>",
+        "songName": "Baarishein",
+        "artistName": "Atif Aslam",
         "poster": "./img/13.jpg"
     },
     {
         "id": 14,
-        "songName": "Vaste <br> <span class=\"subtitle\">Dhvani Bhanushali, Nikhil D Souza</span>",
+        "songName": "Vaste",
+        "artistName": "Dhvani Bhanushali, Nikhil D Souza",
         "poster": "./img/14.jpg"
     },
     {
         "id": 15,
-        "songName": "Lut Gay <br> <span class=\"subtitle\">Jubin Nautiyal</span>",
+        "songName": "Lut Gay",
+        "artistName": "Jubin Nautiyal",
         "poster": "./img/15.jpg"
     },
     {
         "id": 16,
-        "songName": "Meri Zindagi Hai Tu <br> <span class=\"subtitle\">Jubin Nautiyal, Neeti Mohan</span>",
+        "songName": "Meri Zindagi Hai Tu",
+        "artistName": "Jubin Nautiyal, Neeti Mohan",
         "poster": "./img/16.jpg"
     },
     {
         "id": 20,
-        "songName": "Vande Matram <br> <span class=\"subtitle\">AR Raheman</span>",
+        "songName": "Vande Matram",
+        "artistName": "AR Raheman",
         "poster": "./img/20.jpg"
     }
     ,
     {
         "id": 17,
-        "songName": "Zaroori Tha <br> <span class=\"subtitle\">rahat fateh ali khan</span>",
+        "songName": "Zaroori Tha",
+        "artistName": "rahat fateh ali khan",
         "poster": "./img/17.jpg"
     },
     {
         "id": 18,
-        "songName": "PASOORI<br> <span class=\"subtitle\">Ali Sethi, Shae Gill</span>",
+        "songName": "PASOORI",
+        "artistName": "Ali Sethi, Shae Gill",
         "poster": "./img/18.jpg"
     },
     {
         "id": 19,
-        "songName": "Insane <br> <span class=\"subtitle\">AP Dhillon</span>",
+        "songName": "Insane",
+        "artistName": "AP Dhillon",
         "poster": "./img/19.jpg"
     }
     ,
     {
         "id": 21,
-        "songName": "Udd ja kale kawan <br> <span class=\"subtitle\">Udit Narayan</span>",
+        "songName": "Udd ja kale kawan | Gadar 1",
+        "artistName": "Udit Narayan",
         "poster": "./img/21.jpg"
     }
     ,
     {
         "id": 23,
-        "songName": "Har Har Mahadev <br> <span class=\"subtitle\"> Vikram Montrose</span>",
+        "songName": "Har Har Mahadev",
+        "artistName": "Vikram Montrose",
         "poster": "./img/23.jpg"
     }
     ,
     {
         "id": 22,
-        "songName": "Boofer <br> <span class=\"subtitle\">Unknown</span>",
+        "songName": "Boofer",
+        "artistName": "Unknown",
         "poster": "./img/22.jpg"
     }
 ]
