@@ -6,9 +6,9 @@ if (localStorage.length == 0) {
 
 const data = JSON.parse(localStorage.getItem("object"))
 let imgurl = "./img/" + data.img;
-// $(".backimg").attr("src", imgurl);
-// $(".img-artist").attr("src", imgurl);
-// $(".name-artist").html(data.name);
+$(".backimg").attr("src", imgurl);
+$(".img-artist").attr("src", imgurl);
+$(".name-artist").html(data.name);
 const indexs = [];
 const results = [];
 const searchTerm = data.name;
