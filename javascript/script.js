@@ -87,11 +87,11 @@ function goNext(msg) {
 
 function playSearchedSong(e) {
 
-    let isOn = e.querySelector(".bi").classList.contains("bi-play-circle-fill");
+    let isNotOn = e.querySelector(".bi").classList.contains("bi-play-circle-fill");
     progressBar.value = 0;
     pauseAllBtns();
     changeMasterPlay(e.dataset.customValue, e.getAttribute("id"), songs,"playmasterplay");
-    if (isOn) {
+    if (isNotOn) {
 
         document.querySelector("footer img").classList.add("spining");
         document.querySelector("footer .wave").classList.add("active1");
@@ -165,11 +165,11 @@ xhr.onreadystatechange = function () {
         // getting all play button and using this we play songs...
         Array.from(document.getElementsByClassName("playsong")).forEach((e, i) => {
             e.addEventListener("click", () => {
-                let isOn = e.querySelector(".bi").classList.contains("bi-play-circle-fill");
+                let isNotOn = e.querySelector(".bi").classList.contains("bi-play-circle-fill");
                 progressBar.value = 0;
                 pauseAllBtns();
                 changeMasterPlay(e.dataset.customValue, e.getAttribute("id"), songs,"playmasterplay");
-                if (isOn) {
+                if (isNotOn) {
                     
                     document.querySelector("footer img").classList.add("spining");
                     document.querySelector("footer .wave").classList.add("active1");

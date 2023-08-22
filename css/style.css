@@ -1028,7 +1028,7 @@ body .logo {
 }
 #poster{
     display: inline-block;
-
+    transition: width 0.3s ease, height 0.3s ease;
 }
 .poster-container{
     position: relative;

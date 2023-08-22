@@ -169,7 +169,7 @@ function changeMasterPlay(indexs, id, arrayname,functionName) {
                 <div class="poster-container">
                     <img src="${arrayname[indexs].poster}" id="poster" alt="">
                 </div>
-                <h5 class="title">${arrayname[indexs].songName}</h5>
+                <h5 class="title">${arrayname[indexs].songName} <br> <span class="subtitle">${arrayname[indexs].artistName}</h5>
         `
     document.querySelector(".control-icons").innerHTML = `
                 <div class="control-icons-inner">
@@ -181,26 +181,6 @@ function changeMasterPlay(indexs, id, arrayname,functionName) {
     document.querySelector("footer .tracker").style.pointerEvents = "all";
 }
 
-// changing master play content dynamically when music is played
-// function changeMasterPlay(i, id, arrayname) {
-//     document.querySelector("footer .controles .wave").innerHTML = `
-//             <div class="wave1"></div>
-//             <div class="wave1"></div>
-//             <div class="wave1"></div>
-//     `
-//     document.querySelector("footer .controles .imgandname").innerHTML = `
-//             <img src="${arrayname[i].poster}" id="poster" alt="">
-//             <h5 class="title">${arrayname[i].songName}</h5>
-//     `
-//     document.querySelector(".control-icons").innerHTML = `
-//             <div class="control-icons-inner">
-//                 <i class="bi bi-skip-start-fill" onclick="goPrev(this)"></i>
-//                 <i class="bi bi-play-fill  play-and-pause" data-custom-value="${i} ${id}" onclick="playmasterplay(this)" id="0-${id}"></i>
-//                 <i class="bi bi-skip-end-fill" onclick="goNext('linear')" ></i>
-//             </div>       
-//     `;
-//     document.querySelector("footer .tracker").style.pointerEvents = "all";
-// }
 
 
 music.addEventListener("timeupdate", () => {
@@ -240,7 +220,11 @@ music.addEventListener("timeupdate", () => {
 setInterval(()=>{
     if(currentEnd.innerHTML == "Buffering..."){
         document.querySelector(".poster-container").classList.add("loading");
+        document.getElementById("poster").style.width = "30px";
+        document.getElementById("poster").style.height = "30px";
     }else{
         document.querySelector(".poster-container").classList.remove("loading");
+        document.getElementById("poster").style.width = "50px";
+        document.getElementById("poster").style.height = "50px";
     }
 },500)

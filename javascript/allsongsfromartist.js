@@ -46,30 +46,31 @@ fetch('./jsonFiles/songs.json')
     })
     .catch(error => console.error('Error loading JSON:', error));
 
-function PlaySong(e) {
-    pauseAllBtns(); 
-    changeMasterPlay(e.dataset.customValue.split(" ")[1],e.getAttribute("id"),results,"playmasterplayofaritistsongs");
-    if (music.paused) {
-        document.querySelector("footer img").classList.add("spining");
-        document.querySelector("footer .wave").classList.add("active1");
-        music.src = "./audio/" + e.getAttribute("id") + ".mp3";
-        buffering()
-        music.play();
-        e.classList.remove("bi-play-circle-fill");
-        e.classList.add("bi-pause-circle-fill");
-        document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
-        document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill");
-    } else {
-        music.pause();
-        document.querySelector("footer .wave").classList.remove("active1");
-        document.querySelector("footer img").classList.remove("spining");
-        document.querySelector(".icons .play-and-pause").classList.remove("bi-pause-fill")
-        document.querySelector(".icons .play-and-pause").classList.add("bi-play-fill")
-        e.classList.add("bi-play-circle-fill");
-        e.classList.remove("bi-pause-circle-fill");
+    function PlaySong(e) {
+        let isNotOn = e.classList.contains("bi-play-circle-fill");
+        progressBar.value = 0;
+        pauseAllBtns(); 
+        changeMasterPlay(e.dataset.customValue.split(" ")[1],e.getAttribute("id"),results,"playmasterplayofaritistsongs");
+        if (isNotOn) {
+            document.querySelector("footer img").classList.add("spining");
+            document.querySelector("footer .wave").classList.add("active1");
+            music.src = "./audio/" + e.getAttribute("id") + ".mp3";
+            buffering()
+            music.play();
+            e.classList.remove("bi-play-circle-fill");
+            e.classList.add("bi-pause-circle-fill");
+            document.querySelector(".icons .play-and-pause").classList.remove("bi-play-fill")
+            document.querySelector(".icons .play-and-pause").classList.add("bi-pause-fill");
+        } else {
+            music.pause();
+            document.querySelector("footer .wave").classList.remove("active1");
+            document.querySelector("footer img").classList.remove("spining");
+            document.querySelector(".icons .play-and-pause").classList.remove("bi-pause-fill")
+            document.querySelector(".icons .play-and-pause").classList.add("bi-play-fill")
+            e.classList.add("bi-play-circle-fill");
+            e.classList.remove("bi-pause-circle-fill");
+        }
     }
-}
-
 
 
 
