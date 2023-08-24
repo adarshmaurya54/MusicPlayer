@@ -137,9 +137,39 @@
     }
     ,
     {
-        "id": 22,
-        "songName": "Boofer",
-        "artistName": "Unknown",
-        "poster": "./img/22.jpg"
+        "id": "BankeHawaMein",
+        "songName": "Banke Hawa Mein",
+        "artistName": "Altamash Faridi",
+        "poster": "./img/BankeHawaMein.jpg"
+    },
+    {
+        "id": "ChaloIkBaarFirSeAjnabiBanJaye",
+        "songName": "Chalo Ik Baar Fir Se Ajnabi Ban Jaye",
+        "artistName": "Mahendra Kapoor",
+        "poster": "./img/ChaloIkBaarFirSeAjnabiBanJaye.jpg"
+    },
+    {
+        "id": "MaahiVe",
+        "songName": "Maahi Ve",
+        "artistName": "Neha Kakker",
+        "poster": "./img/MaahiVe.jpg"
+    },
+    {
+        "id": "MeriBheegiBheegiSi",
+        "songName": "Meri Bheegi Bheegi Si",
+        "artistName": "Kishore Kumar",
+        "poster": "./img/MeriBheegiBheegiSi.jpg"
+    },
+    {
+        "id": "Musafir",
+        "songName": "Musafir",
+        "artistName": "Atif Aslam",
+        "poster": "./img/Musafir.jpg"
+    },
+    {
+        "id": "YadavBrand2",
+        "songName": "Yadav Brand 2",
+        "artistName": "sunny yaduvanshi, Nitesh ujoli",
+        "poster": "./img/YadavBrand2.jpg"
     }
 ]
