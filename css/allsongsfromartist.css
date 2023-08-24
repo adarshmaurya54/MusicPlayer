@@ -42,7 +42,7 @@
     backdrop-filter: blur(3px);
     top: 0;
     left: 0;
-    height: 500px;
+    height: 505px;
     z-index: -1;
     width: 100%;
     background: linear-gradient(to top, var(--imgbg) 10%, rgba(0, 0, 0, 0.308) 90%);

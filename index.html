@@ -121,47 +121,47 @@
                 </div>
             </div>
         </section>
-        <footer class="song-ctrl">
-            <div class="controles">
-                <div class="song-info">
-                    <div class="wave ">
-                        <div class="wave1"></div>
-                        <div class="wave1"></div>
-                        <div class="wave1"></div>
-                    </div>
-                    <div class="imgandname">
-                        <div class="poster-container">
-                            <img src="./otherImages/music-icon.svg"  id="poster" alt="">
-                        </div>
-                        <h5 class="title">No Song</span></h5>
-                    </div>
-                </div>
-                <div class="icons">
-                    <i class="bi bi-shuffle" onclick="loop(this)"></i>
-                    <div class="control-icons">
-                        <div class="control-icons-inner" id="no-song">
-                            <i class="bi bi-skip-start-fill" style="pointer-events: none;"></i>
-                            <i class="bi bi-play-fill play-and-pause" style="pointer-events: none;"></i>
-                            <i class="bi bi-skip-end-fill" style="pointer-events: none;"></i>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="tracker">
-                <span id="currentStart">00:00</span>
-                <div class="bar">
-                    <input type="range" id="seek" min="0" value="0" max="100">
-                    <div class="bar1" id="bar1"></div>
-                </div>
-                <span id="currentEnd">00:00</span>
-            </div>
-            <div class="vol">
-                <input type="range" id="seek" min="0" max="100">
-                <div class="bar2" id="bar2"></div>
-                <i class="bi bi-volume-down-fill"></i>
-            </div>
-        </footer>
     </div>
+    <footer class="song-ctrl">
+        <div class="controles">
+            <div class="song-info">
+                <div class="wave ">
+                    <div class="wave1"></div>
+                    <div class="wave1"></div>
+                    <div class="wave1"></div>
+                </div>
+                <div class="imgandname">
+                    <div class="poster-container">
+                        <img src="./otherImages/music-icon.svg"  id="poster" alt="">
+                    </div>
+                    <h5 class="title">No Song</span></h5>
+                </div>
+            </div>
+            <div class="icons">
+                <i class="bi bi-shuffle" onclick="loop(this)"></i>
+                <div class="control-icons">
+                    <div class="control-icons-inner" id="no-song">
+                        <i class="bi bi-skip-start-fill" style="pointer-events: none;"></i>
+                        <i class="bi bi-play-fill play-and-pause" style="pointer-events: none;"></i>
+                        <i class="bi bi-skip-end-fill" style="pointer-events: none;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tracker">
+            <span id="currentStart">00:00</span>
+            <div class="bar">
+                <input type="range" id="seek" min="0" value="0" max="100">
+                <div class="bar1" id="bar1"></div>
+            </div>
+            <span id="currentEnd">00:00</span>
+        </div>
+        <div class="vol">
+            <input type="range" id="seek" min="0" max="100">
+            <div class="bar2" id="bar2"></div>
+            <i class="bi bi-volume-down-fill"></i>
+        </div>
+    </footer>
     <div class="customAlert">
         <div class="alert">
             <i class="bi bi-x-lg close"></i>
