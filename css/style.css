@@ -65,6 +65,7 @@ body.dark {
 }
 
 .dark-btn .btn {
+    font-size: 0.7em;
     color: var(--color);
     display: flex;
     justify-content: center;
@@ -74,7 +75,7 @@ body.dark {
     background: var(--textcolor1);
     position: absolute;
     top: 50%;
-    transform: translateY(-46%);
+    transform: translateY(-50%);
     left: 5px;
     border-radius: 50%;
     transition: left 0.7s ease;
@@ -147,10 +148,11 @@ body {
     transform: translateX(-50%);
     width: 50%;
     height: 50%;
+    filter: blur(10px);
 }
 
 .container {
-    backdrop-filter: blur(10px);
+    /* backdrop-filter: blur(10px); */
     border-radius: 10px;
     width: 100vw;
     height: 80vh;
@@ -194,8 +196,8 @@ footer {
     border: 2px solid var(--border); 
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
-    background: var(--playerctrl);
-    backdrop-filter: blur(10px);
+    background: var(--imgbg);
+    /* backdrop-filter: blur(10px); */
     height: 20vh;
     width: 100vw;
     z-index: 12;

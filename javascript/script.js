@@ -248,7 +248,7 @@ xhr1.send();
 document.querySelector(".mobile-hamb").addEventListener("click", () => {
     document.querySelector(".menu").classList.add("show");
     document.querySelector(".songs").style.pointerEvents = "none";
-    document.querySelector(".songs").style.filter = "blur(5px)";
+    document.querySelector(".songs").style.filter = "brightness(10%)";
 });
 document.querySelector(".close").addEventListener("click", () => {
     document.querySelector(".menu").classList.remove("show");
