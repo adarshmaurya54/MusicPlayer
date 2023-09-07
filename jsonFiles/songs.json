@@ -164,12 +164,12 @@
         "id": "Musafir",
         "songName": "Musafir",
         "artistName": "Atif Aslam",
-        "poster": "./img/Musafir.jpg"
+        "poster": "./img/musafir.jpg"
     },
     {
         "id": "YadavBrand2",
         "songName": "Yadav Brand 2",
         "artistName": "sunny yaduvanshi, Nitesh ujoli",
-        "poster": "./img/YadavBrand2.jpg"
+        "poster": "./img/yadavbrand2.jpg"
     }
 ]
