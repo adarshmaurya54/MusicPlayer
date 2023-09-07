@@ -1,3 +1,4 @@
+
 [
     {
         "id": 3,
@@ -171,5 +172,11 @@
         "songName": "Yadav Brand 2",
         "artistName": "sunny yaduvanshi, Nitesh ujoli",
         "poster": "./img/yadavbrand2.jpg"
+    },
+    {
+        "id": "Tumhiaana,Marjaavaan",
+        "songName": "Tum Hi Aana, Marjaavaan",
+        "artistName": "Jubin Nautiyal",
+        "poster": "./img/Tumhiaana,Marjaavaan.jpeg"
     }
 ]
