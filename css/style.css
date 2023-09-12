@@ -153,19 +153,12 @@ body {
 }
 
 .container {
-    /* backdrop-filter: blur(10px); */
-    border-radius: 10px;
     width: 100vw;
     height: 80vh;
-    border: 2px solid var(--border); 
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
     border-bottom: none;
 }
 
 section {
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
     height: 100%;
     display: flex;
     align-items: center;
@@ -177,7 +170,6 @@ section .menu {
     overflow: auto;
     padding: 10px 20px;
     border-right: 2px solid var(--border);
-    border-top-left-radius: 10px;
     background: var(--menubg);
     height: 100%;
     width: 25%;
@@ -187,16 +179,13 @@ section .songs::-webkit-scrollbar {
 }
 
 section .songs {
-    border-top-right-radius: 10px;
     background: var(--songbg);
     height: 100%;
     width: 75%;
 }
 
 footer {
-    border: 2px solid var(--border); 
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-top: 2px solid var(--border); 
     background: var(--footerbg);
     /* backdrop-filter: blur(10px); */
     height: 20vh;
