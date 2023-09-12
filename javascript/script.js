@@ -265,13 +265,12 @@ document.querySelector(".close").addEventListener("click", () => {
 document.getElementById("search-item").addEventListener("input", (e) => {
     // // Load JSON data using Fetch API
     const searchTerm = e.target.value.trim();
-    const unwantedCharacters = ['<', '>', '\\', '"', ' ', '\n', '\t', '\r', '/', ',', '|'];
+    const unwantedCharacters = ['<', '>', '\\', '"', '\n', '\t', '\r', '/', ',', '|'];
 
     const unwantedArray = Array.from(searchTerm).filter(character => {
         return unwantedCharacters.includes(character);
     });
-
-
+    
     if (searchTerm != "" && unwantedArray.length == 0) {
         document.querySelector(".result").style.opacity = "1";
         document.querySelector(".result").style.zIndex = "100";

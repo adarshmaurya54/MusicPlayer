@@ -149,6 +149,7 @@ body {
     width: 50%;
     height: 50%;
     filter: blur(10px);
+    z-index: -1;
 }
 
 .container {
@@ -196,7 +197,7 @@ footer {
     border: 2px solid var(--border); 
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
-    background: var(--imgbg);
+    background: var(--footerbg);
     /* backdrop-filter: blur(10px); */
     height: 20vh;
     width: 100vw;
