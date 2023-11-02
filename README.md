@@ -1,5 +1,5 @@
 # MusicPlayer
-
+<code>
 Note : 
 {
     "id": 3, // songfile name should match with this id
@@ -7,3 +7,4 @@ Note :
     "artistName": "Daniel Levi",
     "poster": "./img/3.jpg"
 }
+</code>
